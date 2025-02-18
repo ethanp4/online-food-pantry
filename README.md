@@ -1,2 +1,2 @@
 - Ensure you have ran `npm i` in both frontend and backend
-- Launch both backend and frontend by running `npm start` in their folders
+- Launch with `npm run dev`

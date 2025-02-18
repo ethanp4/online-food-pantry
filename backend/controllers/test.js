@@ -1,5 +1,3 @@
-const test = async (req, res) => {
-  res.status(200).json({ message: "working" })
+export const test = async (req, res) => {
+  res.status(200).json({ message: "server working" })
 }
-
-module.exports = { test }

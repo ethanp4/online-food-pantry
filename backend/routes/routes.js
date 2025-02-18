@@ -1,8 +1,6 @@
-const express = require('express')
-const router = express.Router()
+import express from "express"
+import { test } from "../controllers/test.js"
 
-const { test } = require('../controllers/test')
+export const router = express.Router()
 
 router.get('/test', test)
-
-module.exports = router

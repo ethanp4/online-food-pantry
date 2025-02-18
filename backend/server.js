@@ -1,7 +1,10 @@
-const express = require('express')
+import dotenv from 'dotenv';
+import express from "express";
+import {router} from "./routes/routes.js";
+
+dotenv.config();
+
 const app = express()
-const routes = require('./routes/routes')
-const PORT = 7000
 
 app.use((req, res, next) => {
   console.log(`Request: ${req.method} ${req.url}`)
@@ -17,8 +20,8 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(routes)
+app.use(router)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on ${process.env.PORT}`)
 })
