@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from "express";
 import {router} from "./routes/routes.js";
-import { dbConnect } from "./config/database.js";
+import { dbConnect, pool } from "./config/database.js";
 
 dotenv.config();
 
