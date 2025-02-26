@@ -1,2 +1,2 @@
 - Ensure you have ran `npm i` in both frontend and backend
-- Launch with `npm run dev`
+- Launch both with `npm run dev`
