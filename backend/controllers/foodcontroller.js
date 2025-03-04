@@ -1,6 +1,14 @@
 import { getAllFood, addFoodRow } from "../model/foodmodel.js";
 
-export async function getFood(req, res) {
+//Controller is called directly when a route is requested
+//The controller imports data manipulation functions from ../model
+//Primary error handling (missing field) is done here since the result
+//is also sent from here
+//Some errors (ie duplicate entry) are detected by mysql and therefore
+//triggered in a model function. Currently they (addFoodRow) dont sent the right 
+//error code to the client 
+
+export const getItems = async (req, res) => {
   try {
     const food = await getAllFood();
     res.json(food);
@@ -9,7 +17,7 @@ export async function getFood(req, res) {
   }
 }
 
-export async function addFoodItem(req, res) {
+export const addItem = async (req, res) => {
   try {
     let name = req.body.name
     let qty = req.body.quantity
@@ -25,3 +33,9 @@ export async function addFoodItem(req, res) {
     console.log(err)
   }
 }
+
+export const getItemById = async (req, res) => {
+  const itemId = req.params.id //"id" is referenced in routes.js as /item/:id
+  //todo
+}
+
