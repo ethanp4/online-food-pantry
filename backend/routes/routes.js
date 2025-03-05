@@ -1,11 +1,9 @@
 import express from "express"
-import { test } from "../controllers/test.js"
 import { addItem, getItems } from "../controllers/foodcontroller.js"
 import { signUp, login, updateProfile } from "../controllers/usercontroller.js"
 
 export const router = express.Router()
 
-router.get('/test', test) //test if backend is working
 
 //item related
 router.get('/item', getItems)
