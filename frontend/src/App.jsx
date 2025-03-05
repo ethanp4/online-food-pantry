@@ -16,7 +16,7 @@ function Header() {
 function App() {
   const [count, setCount] = useState(0)
   const [data, setData] = useState("No data")
-  fetch("http://localhost:5000/test").then(response => response.json()).then(data => setData(data.message));
+  fetch("http://localhost:5001/test").then(response => response.json()).then(data => setData(data.message));
 
   return (
     <>
