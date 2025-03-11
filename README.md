@@ -1,2 +1,3 @@
+- Run the sql in `create_sample_database.sql` via phpmyadmin
 - Ensure you have ran `npm i` in both frontend and backend
 - Launch both with `npm run dev`
