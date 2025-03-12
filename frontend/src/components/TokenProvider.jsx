@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const LoginContext = createContext();
 
 const LoginProvider = ({children}) => {
-  //set the initial value to whatever is in localstorage
+  //set the initial value to whatever is in localstorage (ie page is reloaded)
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem('token');
     return storedToken ? storedToken : "";
