@@ -61,6 +61,10 @@ export const updateProfile = async (req, res) => {
   
 }
 
+
 export const getProfile = async (req, res) => {
-  
+  const accessToken = req.headers.authorization
+  console.log(accessToken)
+  res.status(200).json({ message: "a" })
+
 }
