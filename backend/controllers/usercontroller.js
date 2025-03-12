@@ -7,14 +7,19 @@ const accessSecret = process.env.ACCESS_TOKEN_SECRET
 
 //add user to db if possible then create auth token
 export const signUp = async (req, res) => {
-  const username = req.body.username
-  if (await getUserByUsername(username)) { return res.status(500).json({ message: "That username already exists"}); }
+  const { username, password } = req.body
+  if (!username || !password) {
+    return res.status(500).json({ message: "Missing username or password" })
+  }
+
+  const targetUser = await getUserByUsername(username)
+  if (targetUser) { return res.status(500).json({ message: "That username already exists"}); }
+  
   const hashedPassword = await hash(req.body.password, 10)
-  const email = req.body.email
   const type = "user" //when signing up, only possible type is user
-  const result = await createUser(username, hashedPassword, email, type)
-  if (result) { //error handling for now, result: boolean
-    res = await postAuth(username, type, res)
+  const newUser = await createUser(username, hashedPassword, type)
+  if (newUser) { 
+    res = await postAuth(newUser, res)
   } else {
     res.status(500).json({message: "Failed to create user"})
   }
@@ -22,25 +27,32 @@ export const signUp = async (req, res) => {
 
 //verify login then create auth token
 export const login = async (req, res) => {
-  const username = req.body.username
-  const password = req.body.password
+  const { username, password } = req.body
+  if (!username || !password) {
+    return res.status(500).json({ message: "Missing username or password" })
+  }
+
   const targetUser = await getUserByUsername(username)
-  if (!targetUser) { res.status(500).json({message: "User does not exist"}) }
-  const type = targetUser[0].type
-  if (!await compare(password, targetUser[0].hashedPassword)) {
+  if (!targetUser) { return res.status(500).json({message: "An account with that username doesnt exist"}) }
+  if (!await compare(password, targetUser.hashedPassword)) {
     return res.status(500).json({message: "Incorrect password"})
   }
-  console.log(`User ${username} logged in as ${type}`)
-  res = await postAuth(username, type, res)
+  // console.log(`User ${username} logged in as ${type}`)
+  res = await postAuth(targetUser, res)
 }
 
 //function to create auth token after either login or signup
-export const postAuth = async (username, type, res) => {
+export const postAuth = async (user, res) => {
+  const { id, username, type } = user
   const userJWT = { username: username, type: type }
   const accessToken = sign(userJWT, accessSecret)
-
   return res.status(201).json({ 
-    message: `Successfully authenticated as ${type}`, 
+    message: `Login successful`, 
+    user: {
+      id: id,
+      username: username,
+      type: type
+    },
     accessToken: accessToken 
   })
 }

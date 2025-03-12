@@ -46,25 +46,77 @@ export default function TestLogin() {
     })
   }
 
-  function tryLogin(e) {
+  const tryLogin = async (e) => {
     e.preventDefault();
-    setModalState({
-      title: "Login attempt", 
-      desc: `Username: ${formState.username}
-      Password: ${formState.password}`
-    })
-    modal.current.showModal();
+    try {
+      const response = await fetch('http://localhost:5001/login', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setToken(data.accessToken)
+        setModalState({
+          title: "Login successful",
+          desc: `Welcome: ${data.user.username}`
+        })
+      } else {
+        setModalState({
+          title: "Login unsuccessful",
+          desc: data.message
+        })
+      }
+    } catch (error) {
+      //error making request
+      setModalState({
+        title: "Login unsuccessful",
+        desc: error.message
+      })
+    } finally {
+      //show the modal to display the state of the attempt
+      modal.current.showModal();
+    }
   }
 
-  function tryRegister(e) {
-    e.preventDefault();
-    setModalState({
-      title: "Register attempt", 
-      desc: `Username: ${formState.username}
-      Password: ${formState.password}
-      Admin: ${formState.isAdmin}`
-    })
-    modal.current.showModal();
+  const tryRegister = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const response = await fetch('http://localhost:5001/register', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setToken(data.accessToken)
+        setModalState({
+          title: "Registration successful",
+          desc: `Welcome: ${data.user.username}`
+        })
+      } else {
+        setModalState({
+          title: "Registration unsuccessful",
+          desc: data.message
+        })
+      }
+    } catch (error) {
+      setModalState({
+        title: "Login unsuccessful",
+        desc: error.message
+      })
+    } finally {
+      modal.current.showModal();
+    }
   }
 
   return (

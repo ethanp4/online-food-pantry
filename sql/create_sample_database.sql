@@ -32,4 +32,3 @@ INSERT INTO food_items (name, count) VALUES
 ('Banana', 5),
 ('Orange', 15),
 ('5 kg of flour', 20);
-
