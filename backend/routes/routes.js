@@ -1,7 +1,7 @@
 import express from "express"
 import { getItemById, getItems } from "../controllers/foodcontroller.js"
 import { signUp, login, updateProfile, getProfile } from "../controllers/usercontroller.js"
-import { getUsers, getUserById, addUser, deleteItemById, editItemById, addItem } from "../controllers/admincontroller.js"
+import { getUsers, getUserById, deleteItemById, editItemById, addItem } from "../controllers/admincontroller.js"
 
 export const router = express.Router()
 
@@ -23,7 +23,6 @@ router.post('/updateProfile', updateProfile) //update one or multiple values rel
 //administrator actions, requires admin authorization header
 router.get('/users', getUsers)
 router.get('/users/:id', getUserById)
-router.post('/addUser', addUser)
 router.delete('/deleteItem/:id', deleteItemById)
 router.post('/editItem/:id', editItemById)
 router.post('/addItem', addItem)

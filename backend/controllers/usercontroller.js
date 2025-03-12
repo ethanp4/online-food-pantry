@@ -15,23 +15,26 @@ export const signUp = async (req, res) => {
   const targetUser = await getUserByUsername(username)
   if (targetUser) { return res.status(500).json({ message: "That username already exists"}); }
   
-  let type = "user" //default type
   const accessToken = req.headers.authorization
+  let type = "user" //default type
   let authorized = false
+
+  //apply the type if the request was made by an admin
   if (accessToken) {
     try {
-      const { type } = verify(accessToken, accessSecret)
-      if (type === "admin") { authorized = true}
+      const tokenType = verify(accessToken, accessSecret)['type']
+      if (tokenType === "admin") { authorized = true}
       if (authorized && req.body.type) {
-        if (req.body.type !== "admin" && req.body.type !== "user") {
-          return res.status(500).json({message: "Invalid type"})
-        } else {
+        if (req.body.type == "admin" || req.body.type == "user") {
           type = req.body.type 
+        } else {
+          return res.status(500).json({message: "Invalid type"})
         }
       } 
     } catch (err) { }
   }
-  
+
+  //create the user
   const newUser = await createUser(username, password, type)
   if (newUser) {
     //if the request was made by an admin, then postAuth is skipped 
@@ -84,7 +87,6 @@ export const postAuth = async (user, res) => {
 export const updateProfile = async (req, res) => {
   
 }
-
 
 export const getProfile = async (req, res) => {
   const accessToken = req.headers.authorization

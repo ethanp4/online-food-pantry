@@ -43,10 +43,6 @@ export const getUserById = async (req, res) => {
   }
 }
 
-export const addUser = async (req, res) => {
-  
-}
-
 export const deleteItemById = async (req, res) => {
 
 }
