@@ -30,11 +30,11 @@ function formReducer(state, action) {
 
 export default function TestLogin() {
   const {token, setToken} = useContext(LoginContext)
-
   const modal = useRef();
   const [modalState, setModalState] = useState(initialModalState)
-
   const [formState, setFormState] = useReducer(formReducer, initialLoginState)
+
+  const [profileInfo, setProfileInfo] = useState([])
 
   function handleFormChange(e) {
     const { name, type, value, checked } = e.target
@@ -46,25 +46,77 @@ export default function TestLogin() {
     })
   }
 
-  function tryLogin(e) {
+  const tryLogin = async (e) => {
     e.preventDefault();
-    setModalState({
-      title: "Login attempt", 
-      desc: `Username: ${formState.username}
-      Password: ${formState.password}`
-    })
-    modal.current.showModal();
+    try {
+      const response = await fetch('http://localhost:5001/login', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setToken(data.accessToken)
+        setModalState({
+          title: "Login successful",
+          desc: `Welcome: ${data.user.username}`
+        })
+      } else {
+        setModalState({
+          title: "Login unsuccessful",
+          desc: data.message
+        })
+      }
+    } catch (error) {
+      //error making request
+      setModalState({
+        title: "Login unsuccessful",
+        desc: error.message
+      })
+    } finally {
+      //show the modal to display the state of the attempt
+      modal.current.showModal();
+    }
   }
 
-  function tryRegister(e) {
-    e.preventDefault();
-    setModalState({
-      title: "Register attempt", 
-      desc: `Username: ${formState.username}
-      Password: ${formState.password}
-      Admin: ${formState.isAdmin}`
-    })
-    modal.current.showModal();
+  const tryRegister = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const response = await fetch('http://localhost:5001/register', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setToken(data.accessToken)
+        setModalState({
+          title: "Registration successful",
+          desc: `Welcome: ${data.user.username}`
+        })
+      } else {
+        setModalState({
+          title: "Registration unsuccessful",
+          desc: data.message
+        })
+      }
+    } catch (error) {
+      setModalState({
+        title: "Registration unsuccessful",
+        desc: error.message
+      })
+    } finally {
+      modal.current.showModal();
+    }
   }
 
   return (
@@ -81,6 +133,10 @@ export default function TestLogin() {
         <button onClick={(e) => tryRegister(e)}>Register</button>
         <button onClick={(e) => tryLogin(e)}>Login</button>
       </form>
+      <button onClick={(e) => tryGetProfile(e)}>Get profile</button>
+      <div>
+        {profileInfo ? profileInfo : "No profile info"}
+      </div>
     </div>
   )
 }
