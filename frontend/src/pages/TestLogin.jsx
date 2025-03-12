@@ -30,11 +30,11 @@ function formReducer(state, action) {
 
 export default function TestLogin() {
   const {token, setToken} = useContext(LoginContext)
-
   const modal = useRef();
   const [modalState, setModalState] = useState(initialModalState)
-
   const [formState, setFormState] = useReducer(formReducer, initialLoginState)
+
+  const [profileInfo, setProfileInfo] = useState([])
 
   function handleFormChange(e) {
     const { name, type, value, checked } = e.target
@@ -111,7 +111,7 @@ export default function TestLogin() {
       }
     } catch (error) {
       setModalState({
-        title: "Login unsuccessful",
+        title: "Registration unsuccessful",
         desc: error.message
       })
     } finally {
@@ -133,6 +133,10 @@ export default function TestLogin() {
         <button onClick={(e) => tryRegister(e)}>Register</button>
         <button onClick={(e) => tryLogin(e)}>Login</button>
       </form>
+      <button onClick={(e) => tryGetProfile(e)}>Get profile</button>
+      <div>
+        {profileInfo ? profileInfo : "No profile info"}
+      </div>
     </div>
   )
 }

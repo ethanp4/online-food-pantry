@@ -1,4 +1,4 @@
-import { getAllFood, addFoodRow } from "../model/foodmodel.js";
+import { getAllFood, addFoodRow, getFoodItemById } from "../model/foodmodel.js";
 
 //Controller is called directly when a route is requested
 //The controller imports data manipulation functions from ../model
@@ -36,6 +36,11 @@ export const addItem = async (req, res) => {
 
 export const getItemById = async (req, res) => {
   const itemId = req.params.id //"id" is referenced in routes.js as /item/:id
-  //todo
+  let item = await getFoodItemById(itemId)
+  if (item) {
+    res.status(200).json({ item: item })
+  } else {
+    res.status(500).json({ message: "Item not found" })
+  }
 }
 

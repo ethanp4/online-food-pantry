@@ -60,3 +60,7 @@ export const postAuth = async (user, res) => {
 export const updateProfile = async (req, res) => {
   
 }
+
+export const getProfile = async (req, res) => {
+  
+}

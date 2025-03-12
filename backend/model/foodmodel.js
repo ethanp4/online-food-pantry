@@ -9,6 +9,18 @@ export async function getAllFood() {
   }
 }
 
+export async function getFoodItemById(id) {
+  try {
+    let params = [id]
+    const [rows, fields] = await pool.execute("SELECT * FROM food_items WHERE id = ?", params)
+    if (rows.length == 0) { return false }
+    return rows[0]
+  } catch (err) {
+    console.log(err)
+  }
+  return false
+}
+
 export async function addFoodRow(name, qty) {
   try {
     let params = [name, qty]

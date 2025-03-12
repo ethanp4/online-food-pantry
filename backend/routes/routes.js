@@ -1,12 +1,14 @@
 import express from "express"
-import { addItem, getItems } from "../controllers/foodcontroller.js"
-import { signUp, login, updateProfile } from "../controllers/usercontroller.js"
+import { addItem, getItemById, getItems } from "../controllers/foodcontroller.js"
+import { signUp, login, updateProfile, getProfile } from "../controllers/usercontroller.js"
 
 export const router = express.Router()
 
 
 //item related
 router.get('/item', getItems)
+router.get('/item/:id', getItemById)
+
 // router.get('/item/:id', getItemById)
 router.post('/addItem', addItem)
 
@@ -15,3 +17,6 @@ router.post('/register', signUp) //sign up with basic details (username, passwor
 // requires keys username, password
 router.post('/login', login) //authenticate with same basic details
 router.post('/updateProfile', updateProfile) //update one or multiple values related to a users profile
+
+//requires authentication header
+router.get('/profile', getProfile)
