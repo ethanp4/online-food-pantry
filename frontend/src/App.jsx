@@ -17,8 +17,6 @@ function Header() {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState("No data")
   // fetch("http://localhost:5001/test").then(response => response.json()).then(data => setData(data.message));
 
   return (
@@ -29,7 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="testLogin" element={<TestLogin />} />
+            <Route path="/testLogin" element={<TestLogin />} />
           </Routes>
         </BrowserRouter>
       </LoginProvider>
