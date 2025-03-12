@@ -7,14 +7,12 @@ CREATE TABLE food_items (
   max_per_person INT NOT NULL DEFAULT -1,
   count INT NOT NULL
 );
---strictly login related information
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
   hashedPassword VARCHAR(255) NOT NULL,
   type ENUM('user', 'admin') NOT NULL
 );
---contains extra personal information and a foreign key to their login in 'users'
 CREATE TABLE user_profiles (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT NOT NULL,
@@ -35,5 +33,3 @@ INSERT INTO food_items (name, count) VALUES
 ('Orange', 15),
 ('5 kg of flour', 20);
 
--- SELECT * FROM food_items;
--- SELECT * FROM users;
