@@ -8,7 +8,7 @@ export const router = express.Router()
 
 //item related
 router.get('/item', getItems)
-// router.get('/item/:id', getItemById)
+router.get('/item/:id', getItemById)
 router.post('/addItem', addItem)
 
 // requires keys username, password, email
