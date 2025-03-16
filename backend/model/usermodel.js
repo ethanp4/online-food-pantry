@@ -18,7 +18,7 @@ export const getUserByUsername = async (username) => {
 export const getProfileByUsername = async (username) => {
   try {
     let params = [username]
-    const [rows, fields] = await pool.query("SELECT (id, username, type) FROM users WHERE username = ?", params)
+    const [rows, fields] = await pool.query("SELECT id, username, type FROM users WHERE username = ?", params)
     if (rows.length == 0) { return false }
     return rows[0]
   } catch (err) {
@@ -30,7 +30,7 @@ export const getProfileByUsername = async (username) => {
 export const getProfileById = async (id) => {
   try {
     let params = [id]
-    const [rows, fields] = await pool.query("SELECT (id, username, type) FROM users WHERE id = ?", params)
+    const [rows, fields] = await pool.query("SELECT id, username, type FROM users WHERE id = ?", params)
     if (rows.length == 0) { return false }
     return rows[0]
   } catch (err) {

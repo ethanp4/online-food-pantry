@@ -1,5 +1,0 @@
-admin token -- 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidHlwZSI6ImFkbWluIiwiaWF0IjoxNzQxODEyNjkzfQ.Qva_zJThJyKWiNuItGTp2cTQ3Fn-K7E4fkR4KXkcwOM 
-
-user token -- 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwidHlwZSI6InVzZXIiLCJpYXQiOjE3NDE4MTI3MzZ9.q92cWJUVvGUyBzCY-douKKpg4YcGEhvAoK322D5ido8
