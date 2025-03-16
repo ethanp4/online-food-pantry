@@ -54,7 +54,7 @@ export const createUser = async (username, password, type) => {
 
 export const getAllUsers = async () => {
   try {
-    const [rows, fields] = await pool.query("SELECT (id, username, type) FROM users")
+    const [rows, fields] = await pool.query("SELECT id, username, type FROM users")
     return rows
   } catch (err) {
     console.log(err)

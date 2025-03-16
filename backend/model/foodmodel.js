@@ -26,12 +26,34 @@ export async function addFoodRow(name, qty) {
     let params = [name, qty]
     const res = await pool.execute("INSERT INTO food_items (name, count) VALUES(?, ?)", params)
     let rows = res[0].affectedRows
-    return `Affected rows: ${rows}`
+    return await getFoodItemById(res[0].insertId)
   } catch (err) {
     switch (err.errno) {
       case 1062:
         return `The food item "${name}" already exists`
     }
+    return err
+  }
+}
+
+export async function deleteFoodItemById(id) {
+  try {
+    let params = [id]
+    const res = await pool.execute("DELETE FROM food_items WHERE id = ?", params)
+    let rows = res[0].affectedRows
+    return `Affected rows: ${rows}`
+  } catch (err) {
+    return err
+  }
+}
+
+export async function editFoodItemById(id, name, qty, max_per_person) {
+  try {
+    let params = [name, qty, max_per_person, id]
+    const res = await pool.execute("UPDATE food_items SET name = ?, count = ?, max_per_person = ? WHERE id = ?", params)
+    let rows = res[0].affectedRows
+    return await getFoodItemById(id)
+  } catch (err) {
     return err
   }
 }
