@@ -23,6 +23,8 @@ export const signUp = async (req, res) => {
   if (accessToken) {
     try {
       const tokenType = verify(accessToken, accessSecret)['type']
+      console.log(tokenType)
+      console.log(req.body)
       if (tokenType === "admin") { authorized = true}
       if (authorized && req.body.type) {
         if (req.body.type == "admin" || req.body.type == "user") {
