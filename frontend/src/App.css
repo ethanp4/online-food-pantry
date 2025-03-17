@@ -27,6 +27,8 @@ body {
 }
 
 
+
+
 /* --------------  HEADER ----------------*/
 header{
     background-color: white; 
@@ -34,8 +36,10 @@ header{
     /* background-color: orange; */
     height: 80px;
     width: 100%;
-    border-bottom: 1px solid #6d1e43;
+    position: sticky;
+    top: 0;
 
+    border-bottom: 1px solid #6d1e43;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,8 +48,10 @@ header{
 .link{
     text-decoration: none;
     color: #404040;
-    font-size: 15px;
+    font-size: 12px;
     padding: 0px 50px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
 }
 
 .link:active{

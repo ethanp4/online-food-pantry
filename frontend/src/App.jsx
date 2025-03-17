@@ -13,7 +13,7 @@ function Header() {
       <Link to="/" className='link'>Home </Link>
       <Link to="/about" className='link'>About </Link>
       <Link to="/testLogin" className='link'>Test Login Page </Link>
-      <Link to="/details/1" className='link'>Product details</Link> {/* for testing purposes -  will delete after */}
+      <button onClick={null} className='translate-btn'>Eng/Fr</button> {/* place holder */}
     </header>
   )
 }
@@ -26,6 +26,7 @@ function App() {
       <LoginProvider>
         <BrowserRouter>
           <Header />
+          {/* should add a function that includes the search bar and cart icon like our whimsical design */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
