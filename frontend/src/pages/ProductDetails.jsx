@@ -16,9 +16,9 @@ export function ProductDetails(){
     };
 
     async function fetchItem() {
-        const response = await fetch (`http:localhost:5173/api/item/${id}`);
+        const response = await fetch (`http://localhost:5001/item/${id}`);
         const data = await response.json();
-        setItem(data);
+        setItem(data["item"]);
     }
 
     useEffect(() => {
