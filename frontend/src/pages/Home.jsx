@@ -67,7 +67,7 @@ export function Home() {
               <div className="card" key={item.id}>
                 <div className="image">🖼</div> {/* place holder */}
                 <h4>{item.name}</h4>
-                <Link to={`/productDetails/${item.id}`}>
+                <Link to={`/details/${item.id}`}>
                   <button className="details-btn">Details</button>
                 </Link>
                 <button className="cart-btn">+</button>
