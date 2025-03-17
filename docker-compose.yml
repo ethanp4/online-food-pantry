@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4173:4173"  # Map frontend port
+      - "5001:5001"  # Map backend port
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: ""
+      DB_NAME: myapp
+
+  db:
+    image: mariadb:latest
+    # ports:
+    #   - "3306:3306"  
+    environment:
+      MYSQL_ROOT_PASSWORD: ""  # Blank password
+      MYSQL_DATABASE: myapp
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persist MariaDB data
+
+volumes:
+  mysql_data:

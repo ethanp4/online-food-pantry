@@ -31,7 +31,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="testLogin" element={<TestLogin />} />
             <Route path="/details/:id" element={<ProductDetails />} />
-
           </Routes>
         </BrowserRouter>
       </LoginProvider>

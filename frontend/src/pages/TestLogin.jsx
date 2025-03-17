@@ -5,7 +5,7 @@ import GenericModal from "../components/GenericModal";
 const initialLoginState = {
   username: '',
   password: '',
-  isAdmin: false // user / admin in db
+  type: '' // user / admin in db
 }
 
 const initialModalState = {
@@ -30,19 +30,25 @@ function formReducer(state, action) {
 
 export default function TestLogin() {
   const {token, setToken} = useContext(LoginContext)
-
   const modal = useRef();
   const [modalState, setModalState] = useState(initialModalState)
-
   const [formState, setFormState] = useReducer(formReducer, initialLoginState)
+
+  const [profileInfo, setProfileInfo] = useState([])
 
   function handleFormChange(e) {
     const { name, type, value, checked } = e.target
+    let userType = "user"
+    if (type === 'checkbox') {
+      if (checked) {
+        userType = "admin"
+      }
+    }
     setFormState({
       type: 'updateField',
       field: name,
       //if its a checkbox, then use "checked" instead of "value"
-      value: type === 'checkbox' ? checked : value,
+      value: type === 'checkbox' ? userType : value,
     })
   }
 
@@ -91,6 +97,7 @@ export default function TestLogin() {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${token}`
         },
         body: JSON.stringify(formState),
       });
@@ -98,7 +105,9 @@ export default function TestLogin() {
       const data = await response.json();
       console.log(data)
       if (response.ok) {
-        setToken(data.accessToken)
+        if (!token) { //only set the new token if not already logged in
+          setToken(data.accessToken)
+        }
         setModalState({
           title: "Registration successful",
           desc: `Welcome: ${data.user.username}`
@@ -111,12 +120,33 @@ export default function TestLogin() {
       }
     } catch (error) {
       setModalState({
-        title: "Login unsuccessful",
+        title: "Registration unsuccessful",
         desc: error.message
       })
     } finally {
       modal.current.showModal();
     }
+  }
+
+  const tryGetProfile = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:5001/profile', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${token}`
+        },
+      });
+  
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setProfileInfo(data)
+      } else {
+        setProfileInfo(data.message)
+      }
+    } catch (error) { }
   }
 
   return (
@@ -127,12 +157,16 @@ export default function TestLogin() {
         <input value={formState.username} onChange={handleFormChange} type="text" name="username" placeholder="username"></input><br/>
         <input value={formState.password} onChange={handleFormChange} type="text" name="password" placeholder="password"></input><br/>
         <label>
-          Admin: (only for register)
-          <input checked={formState.isAdmin} onChange={handleFormChange} type="checkbox" name="isAdmin"/>
+          Admin: (only for register and logged in as admin type already)
+          <input checked={formState.isAdmin} onChange={handleFormChange} type="checkbox" name="type"/>
         </label><br/>
         <button onClick={(e) => tryRegister(e)}>Register</button>
         <button onClick={(e) => tryLogin(e)}>Login</button>
       </form>
+      <button onClick={(e) => tryGetProfile(e)}>Get profile</button>
+      <div>
+        {JSON.stringify(profileInfo)}
+      </div>
     </div>
   )
 }
