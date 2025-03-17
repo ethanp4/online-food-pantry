@@ -1,0 +1,57 @@
+/*
+    website color scheme
+    (i used a color picker so it may not be accurate to what they used)
+        orange: #e49439
+        magenta: #6d1e43
+        main text: #f2ecef
+        active text: #722549
+        non active text: #404040
+*/
+
+
+/* --------------  RESETTING MAIN MARGINS AND PADDING ----------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* --------------  HEADER ----------------*/
+header{
+    background-color: white; 
+    /* testing purposes as main color is white.. */
+    /* background-color: orange; */
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px solid #6d1e43;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link{
+    text-decoration: none;
+    color: #404040;
+    font-size: 15px;
+    padding: 0px 50px;
+}
+
+.link:active{
+    color: #722549;
+}
+
+.link:hover{
+    text-decoration: underline;
+}

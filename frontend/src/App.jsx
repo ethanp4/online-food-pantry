@@ -10,10 +10,10 @@ import TestLogin from './pages/TestLogin.jsx'
 function Header() {
   return (
     <header>
-      <Link to="/">Home </Link>
-      <Link to="/about">About </Link>
-      <Link to="/testLogin">Test Login Page </Link>
-      <Link to="/productDetails">Product details</Link>
+      <Link to="/" className='link'>Home </Link>
+      <Link to="/about" className='link'>About </Link>
+      <Link to="/testLogin" className='link'>Test Login Page </Link>
+      <Link to="/details/1" className='link'>Product details</Link> {/* for testing purposes -  will delete after */}
     </header>
   )
 }
@@ -30,8 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="testLogin" element={<TestLogin />} />
-            <Route path="/productDetails" element={<ProductDetails />} />
-
+            <Route path="/details/:id" element={<ProductDetails />} />
           </Routes>
         </BrowserRouter>
       </LoginProvider>
