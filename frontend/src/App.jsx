@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import { LoginProvider } from './components/TokenProvider.jsx'
 import TestLogin from './pages/TestLogin.jsx'
+import { CartProvider } from './components/CartProvider.jsx'
 
 function Header() {
   return (
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <LoginProvider>
+      <CartProvider>
         <BrowserRouter>
           <Header />
           <Routes>
@@ -34,6 +36,7 @@ function App() {
 
           </Routes>
         </BrowserRouter>
+      </CartProvider>
       </LoginProvider>
     </>
   )
