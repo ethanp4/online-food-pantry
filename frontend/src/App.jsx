@@ -1,11 +1,18 @@
-import { useState } from 'react'
-import { Home } from './pages/Home.jsx'
-import { About } from './pages/About.jsx'
-import { ProductDetails } from './pages/ProductDetails.jsx'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import './App.css'
-import { LoginProvider } from './components/TokenProvider.jsx'
-import TestLogin from './pages/TestLogin.jsx'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import {Home }  from './pages/Home.jsx';
+import { About } from './pages/About.jsx';
+
+import ProductDetails from './pages/ProductDetails.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+
+import  ProductManagement  from './pages/productManagement.jsx';
+import EditDetails from './pages/editDetails.jsx';
+
+import  OrderManagement  from './pages/orderManagement.jsx';
+import  PickupRequestManagement  from './pages/PickupRequestManagement.jsx';
+import TestLogin from './pages/TestLogin.jsx';
+import  LoginProvider from './components/TokenProvider.jsx';
+import './App.css';
 
 function Header() {
   return (
@@ -13,14 +20,12 @@ function Header() {
       <Link to="/" className='link'>Home </Link>
       <Link to="/about" className='link'>About </Link>
       <Link to="/testLogin" className='link'>Test Login Page </Link>
-      <button onClick={null} className='translate-btn'>Eng/Fr</button> {/* place holder */}
+      <Link to="/details/1" className='link'>Product details</Link> {/* for testing purposes -  will delete after */}
     </header>
-  )
+  );
 }
 
 function App() {
-  // fetch("http://localhost:5001/test").then(response => response.json()).then(data => setData(data.message));
-
   return (
     <>
       <LoginProvider>
@@ -30,13 +35,20 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="testLogin" element={<TestLogin />} />
+            <Route path="/testLogin" element={<TestLogin />} />
             <Route path="/details/:id" element={<ProductDetails />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/product-management" element={<ProductManagement />} />
+            <Route path="/edit-details/:id" element={<EditDetails />} />
+            
+
+            <Route path="/order-management" element={<OrderManagement />} />
+            <Route path="/pickup-request-management" element={<PickupRequestManagement />} />
           </Routes>
         </BrowserRouter>
       </LoginProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
