@@ -65,12 +65,20 @@ export function Home() {
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
               <div className="card" key={item.id}>
-                <div className="image">🖼</div> {/* place holder */}
+                <div className="image"></div> {/* place holder */}
+                 {/* image */}
+                <img
+                  src="https://blocks.astratic.com/img/general-img-square.png"
+                  alt="Placeholder"
+                  className="product-image"
+                />
                 <h4>{item.name}</h4>
+                {/* details button */}
                 <Link to={`/details/${item.id}`}>
                   <button className="details-btn">Details</button>
                 </Link>
-                <button className="cart-btn">+</button>
+                {/* add to cart button (non functional) */}
+                <button className="cart-btn">🛒</button>
               </div>
             ))
           ) : (
