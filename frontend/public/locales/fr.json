@@ -1,0 +1,19 @@
+{
+    "noItem": "Article non trouvé...",
+
+    "home": "Accueil",
+    "about": "À propos",
+
+    "filter": "Filtrer par",
+    "dietary": "Préférences Alimentaires",
+    "cultural": "Préférences Culturelles",
+    "foodtype": "Type d'Aliment",
+    "details": "Détails",
+    "search": "Recherche",
+    "searchBar": "Rechercher un Produit",
+    "backBtn": "Précédent",
+
+    "addToCart": "Ajouter au Panier",
+    "inStock": "En Stock",
+    "outofStock": "est en rupture de stock"
+  }

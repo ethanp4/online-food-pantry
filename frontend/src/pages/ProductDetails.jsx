@@ -1,11 +1,16 @@
+//https://www.linguee.com/english-french/
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import "./ProductDetails.css"
+import { useTranslation } from "react-i18next";
 
 export function ProductDetails(){
     const {id} = useParams();
     const [item, setItem] = useState(null);
     const navigate = useNavigate();
+    // const { cart, setCart } = useContext(CartContext)
+    const { t } = useTranslation(); //for translations
 
     const errorTextStyling = {
         textAlign:"center",
@@ -29,8 +34,8 @@ export function ProductDetails(){
     if (!item) {
         return (
             <div>
-                <h1 style={errorTextStyling}>Item not found...</h1>
-                <button onClick={() => navigate(`../`)}>Back</button>
+                <h1 style={errorTextStyling}>{t("noItem")}</h1>
+                <button onClick={() => navigate(`../`)}>{t("backBtn")}</button>
             </div>
         )
     }
@@ -38,19 +43,19 @@ export function ProductDetails(){
     //hypothetically checks if an item is in stock or not (unsure if it works as we dont have any out of stock dummy data)
     const getStockMessage = (item) => {
         if (item.count === 0) {
-            return <p style={{ color: "red" }}>{item.name} is out of stock</p>;
+            return <p style={{ color: "red" }}>{item.name} {t("outofStock")}</p>;
         }
         return (
             <p>
                 {/* if count=1, name will be singular, if more than 1, name will be plural */}
-                In stock: {item.count} {item.count === 1 ? item.name : `${item.name}s`}
+                {t("inStock")}: {item.count} {item.count === 1 ? item.name : `${item.name}s`}
             </p>
         );
     };
 
     return(
         <div>
-            <button onClick={() => navigate(`../`)}>Back</button>
+            <button onClick={() => navigate(`../`)}>{t("backBtn")}</button>
 
             <div className="details-panel">
                 <div className="item-image">
@@ -62,16 +67,18 @@ export function ProductDetails(){
                     <div className="specifications">
                         {getStockMessage(item)}
                         {/* dummy data for the specification/nutrition facts/description/whatever else idk */}
+                        <h2>Nutrition Facts</h2>
+                        <h2>Valeur Nutritive</h2>
+                        <h4>Per XXX</h4>
+                        <hr />
                         <h4><b>Calories</b> XXX cal</h4>
-                        <p><b>Fat</b> XX g</p>
-                        <p><b>Carbohydrate</b> XX g</p>
-                        <p><b>Protein</b> XX g</p>
-                        <p><b>Cholesterol</b> XX mg</p>
+                        <p><b>Fat / Lipides</b> XX g</p>
+                        <p><b>Carbohydrate / Glucides</b> XX g</p>
+                        <p><b>Protein / Protiène</b> XX g</p>
+                        <p><b>Cholesterol / Cholestérol</b> XX mg</p>
                         <p>Potassium XX mg</p>
                         <p>Calcium XX mg</p>
-                        <p>Iron XX mg</p>
-                        <p>Vitamin A XX mg</p>
-                        <p>Vitamin C XX mg</p>
+                        <p>Iron / Fer XX mg</p>
                         <hr />
                         <h4>Ingredients</h4>
                         <p>
@@ -81,7 +88,7 @@ export function ProductDetails(){
                             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                     </div>
-                    <button onClick={null}>Add To Cart</button> {/* no functionality yet */}
+                    <button onClick={null}>{t("addToCart")}</button> {/* no functionality yet */}
                 </div>
             </div>
         </div>
