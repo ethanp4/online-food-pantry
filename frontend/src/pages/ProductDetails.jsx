@@ -55,10 +55,9 @@ export function ProductDetails(){
 
     return(
         <div>
-            <button onClick={() => navigate(`../`)}>{t("backBtn")}</button>
-
             <div className="details-panel">
                 <div className="item-image">
+                    <button onClick={() => navigate(`../`)} className="backBtn">{t("backBtn")}</button>
                     <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "400px"}}/> {/* place holder */}
                 </div>
                 <div className="item-details">
@@ -88,7 +87,7 @@ export function ProductDetails(){
                             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                     </div>
-                    <button onClick={null}>{t("addToCart")}</button> {/* no functionality yet */}
+                    <button onClick={null} className="addToCart">{t("addToCart")}</button> {/* no functionality yet */}
                 </div>
             </div>
         </div>
