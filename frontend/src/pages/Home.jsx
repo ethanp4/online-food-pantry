@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function Home() {
   const [items, setItems] = useState([]);  // display all items on database
   const [searchTerm, setSearchTerm] = useState("");  // filtering items with search bar
   const [filteredItems, setFilteredItems] = useState([]);  // displayed items once filtered in searchbar
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchItems() {
@@ -41,10 +43,10 @@ export function Home() {
     <div className="home-container">
       {/* Filter (DOES NOT WORK YET) */}
       <aside className="sidebar">
-        <h3>Filter by</h3>
-        <button>Dietary Preferences ⌄</button>
-        <button>Cultural Preferences ⌄</button>
-        <button>Food Type ⌄</button>
+        <h3>{t("filter")}</h3>
+        <button>{t("dietary")} ⌄</button>
+        <button>{t("cultural")} ⌄</button>
+        <button>{t("foodtype")} ⌄</button>
       </aside>
 
       {/* Main Content */}
@@ -53,11 +55,11 @@ export function Home() {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="Search for a Product"
+            placeholder={t("searchBar")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="search-btn">Search</button>
+          <button className="search-btn">{t("search")}</button>
         </div>
 
         {/* Product Grid */}
@@ -75,7 +77,7 @@ export function Home() {
                 <h4>{item.name}</h4>
                 {/* details button */}
                 <Link to={`/details/${item.id}`}>
-                  <button className="details-btn">Details</button>
+                  <button className="details-btn">{t("details")}</button>
                 </Link>
                 {/* add to cart button (non functional) */}
                 <button className="cart-btn">🛒</button>
