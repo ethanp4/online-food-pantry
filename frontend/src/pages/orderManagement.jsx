@@ -1,36 +1,28 @@
 import React from 'react';
 
-const orderManagement = () => {
-  const orders = [
-    { id: 1, customer: 'John Doe', status: 'Pending' },
-    { id: 2, customer: 'Jane Smith', status: 'Delivered' },
-  ];
-
-  return (
-    <div className="order-management">
-      <h2>Order Management</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.customer}</td>
-              <td>{order.status}</td>
-              <td>
-                <button>Update</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+const orderManagement = ({ setCurrentPage }) => {
+    return (
+        <div>
+            <h1>Order Management</h1>
+            {/* Placeholder for Order Table */}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* Example row */}
+                    <tr>
+                        <td>001</td>
+                        <td>Pending</td>
+                    </tr>
+                    {/* Add more orders as needed */}
+                </tbody>
+            </table>
+        </div>
+    );
 };
 
 export default orderManagement;

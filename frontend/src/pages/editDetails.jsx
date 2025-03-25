@@ -1,36 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const editDetails = ({ product }) => {
-  const [name, setName] = useState(product.name);
-  const [category, setCategory] = useState(product.category);
-
-  const handleSave = () => {
-    alert('Changes saved');
-  };
-
-  const handleDelete = () => {
-    alert('Product deleted');
-  };
-
-  return (
-    <div className="edit-details">
-      <h2>Edit Product Details</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Product Name"
-      />
-      <input
-        type="text"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        placeholder="Category"
-      />
-      <button onClick={handleSave}>Save Changes</button>
-      <button onClick={handleDelete} className="delete">Delete</button>
-    </div>
-  );
+const EditDetails = ({ setCurrentPage }) => {
+    return (
+        <div>
+            <h1>Edit Product Details</h1>
+            <form>
+                <label>Product Name:</label>
+                <input type="text" placeholder="Enter product name" />
+                <label>Category:</label>
+                <input type="text" placeholder="Enter category" />
+                <button type="submit">Save Changes</button>
+                <button onClick={() => setCurrentPage('ProductManagement')}>Cancel</button>
+            </form>
+        </div>
+    );
 };
 
-export default editDetails;
+export default EditDetails;
