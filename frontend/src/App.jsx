@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import EditDetails from "./pages/editDetails.jsx";
 import OrderManagement from "./pages/orderManagement.jsx";
 import PickupRequestManagement from "./pages/PickupRequestManagement.jsx";
-import ProductManagement from "./pages/ProductManagement.jsx";
+import ProductManagement from "./pages/productManagement.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
 import LoginProvider from "./components/TokenProvider.jsx";
 import "./App.css";
