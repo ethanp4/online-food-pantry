@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS food;
 CREATE DATABASE food;
 USE food;
 CREATE TABLE food_items (
