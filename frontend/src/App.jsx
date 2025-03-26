@@ -8,6 +8,8 @@ import OrderManagement from "./pages/orderManagement.jsx";
 import PickupRequestManagement from "./pages/PickupRequestManagement.jsx";
 import ProductManagement from "./pages/productManagement.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
+import SignUp from "./pages/signup.jsx";
+import Login from "./pages/login.jsx";
 import LoginProvider from "./components/TokenProvider.jsx";
 import "./App.css";
 
@@ -18,6 +20,8 @@ function Header() {
       <Link to="/about" className="link">About</Link>
       <Link to="/testLogin" className="link">Test Login Page</Link>
       <Link to="/dashboard" className="link">Dashboard</Link>
+      <Link to="/login" className="link">Login</Link>
+      <Link to="/signup" className="link">Sign Up</Link>
     </header>
   );
 }
@@ -33,6 +37,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/testLogin" element={<TestLogin />} />
           <Route path="/details/:id" element={<ProductDetails />} />
+
+          {/* Authentication Pages */}
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Admin Pages */}
           <Route path="/dashboard" element={<Dashboard />} />

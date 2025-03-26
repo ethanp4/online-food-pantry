@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-// import "./ProductManagement.css"; // Add styling for Product Management page
+import { Link } from "react-router-dom";
+ import "./productManagement.css"; // Importing the CSS file
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -7,21 +8,21 @@ const ProductManagement = () => {
   return (
     <div className="admin-container">
       {/* Sidebar */}
-      <div className="sidebar">
+      <aside className="sidebar">
         <h3>Admin Panel</h3>
         <nav>
           <ul>
             <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><strong>Items</strong></li>
-            <li><Link to="/dashboard/products">Products</Link></li>
+            <li className="menu-header">Items</li>
+            <li><Link to="/dashboard/products" className="active">Products</Link></li>
             <li><Link to="/dashboard/orders">Orders</Link></li>
             <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li>
           </ul>
         </nav>
-      </div>
+      </aside>
 
       {/* Main Content */}
-      <div className="main-content">
+      <main className="main-content">
         {/* Topbar */}
         <header className="header">
           <h2>Product Management</h2>
@@ -32,15 +33,16 @@ const ProductManagement = () => {
         </header>
 
         {/* Product Management Table */}
-        <div className="content">
+        <section className="content">
           <div className="product-header">
             <input
               type="text"
-              placeholder="Search for a product"
+              className="search-box"
+              placeholder="Search for a product..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="add-btn">Add Item</button>
+            <button className="add-btn">+ Add Item</button>
           </div>
 
           <table className="product-table">
@@ -59,17 +61,17 @@ const ProductManagement = () => {
                   <td>#{index + 1}</td>
                   <td>Product Name</td>
                   <td>Category</td>
-                  <td>#</td>
+                  <td>10</td>
                   <td className="actions">
-                    <button className="edit-btn">✏️</button>
-                    <button className="delete-btn">🗑️</button>
+                    <button className="edit-btn">✏️ Edit</button>
+                    <button className="delete-btn">🗑️ Delete</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 };
