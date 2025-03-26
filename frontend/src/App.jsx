@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import { LoginProvider } from './components/TokenProvider.jsx'
 import TestLogin from './pages/TestLogin.jsx'
+import { useTranslation } from "react-i18next";
+import "./i18n.js"
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -20,7 +22,7 @@ function Header() {
       <Link to="/" className='link'>Home </Link>
       <Link to="/about" className='link'>About </Link>
       <Link to="/testLogin" className='link'>Test Login Page </Link>
-      <button onClick={null} className='translate-btn'>Eng/Fr</button> {/* place holder */}
+      <button onClick={toggleLanguage} className='translate-btn'>{i18n.language === "en" ? "French" : "English"}</button>
     </header>
   );
 }
