@@ -65,27 +65,7 @@ export function ProductDetails(){
                     <br />
                     <div className="specifications">
                         {getStockMessage(item)}
-                        {/* dummy data for the specification/nutrition facts/description/whatever else idk */}
-                        <h2>Nutrition Facts</h2>
-                        <h2>Valeur Nutritive</h2>
-                        <h4>Per XXX</h4>
-                        <hr />
-                        <h4><b>Calories</b> XXX cal</h4>
-                        <p><b>Fat / Lipides</b> XX g</p>
-                        <p><b>Carbohydrate / Glucides</b> XX g</p>
-                        <p><b>Protein / Protiène</b> XX g</p>
-                        <p><b>Cholesterol / Cholestérol</b> XX mg</p>
-                        <p>Potassium XX mg</p>
-                        <p>Calcium XX mg</p>
-                        <p>Iron / Fer XX mg</p>
-                        <hr />
-                        <h4>Ingredients</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                        
                     </div>
                     <button onClick={null} className="addToCart">{t("addToCart")}</button> {/* no functionality yet */}
                 </div>
