@@ -97,7 +97,7 @@ export const getProfile = async (req, res) => {
     const { username } = verify(accessToken, accessSecret)
     const targetUser = await getProfileByUsername(username)
     if (!targetUser) { return res.status(500).json({ message: "User not found" }) }
-    return res.status(200).json({ user: targetUser })
+    return res.status(200).json({ profile: targetUser })
     } catch (err) {
       if (err.name === "JsonWebTokenError") {
         return res.status(401).json({ message: "Unauthorized" })

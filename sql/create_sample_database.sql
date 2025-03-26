@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS food;
 CREATE DATABASE food;
 USE food;
 CREATE TABLE food_items (
@@ -26,7 +25,8 @@ CREATE TABLE user_profiles (
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
 
-  name VARCHAR(255) NOT NULL,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
   address VARCHAR(255) NOT NULL,
@@ -35,3 +35,10 @@ CREATE TABLE user_profiles (
   spoken_language VARCHAR(255) NOT NULL,
   referrer VARCHAR(255) NOT NULL 
 );
+INSERT INTO user_profiles VALUES
+(1, 1, 'John', 'Doe', 'johndoe@gmail.com', '555-555-5555', '126 Address St', 'NW', 'Bulgaria', 'Bulgarian', 'Bulgarian Govt'),
+(2, 2, 'Jane', 'Admin-Doe', 'janedoe@gmail.com', '555-555-5555', '127 Address St', 'NW', 'France', 'French', 'France Govt');
+SELECT u.username, p.*
+FROM users AS u
+JOIN user_profiles AS p ON p.user_id = u.id
+WHERE u.id = 1;

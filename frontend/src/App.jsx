@@ -7,6 +7,7 @@ import './App.css'
 import { LoginProvider } from './components/TokenProvider.jsx'
 import TestLogin from './pages/TestLogin.jsx'
 import { CartProvider } from './components/CartProvider.jsx'
+import { Profile } from './pages/Profile.jsx'
 
 function Header() {
   return (
@@ -15,6 +16,7 @@ function Header() {
       <Link to="/about">About </Link>
       <Link to="/testLogin">Test Login Page </Link>
       <Link to="/productDetails">Product details</Link>
+      <Link to="/profile">My Profile</Link>
     </header>
   )
 }
@@ -33,7 +35,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="testLogin" element={<TestLogin />} />
             <Route path="/productDetails" element={<ProductDetails />} />
-
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>
