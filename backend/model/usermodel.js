@@ -68,6 +68,8 @@ export const getAllUsers = async () => {
 }
 
 //replace or add if new
-export const setUserProfileById = async (userId) => {
-  
+export const setUserProfileById = async (userId, profile) => {
+  try {
+    
+  } catch (err) { }
 }

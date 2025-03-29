@@ -95,7 +95,8 @@ export const updateProfile = async (req, res) => {
     let targetProfile = getProfileById(id)
     if (!targetProfile) { return res.status(500).json({ message: "Unauthorized" }) }
     const validKeys = ["first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language"]
-    // console.log(req.body)
+
+    //check if keys are valid, modifying the profile as it goes
     for (var key in req.body) {
       if (!validKeys.includes(key)) {
         return res.status(500).json({ message: "Invalid key: " + key })
@@ -104,6 +105,7 @@ export const updateProfile = async (req, res) => {
       }
     }
 
+    const res = await setUserProfileById(id, targetProfile)
   } catch (err) {
     res.status(500).json({ message: "Failed to update profile" })
   }
