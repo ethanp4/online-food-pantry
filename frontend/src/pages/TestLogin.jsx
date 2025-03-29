@@ -14,7 +14,7 @@ const initialModalState = {
   redirect: '' //either empty string for no redirect or a path like '/home'
 }
 
-function formReducer(state, action) {
+function loginFormReducer(state, action) {
   switch (action.type) {
     case 'updateField':
       return {
@@ -32,7 +32,7 @@ export default function TestLogin() {
   const {token, setToken} = useContext(LoginContext)
   const modal = useRef();
   const [modalState, setModalState] = useState(initialModalState)
-  const [formState, setFormState] = useReducer(formReducer, initialLoginState)
+  const [formState, setFormState] = useReducer(loginFormReducer, initialLoginState)
 
   const [profileInfo, setProfileInfo] = useState([])
 

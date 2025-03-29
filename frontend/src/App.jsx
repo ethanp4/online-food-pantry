@@ -8,6 +8,8 @@ import { LoginProvider } from './components/TokenProvider.jsx'
 import TestLogin from './pages/TestLogin.jsx'
 import { useTranslation } from "react-i18next";
 import "./i18n.js"
+import { CartProvider } from './components/CartProvider.jsx'
+import { Profile } from './pages/Profile.jsx'
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -19,10 +21,13 @@ function Header() {
 
   return (
     <header>
+
       <Link to="/" className='link'>Home </Link>
       <Link to="/about" className='link'>About </Link>
       <Link to="/testLogin" className='link'>Test Login Page </Link>
       <button onClick={toggleLanguage} className='translate-btn'>{i18n.language === "en" ? "French" : "English"}</button>
+      <Link to="/profile">My Profile</Link>
+
     </header>
   );
 }
@@ -39,6 +44,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="testLogin" element={<TestLogin />} />
             <Route path="/details/:id" element={<ProductDetails />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </LoginProvider>
