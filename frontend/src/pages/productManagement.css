@@ -1,0 +1,134 @@
+/* General Styling */
+body {
+    background-color: #f2ecef;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Admin Container */
+  .admin-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background-color: #6d1e43;
+    padding: 20px;
+    color: #f2ecef;
+  }
+  
+  .sidebar h3 {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .sidebar .active {
+    font-weight: bold;
+    color: #e49439;
+  }
+  
+  .sidebar .active-text {
+    color: #722549;
+  }
+  
+  .sidebar .non-active {
+    color: #404040;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e49439;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .header-right {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .language-button,
+  .logout-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Content */
+  .content {
+    margin-top: 20px;
+  }
+  
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .product-header input {
+    padding: 8px;
+    width: 60%;
+    border: 1px solid #6d1e43;
+    border-radius: 4px;
+  }
+  
+  .add-btn {
+    background-color: #e49439;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Table */
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .product-table th {
+    background-color: #6d1e43;
+    color: #f2ecef;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  

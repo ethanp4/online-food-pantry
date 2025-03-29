@@ -1,0 +1,62 @@
+/*
+    website color scheme
+    (i used a color picker so it may not be accurate to what they used)
+        orange: #e49439
+        magenta: #6d1e43
+        main text: #f2ecef
+        active text: #722549
+        non active text: #404040
+*/
+
+/* --------------  PRODUCT DETAILS ----------------*/
+.details-panel{
+    display : flex;
+    flex-direction : row;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.item-image {
+    width: 30%;
+    float: right;
+    padding: 30px;
+}
+
+.item-details{
+    width: 50%;
+    float: left;
+    padding: 10px 50px;
+}
+
+.specifications {
+    margin-bottom: 15px;
+    border: 1px solid #404040
+}
+
+.specifications p{
+    padding-bottom: 4px;
+    font-size: 12px;
+}
+
+
+
+/* --------------  BUTTONS ----------------*/
+.backBtn{
+    margin-bottom: 10px;
+    background-color: #e49439;
+    color: white;
+    border: 0px;
+    padding: 5px 7px;
+    border-radius: 4px;
+}
+
+.addToCart{
+    float: right;
+    font-size: 20px;
+    background-color: #e49439;
+    color: white;
+    border: 0px;
+    padding: 5px 7px;
+    border-radius: 4px;
+}

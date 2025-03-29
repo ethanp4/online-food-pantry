@@ -1,0 +1,19 @@
+{
+    "noItem": "Item not found...",
+
+    "home": "Home",
+    "about": "About",
+
+    "filter": "Filter by",
+    "dietary": "Dietary Preferences",
+    "cultural": "Cultural Preferences",
+    "foodtype": "Food Type",
+    "details": "Details",
+    "search": "Search",
+    "searchBar": "Search for a Product",
+    "backBtn": "Back",
+
+    "addToCart": "Add To Cart",
+    "inStock": "In stock",
+    "outofStock": "is out of stock"
+  }
