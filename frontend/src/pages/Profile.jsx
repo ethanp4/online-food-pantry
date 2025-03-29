@@ -73,7 +73,7 @@ export function Profile() {
       const data = await response.json();
       if (response.ok) {
         console.log("Got profile")
-        setProfile(data['profile'])
+        setProfile(data)
       } else {
         console.log("Unable to get profile")
       }
