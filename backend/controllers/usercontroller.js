@@ -94,7 +94,18 @@ export const updateProfile = async (req, res) => {
     const { id } = verify(accessToken, accessSecret)
     let targetProfile = getProfileById(id)
     if (!targetProfile) { return res.status(500).json({ message: "Unauthorized" }) }
-    const validKeys = [ "first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language", "" ]
+    const validKeys = ["first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language"]
+    // console.log(req.body)
+    for (var key in req.body) {
+      if (!validKeys.includes(key)) {
+        return res.status(500).json({ message: "Invalid key: " + key })
+      } else {
+        targetProfile[key] = req.body[key]
+      }
+    }
+
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update profile" })
   }
 }
 

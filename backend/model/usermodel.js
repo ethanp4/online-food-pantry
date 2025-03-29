@@ -67,3 +67,7 @@ export const getAllUsers = async () => {
   return false
 }
 
+//replace or add if new
+export const setUserProfileById = async (userId) => {
+  
+}

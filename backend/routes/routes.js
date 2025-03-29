@@ -19,6 +19,9 @@ router.post('/login', login) //authenticate with same basic details
 router.get('/profile', getProfile)
 router.post('/updateProfile', updateProfile) //update one or multiple values related to a users profile
 
+router.post('/order', createOrder)
+router.get('/order', getOrders)
+
 
 //administrator actions, requires admin authorization header
 router.get('/users', getUsers)
