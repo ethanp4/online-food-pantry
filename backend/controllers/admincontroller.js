@@ -66,9 +66,9 @@ export const editItemById = async (req, res) => {
     const itemId = req.params.id
     const item = await getFoodItemById(itemId)
     const name = req.body.name ? req.body.name : item.name
-    const qty = req.body.quantity ? req.body.quantity : item.count
+    const qty = req.body.count ? req.body.count : item.count
     const max_per_person = req.body.max_per_person ? req.body.max_per_person : item.max_per_person
-
+  
     const result = await editFoodItemById(itemId, name, qty, max_per_person)
     res.status(200).json(result)
   } catch (err) {
