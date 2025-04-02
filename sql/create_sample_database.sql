@@ -5,13 +5,14 @@ CREATE TABLE food_items (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL UNIQUE,
   max_per_person INT NOT NULL DEFAULT -1,
-  count INT NOT NULL
+  count INT NOT NULL,
+  category VARCHAR(255)
 );
-INSERT INTO food_items (name, count) VALUES
-('Apple', 10),
-('Banana', 5),
-('Orange', 15),
-('5 kg of flour', 20);
+INSERT INTO food_items (name, count, category) VALUES
+('Apple', 10, 'Fruit'),
+('Banana', 5, 'Fruit'),
+('Orange', 15, 'Fruit'),
+('5 kg of flour', 20, 'Fruit');
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
@@ -39,18 +40,16 @@ CREATE TABLE user_profiles (
 INSERT INTO user_profiles VALUES
 (1, 1, 'John', 'Doe', 'johndoe@gmail.com', '555-555-5555', '126 Address St', 'NW', 'Bulgaria', 'Bulgarian', 'Bulgarian Govt'),
 (2, 2, 'Jane', 'Admin-Doe', 'janedoe@gmail.com', '555-555-5555', '127 Address St', 'NW', 'France', 'French', 'France Govt');
--- SELECT u.username, p.*
--- FROM users AS u
--- JOIN user_profiles AS p ON p.user_id = u.id
--- WHERE u.id = 1;
 
+DELIMITER //
 CREATE TRIGGER createEmptyProfileRow
 AFTER INSERT ON users
 FOR EACH ROW
 BEGIN
   INSERT INTO user_profiles (user_id)
   VALUES (NEW.id);
-END;
+END//
+DELIMITER ;
 
 CREATE TABLE orders (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -63,5 +62,5 @@ CREATE TABLE orders (
   delivery_time DATETIME,
   address VARCHAR(255),
   region ENUM('NW', 'NE', 'SW', 'SE'),
-  items JSON NOT NULL,
+  items JSON NOT NULL
 )

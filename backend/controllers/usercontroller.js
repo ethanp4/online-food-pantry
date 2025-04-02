@@ -1,4 +1,4 @@
-import { createUser, getUserByUsername, getProfileByUsername, getProfileById } from "../model/usermodel.js"
+import { createUser, getUserByUsername, getProfileByUsername, getProfileById, setUserProfileById } from "../model/usermodel.js"
 import { compare } from "bcrypt"
 import pkg from 'jsonwebtoken'
 import { getUserById } from "./admincontroller.js"
@@ -92,22 +92,26 @@ export const updateProfile = async (req, res) => {
   if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
   try {
     const { id } = verify(accessToken, accessSecret)
-    let targetProfile = getProfileById(id)
-    if (!targetProfile) { return res.status(500).json({ message: "Unauthorized" }) }
-    const validKeys = ["first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language"]
+    // let targetProfile = await getProfileById(id)
+    // if (!targetProfile) { return res.status(500).json({ message: "Unauthorized" }) }
+    const validKeys = ["first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language", "referrer"]
 
-    //check if keys are valid, modifying the profile as it goes
+    //check if keys are valid, modifying the profile object as it goes
     for (var key in req.body) {
       if (!validKeys.includes(key)) {
         return res.status(500).json({ message: "Invalid key: " + key })
-      } else {
-        targetProfile[key] = req.body[key]
-      }
+      } 
     }
 
-    const res = await setUserProfileById(id, targetProfile)
+    //if all keys were valid, then finally set the profile
+    const updatedProfile = await setUserProfileById(id, req.body)
+    if (updatedProfile) {
+      res.status(200).json({ message: "Profile updated", updatedProfile})
+    } else {
+      res.status(500).json({ message: "Failed to update profile" })
+    }
   } catch (err) {
-    res.status(500).json({ message: "Failed to update profile" })
+    res.status(500).json({ message: "Unauthorized" })
   }
 }
 

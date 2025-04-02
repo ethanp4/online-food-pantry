@@ -1,0 +1,67 @@
+/* -------------- ORDER CONFIRMATION PAGE ----------------*/
+.order-confirmation-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #6d1e43;
+    border-radius: 12px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+}
+
+.header-left h1 {
+    font-size: 1.5rem;
+    color: #6d1e43;
+}
+
+.header-right button {
+    margin-left: 10px;
+    background-color: #e49439;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.options {
+    margin-top: 20px;
+    display: flex;
+    gap: 1rem;
+}
+
+.options button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background-color: #6d1e43;
+    cursor: pointer;
+}
+
+.calendar {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.submit-order-btn {
+    background-color: #e49439;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.submit-order-btn:hover {
+    background-color: #722549;
+}
