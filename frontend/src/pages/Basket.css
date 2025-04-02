@@ -1,0 +1,57 @@
+/* -------------- BASKET PAGE ----------------*/
+.basket-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    border: 1px solid #6d1e43;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.basket-header {
+    font-size: 1.5rem;
+    color: #722549;
+}
+
+.basket-buttons button {
+    background-color: #e49439;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.basket-buttons button:hover {
+    background-color: #722549;
+}
+
+.basket-items {
+    margin-top: 20px;
+}
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.remove-btn {
+    background-color: #6d1e43;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout-btn {
+    background-color: #e49439;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-weight: bold;
+}
