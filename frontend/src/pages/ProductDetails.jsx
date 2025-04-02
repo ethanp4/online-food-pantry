@@ -65,7 +65,6 @@ export function ProductDetails(){
                     <br />
                     <div className="specifications">
                         {getStockMessage(item)}
-                        
                     </div>
                     <button onClick={null} className="addToCart">{t("addToCart")}</button> {/* no functionality yet */}
                 </div>
