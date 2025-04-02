@@ -1,6 +1,7 @@
-import { createUser, getUserByUsername, getProfileByUsername } from "../model/usermodel.js"
+import { createUser, getUserByUsername, getProfileByUsername, getProfileById } from "../model/usermodel.js"
 import { compare } from "bcrypt"
 import pkg from 'jsonwebtoken'
+import { getUserById } from "./admincontroller.js"
 const { sign, verify } = pkg
 
 const accessSecret = process.env.ACCESS_TOKEN_SECRET
@@ -13,8 +14,8 @@ export const signUp = async (req, res) => {
   }
 
   const targetUser = await getUserByUsername(username)
-  if (targetUser) { return res.status(500).json({ message: "That username already exists"}); }
-  
+  if (targetUser) { return res.status(500).json({ message: "That username already exists" }); }
+
   const accessToken = req.headers.authorization
   let type = "user" //default type
   let authorized = false
@@ -25,14 +26,14 @@ export const signUp = async (req, res) => {
       const tokenType = verify(accessToken, accessSecret)['type']
       console.log(tokenType)
       console.log(req.body)
-      if (tokenType === "admin") { authorized = true}
+      if (tokenType === "admin") { authorized = true }
       if (authorized && req.body.type) {
         if (req.body.type == "admin" || req.body.type == "user") {
-          type = req.body.type 
+          type = req.body.type
         } else {
-          return res.status(500).json({message: "Invalid type"})
+          return res.status(500).json({ message: "Invalid type" })
         }
-      } 
+      }
     } catch (err) { }
   }
 
@@ -40,8 +41,8 @@ export const signUp = async (req, res) => {
   const newUser = await createUser(username, password, type)
   if (newUser) {
     //if the request was made by an admin, then postAuth is skipped 
-    if (authorized) { 
-      return res.status(200).json({ 
+    if (authorized) {
+      return res.status(200).json({
         message: "Successfully created admin",
         user: {
           id: newUser.id,
@@ -49,12 +50,12 @@ export const signUp = async (req, res) => {
           password: password,
           type: newUser.type
         }
-      }) 
+      })
     } else {
       res = await postAuth(newUser, res)
     }
   } else {
-    res.status(500).json({message: "Failed to create user"})
+    res.status(500).json({ message: "Failed to create user" })
   }
 }
 
@@ -66,9 +67,9 @@ export const login = async (req, res) => {
   }
 
   const targetUser = await getUserByUsername(username)
-  if (!targetUser) { return res.status(500).json({message: "An account with that username doesnt exist"}) }
+  if (!targetUser) { return res.status(500).json({ message: "An account with that username doesnt exist" }) }
   if (!await compare(password, targetUser.hashedPassword)) {
-    return res.status(500).json({message: "Incorrect password"})
+    return res.status(500).json({ message: "Incorrect password" })
   }
   // console.log(`User ${username} logged in as ${type}`)
   res = await postAuth(targetUser, res)
@@ -79,15 +80,35 @@ export const postAuth = async (user, res) => {
   const { id, username, type } = user
   const userJWT = { id: id, username: username, type: type }
   const accessToken = sign(userJWT, accessSecret)
-  return res.status(201).json({ 
-    message: `Login successful`, 
+  return res.status(201).json({
+    message: `Login successful`,
     user: userJWT,
-    accessToken: accessToken 
+    accessToken: accessToken
   })
 }
 
 export const updateProfile = async (req, res) => {
-  
+  const accessToken = req.headers.authorization
+  if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
+  try {
+    const { id } = verify(accessToken, accessSecret)
+    let targetProfile = getProfileById(id)
+    if (!targetProfile) { return res.status(500).json({ message: "Unauthorized" }) }
+    const validKeys = ["first_name", "last_name", "email", "phone_number", "address", "region", "country_of_origin", "spoken_language"]
+
+    //check if keys are valid, modifying the profile as it goes
+    for (var key in req.body) {
+      if (!validKeys.includes(key)) {
+        return res.status(500).json({ message: "Invalid key: " + key })
+      } else {
+        targetProfile[key] = req.body[key]
+      }
+    }
+
+    const res = await setUserProfileById(id, targetProfile)
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update profile" })
+  }
 }
 
 export const getProfile = async (req, res) => {
@@ -97,12 +118,12 @@ export const getProfile = async (req, res) => {
     const { username } = verify(accessToken, accessSecret)
     const targetUser = await getProfileByUsername(username)
     if (!targetUser) { return res.status(500).json({ message: "User not found" }) }
-    return res.status(200).json({ user: targetUser })
-    } catch (err) {
-      if (err.name === "JsonWebTokenError") {
-        return res.status(401).json({ message: "Unauthorized" })
-      } else {
-        return res.status(500).json({ message: "Failed to get profile" })
-      }
+    return res.status(200).json({ ...targetUser })
+  } catch (err) {
+    if (err.name === "JsonWebTokenError") {
+      return res.status(401).json({ message: "Unauthorized" })
+    } else {
+      return res.status(500).json({ message: "Failed to get profile" })
     }
   }
+}

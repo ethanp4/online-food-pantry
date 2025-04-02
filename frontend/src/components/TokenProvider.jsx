@@ -28,3 +28,5 @@ const LoginProvider = ({children}) => {
 }
 
 export {LoginContext, LoginProvider}
+
+export default LoginProvider;

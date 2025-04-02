@@ -1,15 +1,13 @@
 /*
-    website color scheme
-    (i used a color picker so it may not be accurate to what they used)
-        orange: #e49439
-        magenta: #6d1e43
-        main text: #f2ecef
-        active text: #722549
-        non active text: #404040
+    Website Color Scheme
+    Orange: #e49439
+    Magenta: #6d1e43
+    Main Text: #f2ecef
+    Active Text: #722549
+    Non-Active Text: #404040
 */
 
-
-/* --------------  RESETTING MAIN MARGINS AND PADDING ----------------*/
+/* -------------- RESET DEFAULT MARGINS AND PADDING -------------- */
 * {
     margin: 0;
     padding: 0;
@@ -17,8 +15,8 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2ecef; /* Light background for better contrast */
 }
 
 #root {
@@ -26,61 +24,59 @@ body {
     padding: 0;
 }
 
-
-
-
-/* --------------  HEADER ----------------*/
-header{
-    background-color: white; 
-    /* testing purposes as main color is white.. */
-    /* background-color: orange; */
+/* -------------- HEADER STYLING -------------- */
+header {
+    background-color: white;
     height: 80px;
     width: 100%;
     position: sticky;
     top: 0;
-
-    border-bottom: 1px solid #6d1e43;
+    border-bottom: 2px solid #6d1e43;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-
-    padding: 0 20px;
-    position: relative;
+    padding: 0 30px;
+    z-index: 1000;
 }
 
-.link{
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.link {
     text-decoration: none;
     color: #404040;
-    font-size: 12px;
-    padding: 0px 50px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-size: 14px;
     text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: color 0.3s ease-in-out;
 }
 
-.link:active{
+.link:hover {
+    text-decoration: underline;
     color: #722549;
 }
 
-.link:hover{
-    text-decoration: underline;
+/* Active link */
+.link:active {
+    color: #722549;
 }
 
-
-/* --------------  TRANSLATE BUTTON ----------------*/
-.translate-btn{
-    background-color: white;
-    border: 0px;
-    
+/* TRANSLATE BUTTON */
+.translate-btn {
+    background-color: transparent;
+    border: 0;
     color: #404040;
-    font-size: 12px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-size: 14px;
     text-transform: uppercase;
-
-    margin-left: auto;
-    position: absolute;
-    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
 }
 
-.translate-btn:hover{
+.translate-btn:hover {
     text-decoration: underline;
+    color: #6d1e43;
 }
