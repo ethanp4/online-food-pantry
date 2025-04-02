@@ -39,10 +39,6 @@ CREATE TABLE user_profiles (
 INSERT INTO user_profiles VALUES
 (1, 1, 'John', 'Doe', 'johndoe@gmail.com', '555-555-5555', '126 Address St', 'NW', 'Bulgaria', 'Bulgarian', 'Bulgarian Govt'),
 (2, 2, 'Jane', 'Admin-Doe', 'janedoe@gmail.com', '555-555-5555', '127 Address St', 'NW', 'France', 'French', 'France Govt');
--- SELECT u.username, p.*
--- FROM users AS u
--- JOIN user_profiles AS p ON p.user_id = u.id
--- WHERE u.id = 1;
 
 CREATE TRIGGER createEmptyProfileRow
 AFTER INSERT ON users
@@ -65,4 +61,3 @@ CREATE TABLE orders (
   region ENUM('NW', 'NE', 'SW', 'SE'),
   items JSON NOT NULL,
 );
-SELECT * FROM user_profiles;
