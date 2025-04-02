@@ -71,7 +71,7 @@ function EditProfile({profile, setEdit, setProfile}) {
     }
     console.log(data)
   }
-
+  
   return(
     <div>
       <label>First name: <input name="first_name" onChange={handleFormChange}  type="text" value={profileState.first_name} /></label><br/>
