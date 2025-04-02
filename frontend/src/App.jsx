@@ -6,6 +6,10 @@ import Dashboard from "./pages/Dashboard.jsx";
 import OrderManagement from "./pages/orderManagement.jsx";
 import PickupRequestManagement from "./pages/PickupRequestManagement.jsx";
 import ProductManagement from "./pages/ProductManagement.jsx";
+import EditDetails from "./pages/EditDetails.jsx";
+import DeliveryPage from "./pages/DeliveryPage"; 
+
+
 import SignUp from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
@@ -58,8 +62,11 @@ function App() {
           {/* Admin Pages */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/products" element={<ProductManagement />} />
+         
           <Route path="/dashboard/orders" element={<OrderManagement />} />
           <Route path="/dashboard/pickup-requests" element={<PickupRequestManagement />} />
+          <Route path="/dashboard/products/edit/:productId" element={<EditDetails />} />
+          <Route path="/dashboard/delivery" element={<DeliveryPage />} /> 
         </Routes>
       </BrowserRouter>
     </LoginProvider>
