@@ -22,7 +22,7 @@ function Header() {
   return (
     <header>
 
-      <Link to="/" className='link'>Home </Link>
+      <Link to="/" className='link'>{t("home")}</Link>
       <Link to="/about" className='link'>About </Link>
       <Link to="/testLogin" className='link'>Test Login Page </Link>
       <button onClick={toggleLanguage} className='translate-btn'>{i18n.language === "en" ? "French" : "English"}</button>
