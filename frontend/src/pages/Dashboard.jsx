@@ -58,7 +58,7 @@ const Dashboard = () => {
             <li><strong>Items</strong></li>
             <li><Link to="/dashboard/products">Products</Link></li>
             <li><Link to="/dashboard/orders">Orders</Link></li>
-            <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li>
+            {/* <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li> */}
           </ul>
         </nav>
       </div>
