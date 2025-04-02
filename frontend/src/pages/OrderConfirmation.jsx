@@ -2,6 +2,7 @@ import './OrderConfirmation.css';
 import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginContext } from '../components/TokenProvider';
+import { useNavigate } from 'react-router-dom';
 
 const OrderConfirmation = () => {
   const { t, i18n } = useTranslation();
@@ -10,6 +11,7 @@ const OrderConfirmation = () => {
   const [option, setOption] = useState('');
   const [date, setDate] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLanguageToggle = () => {
     const newLang = i18n.language === "en" ? "fr" : "en";
@@ -46,6 +48,10 @@ const OrderConfirmation = () => {
     }
   };
 
+  const handleLogout = () => {
+    navigate('/login');
+  };
+
   return (
     <div className="order-confirmation-container">
       <header className="order-header">
@@ -57,7 +63,7 @@ const OrderConfirmation = () => {
           <button className="language-button" onClick={handleLanguageToggle}>
             {i18n.language === 'en' ? 'Français' : 'English'}
           </button>
-          <button className="logout-button">Logout</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
       </header>
 
