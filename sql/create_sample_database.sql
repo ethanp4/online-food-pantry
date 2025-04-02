@@ -64,4 +64,5 @@ CREATE TABLE orders (
   address VARCHAR(255),
   region ENUM('NW', 'NE', 'SW', 'SE'),
   items JSON NOT NULL,
-)
+);
+SELECT * FROM user_profiles;

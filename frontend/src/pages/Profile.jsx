@@ -15,7 +15,20 @@ function editProfileReducer(state, action) {
   }
 }
 
-function EditProfile({profile, saveProfile}) {
+const emptyProfileState = {
+  first_name: null,
+  last_name: null,
+  email: null,
+  phone_number: null,
+  address: null,
+  region: null,
+  country_of_origin: null,
+  spoken_language: null,
+  referrer: null
+}
+
+function EditProfile({profile, setEdit, setProfile}) {
+  const {token} = useContext(LoginContext)
   const [profileState, setProfileState] = useReducer(editProfileReducer, profile)
   function handleFormChange(e) {
     const { name, value } = e.target
@@ -25,6 +38,40 @@ function EditProfile({profile, saveProfile}) {
       value: value
     })
   }
+
+  const saveProfile = async (e) => {
+    e.preventDefault()
+    const response = await fetch("http://localhost:5001/updateProfile", {
+      method: "POST",
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+      },
+      body: JSON.stringify({
+        "first_name": profileState.first_name ? profileState.first_name : null,
+        "last_name": profileState.last_name ? profileState.last_name : null,
+        "email": profileState.email ? profileState.email : null,
+        "phone_number": profileState.phone_number ? profileState.phone_number : null,
+        "address": profileState.address ? profileState.address : null,
+        "region": profileState.region ? profileState.region : null,
+        "country_of_origin": profileState.country_of_origin ? profileState.country_of_origin : null,
+        "spoken_language": profileState.spoken_language ? profileState.spoken_language : null,
+        "referrer": profileState.referrer ? profileState.referrer : null
+      })
+    })
+
+    const data = await response.json()
+    if (response.ok) {
+      console.log("Profile updated")
+      setProfile(data.updatedProfile)
+      setEdit(false)
+    } else {
+      console.log("Unable to update profile")
+      setEdit(false)
+    }
+    console.log(data)
+  }
+
   return(
     <div>
       <label>First name: <input name="first_name" onChange={handleFormChange}  type="text" value={profileState.first_name} /></label><br/>
@@ -35,7 +82,7 @@ function EditProfile({profile, saveProfile}) {
       <label>Country of origin: <input name="country_of_origin" onChange={handleFormChange} type="text" value={profileState.country_of_origin} /></label><br/>
       <label>Spoken language: <input name="spoken_language" onChange={handleFormChange} type="text" value={profileState.spoken_language} /></label><br/>
       <label>Referrer: <input name="referrer" onChange={handleFormChange} type="text" value={profileState.referrer} /></label>
-      <br/><button onClick={(e, profileState) => saveProfile(e, profileState)}>Save Changes</button>
+      <br/><button onClick={(e) => saveProfile(e)}>Save Changes</button>
     </div>
   )
 }
@@ -56,9 +103,9 @@ function DisplayProfile({profile}) {
 }
 
 export function Profile() {
-  const {token, setToken} = useContext(LoginContext)
-  const [profile, setProfile] = useState(null)
+  const {token} = useContext(LoginContext)
   const [edit, setEdit] = useState(false)
+  const [profile, setProfile] = useState(null)
   
   const getProfile = async () => {
     try {
@@ -76,12 +123,9 @@ export function Profile() {
         setProfile(data)
       } else {
         console.log("Unable to get profile")
+        setProfile(emptyProfileState)
       }
     } catch (error) { }
-  }
-
-  const saveProfile = async(e, profile) => {
-    e.preventDefault()
   }
 
   useEffect(() => {
@@ -92,25 +136,11 @@ export function Profile() {
 
   if (!profile) return <div>Loading profile..</div>
 
-      // address: "127 Address St"
-  // country_of_origin: "France"
-  // email: "janedoe@gmail.com"
-  // first_name: "Jane"
-  // id: 2
-  // last_name: "Admin-Doe"
-  // phone_number: "555-555-5555"
-  // referrer: "France Govt"
-  // region: "NW"
-  // spoken_language: "French"
-  // type: "admin"
-  // user_id: 2
-  // username: "admin"
-
   return(
     <div>
       <h3>Welcome {profile.username}</h3>
       <button onClick={ () => setEdit(!edit) }>{!edit ? "Edit profile" : "Cancel"}</button><br/>
-      {edit && <EditProfile profile={profile} saveProfile={saveProfile} />}
+      {edit && <EditProfile profile={profile} setEdit={setEdit} setProfile={setProfile} />}
       {!edit && <DisplayProfile profile={profile} />}
     </div>
   )
