@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import EditDetails from "./EditDetails"; // Corrected import
+import EditDetails from "./editDetails"; // Corrected import
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");

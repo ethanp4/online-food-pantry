@@ -8,7 +8,6 @@ import { LoginProvider } from './components/TokenProvider.jsx';
 import { CartProvider } from './components/CartProvider.jsx';
 
 import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 import TestLogin from './pages/TestLogin.jsx';
 import Login from './pages/Login.jsx';
@@ -18,8 +17,8 @@ import OrderConfirmation from './pages/OrderConfirmation.jsx';
 import Dashboard from "./pages/Dashboard.jsx";
 import OrderManagement from "./pages/orderManagement.jsx";
 import PickupRequestManagement from "./pages/PickupRequestManagement.jsx";
-import ProductManagement from "./pages/ProductManagement.jsx";
-import EditDetails from "./pages/EditDetails.jsx";
+import ProductManagement from "./pages/productManagement.jsx";
+import EditDetails from "./pages/editDetails.jsx";
 import DeliveryPage from "./pages/DeliveryPage.jsx";
 import { Profile } from "./pages/Profile.jsx";
 
@@ -35,8 +34,6 @@ function Header() {
     <header>
       <nav className="nav-links">
         <Link to="/" className="link">{t("home")}</Link>
-        <Link to="/about" className="link">{t("about")}</Link>
-        <Link to="/testLogin" className="link">Test Login</Link>
         <Link to="/signup" className="link">{t("signup")}</Link>
         <Link to="/login" className="link">{t("login")}</Link>
         <Link to="/basket" className="link">{t("basket.title")}</Link>
@@ -60,8 +57,6 @@ function App() {
           <Routes>
             {/* Public */}
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/testLogin" element={<TestLogin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/basket" element={<Basket />} />
