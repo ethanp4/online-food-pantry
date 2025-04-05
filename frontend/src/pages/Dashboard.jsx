@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 
-
-import "./Dashboard.css";
-
 const Dashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState({

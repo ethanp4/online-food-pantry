@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 import "./i18n.js";
 
-import { LoginProvider } from './components/TokenProvider.jsx';
+import { LoginContext, LoginProvider } from './components/TokenProvider.jsx';
 import { CartProvider } from './components/CartProvider.jsx';
 
 import Home from './pages/Home.jsx';
@@ -24,6 +24,7 @@ import { Profile } from "./pages/Profile.jsx";
 
 function Header() {
   const { t, i18n } = useTranslation();
+  const { token, setToken } = useContext(LoginContext)
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "fr" : "en";
@@ -34,12 +35,15 @@ function Header() {
     <header>
       <nav className="nav-links">
         <Link to="/" className="link">{t("home")}</Link>
-        <Link to="/signup" className="link">{t("signup")}</Link>
-        <Link to="/login" className="link">{t("login")}</Link>
         <Link to="/basket" className="link">{t("basket.title")}</Link>
-        <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link>
-        <Link to="/profile" className="link">My Profile</Link>
+        {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
         <Link to="/dashboard" className="link">Dashboard</Link>
+
+        { token && (
+          <Link to="/profile" className="link">My Profile</Link>
+        )}        
+        { !token ? (<Link to="/login" className="link">{t("login")}</Link>) : (<a onClick={() => { setToken("") }} className="link">{t("logout")}</a>)}
+        
         <button onClick={toggleLanguage} className="translate-btn">
           {i18n.language === "en" ? "French" : "English"}
         </button>
