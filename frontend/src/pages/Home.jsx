@@ -79,7 +79,6 @@ export function Home() {
                 <Link to={`/details/${item.id}`}>
                   <button className="details-btn">{t("details")}</button>
                 </Link>
-                {/* add to cart button (non functional) */}
                 <button className="cart-btn">🛒</button>
               </div>
             ))
