@@ -1,4 +1,5 @@
 import { addFoodRow, deleteFoodItemById, editFoodItemById, getFoodItemById } from "../model/foodmodel.js"
+import { getAllOrders } from "../model/ordermodel.js"
 import { getAllUsers } from "../model/usermodel.js"
 import pkg from 'jsonwebtoken'
 const { verify } = pkg
@@ -95,5 +96,19 @@ export const addItem = async (req, res) => {
     res.json(result);
   } catch (err) {
     console.log(err)
+  }
+}
+
+//admin route to get every order if the right token is provided
+export const getOrders = async (req, res) => {
+  const accessToken = req.headers.authorization
+  if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
+  try {
+    const { type } = verify(accessToken, accessSecret)
+    if (type !== "admin") { return res.status(500).json({ message: "Unauthorized" }) }
+    const orders = await getAllOrders()
+    res.status(200).json(orders)
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get orders" })
   }
 }
