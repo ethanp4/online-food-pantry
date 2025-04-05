@@ -24,14 +24,13 @@
 }
 
 .item-details{
-    width: 50%;
+    width: 30%;
     float: left;
     padding: 10px 50px;
 }
 
 .specifications {
     margin-bottom: 15px;
-    border: 1px solid #404040
 }
 
 .specifications p{
@@ -52,7 +51,7 @@
 }
 
 .addToCart{
-    float: right;
+    float: left;
     font-size: 20px;
     background-color: #e49439;
     color: white;

@@ -116,5 +116,3 @@ Requires authorization header<br>
 #### /profile - GET
 Returns the profile of the authorization header that is used<br>
 ![image](https://github.com/user-attachments/assets/10c62bc8-7b85-4070-a0b2-9730ac9177f1)
-
-

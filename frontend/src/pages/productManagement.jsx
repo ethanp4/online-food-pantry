@@ -1,9 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
- import "./productManagement.css"; // Importing the CSS file
+import { Link, useNavigate } from "react-router-dom";
+import EditDetails from "./editDetails"; // Corrected import
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState([
+    { id: 1, name: "Product Name 1", category: "Category 1", stock: 10 },
+    { id: 2, name: "Product Name 2", category: "Category 2", stock: 10 },
+    { id: 3, name: "Product Name 3", category: "Category 3", stock: 10 },
+    { id: 4, name: "Product Name 4", category: "Category 4", stock: 10 },
+    { id: 5, name: "Product Name 5", category: "Category 5", stock: 10 },
+    { id: 6, name: "Product Name 6", category: "Category 6", stock: 10 },
+  ]);
+  const navigate = useNavigate();
+
+  const handleEditClick = (productId) => {
+    console.log(`Navigating to: /dashboard/products/edit/${productId}`);
+    navigate(`/dashboard/products/edit/${productId}`);
+  };
+
+  const handleDeleteClick = (productId) => {
+    const updatedProducts = products.filter((product) => product.id !== productId);
+    setProducts(updatedProducts);
+    console.log(`Product ${productId} deleted`);
+  };
 
   return (
     <div className="admin-container">
@@ -16,7 +36,6 @@ const ProductManagement = () => {
             <li className="menu-header">Items</li>
             <li><Link to="/dashboard/products" className="active">Products</Link></li>
             <li><Link to="/dashboard/orders">Orders</Link></li>
-            <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li>
           </ul>
         </nav>
       </aside>
@@ -56,18 +75,27 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {[...Array(6)].map((_, index) => (
-                <tr key={index}>
-                  <td>#{index + 1}</td>
-                  <td>Product Name</td>
-                  <td>Category</td>
-                  <td>10</td>
-                  <td className="actions">
-                    <button className="edit-btn">✏️ Edit</button>
-                    <button className="delete-btn">🗑️ Delete</button>
-                  </td>
-                </tr>
-              ))}
+              {products
+                .filter((product) =>
+                  product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  product.category.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                .map((product) => (
+                  <tr key={product.id}>
+                    <td>#{product.id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.category}</td>
+                    <td>{product.stock}</td>
+                    <td className="actions">
+                      <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
+                        ✏️ Edit
+                      </button>
+                      <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
+                        🗑️ Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </section>

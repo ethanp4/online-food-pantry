@@ -1,19 +1,47 @@
 {
-    "noItem": "Item not found...",
-
-    "home": "Home",
-    "about": "About",
-
-    "filter": "Filter by",
-    "dietary": "Dietary Preferences",
-    "cultural": "Cultural Preferences",
-    "foodtype": "Food Type",
-    "details": "Details",
-    "search": "Search",
-    "searchBar": "Search for a Product",
-    "backBtn": "Back",
-
-    "addToCart": "Add To Cart",
-    "inStock": "In stock",
-    "outofStock": "is out of stock"
-  }
+  "noItem": "Item not found...",
+  "home": "Home",
+  "about": "About",
+  "filter": "Filter by",
+  "dietary": "Dietary Preferences",
+  "cultural": "Cultural Preferences",
+  "foodtype": "Food Type",
+  "details": "Details",
+  "search": "Search",
+  "searchBar": "Search for a Product",
+  "backBtn": "Back",
+  "addToCart": "Add To Cart",
+  "inStock": "In stock",
+  "outofStock": "is out of stock",
+  "login": "Login",
+  "signup": "Sign Up",
+  "basket": {
+    "title": "Basket",
+    "checkout": "Proceed to Checkout"
+  },
+  "quantity": "Quantity",
+  "remove": "Remove",
+  "orderConfirmation": "Order Confirmation",
+  "order": {
+    "submit": "Submit Order",
+    "success": "Your order was placed successfully!",
+    "failed": "Order failed",
+    "checkout": "Checkout",
+    "pickup": "Pickup",
+    "delivery": "Delivery",
+    "selectDate": "Select a date"
+  },
+  "signupSuccess": "You have successfully signed up!",
+  "signupFailed": "There was an issue with signing up. Please try again.",
+  "loginError": "There was an error during login. Please check your credentials.",
+  "OrderConfirmation": "Order Confirmation",
+  "loginTitle": "Login",
+  "loginSubtitle": "Enter your details to log in",
+  "email": "Email",
+  "password": "Password",
+  "or": "or",
+  "loginWithGoogle": "Login with Google",
+  "forgotPassword": "Forgot Password?",
+  "noAccount": "Don't have an account?",
+  "basket.empty": "Your basket is empty"
+}

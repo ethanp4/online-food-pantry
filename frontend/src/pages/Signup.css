@@ -1,0 +1,82 @@
+/* -------------- SIGNUP PAGE ----------------*/
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #f2ecef;
+}
+
+.signup-window {
+    width: 400px;
+    padding: 25px;
+    background-color: white;
+    border: 2px solid #6d1e43;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-header {
+    display: flex;
+    justify-content: center;
+}
+
+.signup-profile i {
+    font-size: 3rem;
+    color: #6d1e43;
+}
+
+.signup-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 10px;
+}
+
+.signup-text {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    color: #6d1e43;
+}
+
+.signup-form .signup-input {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.signup-input i {
+    margin-right: 10px;
+}
+
+.signup-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.signup-button,
+.signup-google {
+    width: 100%;
+    padding: 10px;
+    background-color: #e49439;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.signup-google {
+    background-color: #6d1e43;
+}
+
+.signup-or {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.signup-login-link {
+    text-align: center;
+    margin-top: 10px;
+}
