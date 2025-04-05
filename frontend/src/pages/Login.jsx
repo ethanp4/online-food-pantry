@@ -3,7 +3,6 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider";
-import "./Login.css";
 
 const Login = () => {
   const { t } = useTranslation();
