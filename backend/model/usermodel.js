@@ -70,6 +70,20 @@ export const getAllUsers = async () => {
 //replace or add if new
 export const setUserProfileById = async (userId, profile) => {
   try {
-    
-  } catch (err) { }
+    console.log(userId)
+    console.log(profile)
+    const [rows] = await pool.query("SELECT * FROM user_profiles WHERE user_id = ?", [userId])
+    if (rows.length == 0) {
+      let params = [userId, profile.first_name, profile.last_name, profile.email, profile.phone_number, profile.address, profile.region, profile.country_of_origin, profile.spoken_language, profile.referrer]
+      await pool.query("INSERT INTO user_profiles (user_id, first_name, last_name, email, phone_number, address, region, country_of_origin, spoken_language, referrer) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", params)
+    } else {
+      let params = [profile.first_name, profile.last_name, profile.email, profile.phone_number, profile.address, profile.region, profile.country_of_origin, profile.spoken_language, profile.referrer]
+      await pool.query("UPDATE user_profiles SET first_name = ?, last_name = ?, email = ?, phone_number = ?, address = ?, region = ?, country_of_origin = ?, spoken_language = ?, referrer = ? WHERE user_id = ?", [...params, userId])
+    }
+    const updatedProfile = await getProfileById(userId)
+    return updatedProfile
+  } catch (err) { 
+    console.log(err)
+    return false
+  }
 }

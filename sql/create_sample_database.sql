@@ -57,10 +57,9 @@ CREATE TABLE orders (
   FOREIGN KEY (user_id) REFERENCES users(id),
   time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   time_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  items JSON NOT NULL,
   type ENUM('delivery', 'pickup') NOT NULL,
   status ENUM('pending', 'completed', 'cancelled') NOT NULL DEFAULT 'pending',
   delivery_time DATETIME,
-  address VARCHAR(255),
-  region ENUM('NW', 'NE', 'SW', 'SE'),
-  items JSON NOT NULL
-)
+  address VARCHAR(255)
+);
