@@ -6,13 +6,15 @@ CREATE TABLE food_items (
   name VARCHAR(255) NOT NULL UNIQUE,
   max_per_person INT NOT NULL DEFAULT -1,
   count INT NOT NULL,
-  category VARCHAR(255)
+  dietary_preferences VARCHAR(255),
+  cultural_preferences VARCHAR(255),
+  food_type VARCHAR(255)
 );
-INSERT INTO food_items (name, count, category) VALUES
-('Apple', 10, 'Fruit'),
-('Banana', 5, 'Fruit'),
-('Orange', 15, 'Fruit'),
-('5 kg of flour', 20, 'Fruit');
+INSERT INTO food_items (name, count, dietary_preferences,cultural_preferences,food_type) VALUES
+('Apple', 10,'Halal','Vegetarian', 'Fruit'),
+('Banana', 5,'Halal','Vegetarian', 'Fruit'),
+('Orange', 15,'Halal','Vegetarian', 'Fruit'),
+('5 kg of flour', 20,'Mormon','Vegan', 'Ingredients');
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
