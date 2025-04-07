@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { CartContext } from "../components/CartProvider";
 
 export function Home() {
   const [items, setItems] = useState([]);  // display all items on database
   const [searchTerm, setSearchTerm] = useState("");  // filtering items with search bar
   const [filteredItems, setFilteredItems] = useState([]);  // displayed items once filtered in searchbar
   const { t } = useTranslation();
+  const { cart, setCart } = useContext(CartContext)
 
   useEffect(() => {
     async function fetchItems() {
@@ -38,6 +40,23 @@ export function Home() {
       )
     );
   }, [searchTerm, items]);
+
+  const addItemToCart = (item) => {
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    if (existingItem) {
+      setCart((prevCart) =>
+        prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      setCart((prevCart) => [...prevCart, { ...item, quantity: 1 }]);
+    }
+    console.log("Updated cart:", cart);
+    alert(`${item.name} has been added to your cart!`);
+  }
 
   return (
     <div className="home-container">
@@ -79,7 +98,7 @@ export function Home() {
                 <Link to={`/details/${item.id}`}>
                   <button className="details-btn">{t("details")}</button>
                 </Link>
-                <button className="cart-btn">🛒</button>
+                <button className="cart-btn" onClick={() => addItemToCart(item)}>🛒</button>
               </div>
             ))
           ) : (
