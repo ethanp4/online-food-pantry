@@ -4,9 +4,21 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export function Home() {
-  const [items, setItems] = useState([]);  // display all items on database
-  const [searchTerm, setSearchTerm] = useState("");  // filtering items with search bar
-  const [filteredItems, setFilteredItems] = useState([]);  // displayed items once filtered in searchbar
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState({
+    dietary: "",
+    cultural: "",
+    foodType: ""
+  });
+
+  const [dropdownValues, setDropdownValues] = useState({
+    dietary: [],
+    cultural: [],
+    foodType: []
+  });
+
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -14,10 +26,16 @@ export function Home() {
       try {
         const response = await fetch("http://localhost:5001/item");
         const data = await response.json();
-        console.log("Fetched data:", data);
+
         if (Array.isArray(data)) {
           setItems(data);
-          setFilteredItems(data); 
+          setFilteredItems(data);
+
+          const dietary = [...new Set(data.map(item => item.dietary_preferences).filter(Boolean))];
+          const cultural = [...new Set(data.map(item => item.cultural_preferences).filter(Boolean))];
+          const foodType = [...new Set(data.map(item => item.food_type).filter(Boolean))];
+
+          setDropdownValues({ dietary, cultural, foodType });
         } else {
           console.error("Expected an array but got:", data);
         }
@@ -29,24 +47,58 @@ export function Home() {
     fetchItems();
   }, []);
 
-  // updatse filteredItems whenever searchTerm changes
   useEffect(() => {
     const lowerCaseSearch = searchTerm.toLowerCase();
-    setFilteredItems(
-      items.filter((item) =>
-        item.name.toLowerCase().includes(lowerCaseSearch)
-      )
-    );
-  }, [searchTerm, items]);
+
+    const result = items.filter(item => {
+      const matchesSearch = item.name.toLowerCase().includes(lowerCaseSearch);
+      const matchesDietary = filters.dietary ? item.dietary_preferences === filters.dietary : true;
+      const matchesCultural = filters.cultural ? item.cultural_preferences === filters.cultural : true;
+      const matchesFoodType = filters.foodType ? item.food_type === filters.foodType : true;
+
+      return matchesSearch && matchesDietary && matchesCultural && matchesFoodType;
+    });
+
+    setFilteredItems(result);
+  }, [searchTerm, filters, items]);
+
+  function handleFilterChange(type, value) {
+    setFilters(prev => ({ ...prev, [type]: value }));
+  }
+
+  function resetFilters() {
+    setSearchTerm("");
+    setFilters({ dietary: "", cultural: "", foodType: "" });
+  }
 
   return (
     <div className="home-container">
-      {/* Filter (DOES NOT WORK YET) */}
+      {/* filters */}
       <aside className="sidebar">
         <h3>{t("filter")}</h3>
-        <button>{t("dietary")} ⌄</button>
-        <button>{t("cultural")} ⌄</button>
-        <button>{t("foodtype")} ⌄</button>
+
+        <select onChange={(e) => handleFilterChange("dietary", e.target.value)} value={filters.dietary}>
+          <option value="">{t("dietary")}</option>
+          {dropdownValues.dietary.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+
+        <select onChange={(e) => handleFilterChange("cultural", e.target.value)} value={filters.cultural}>
+          <option value="">{t("cultural")}</option>
+          {dropdownValues.cultural.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+
+        <select onChange={(e) => handleFilterChange("foodType", e.target.value)} value={filters.foodType}>
+          <option value="">{t("foodtype")}</option>
+          {dropdownValues.foodType.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+
+        <button onClick={resetFilters} className="reset-btn"> {t("Undo Filters")}</button>
       </aside>
 
       {/* Main Content */}
@@ -67,15 +119,15 @@ export function Home() {
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
               <div className="card" key={item.id}>
-                <div className="image"></div> {/* place holder */}
-                 {/* image */}
+
+                {/*image placeholder*/}
+                <div className="image"></div>
                 <img
                   src="https://blocks.astratic.com/img/general-img-square.png"
                   alt="Placeholder"
                   className="product-image"
                 />
                 <h4>{item.name}</h4>
-                {/* details button */}
                 <Link to={`/details/${item.id}`}>
                   <button className="details-btn">{t("details")}</button>
                 </Link>
@@ -90,4 +142,5 @@ export function Home() {
     </div>
   );
 }
+
 export default Home;
