@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import EditDetails from "./editDetails"; // Corrected import
-
+import { useTranslation } from "react-i18next";
+import { LoginContext } from "../components/TokenProvider"; 
 const ProductManagement = () => {
+  const { t, i18n } = useTranslation();
+  const { setToken } = useContext(LoginContext);
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([
     { id: 1, name: "Product Name 1", category: "Category 1", stock: 10 },
@@ -12,30 +16,37 @@ const ProductManagement = () => {
     { id: 5, name: "Product Name 5", category: "Category 5", stock: 10 },
     { id: 6, name: "Product Name 6", category: "Category 6", stock: 10 },
   ]);
-  const navigate = useNavigate();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    navigate("/login");
+  };
 
   const handleEditClick = (productId) => {
-    console.log(`Navigating to: /dashboard/products/edit/${productId}`);
     navigate(`/dashboard/products/edit/${productId}`);
   };
 
   const handleDeleteClick = (productId) => {
     const updatedProducts = products.filter((product) => product.id !== productId);
     setProducts(updatedProducts);
-    console.log(`Product ${productId} deleted`);
   };
 
   return (
     <div className="admin-container">
       {/* Sidebar */}
       <aside className="sidebar">
-        <h3>Admin Panel</h3>
+        <h3>{t("AdminPanel")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li className="menu-header">Items</li>
-            <li><Link to="/dashboard/products" className="active">Products</Link></li>
-            <li><Link to="/dashboard/orders">Orders</Link></li>
+            <li><Link to="/dashboard">{t("Dashboard")}</Link></li>
+            <li className="menu-header">{t("Items")}</li>
+            <li><Link to="/dashboard/products" className="active">{t("Products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
           </ul>
         </nav>
       </aside>
@@ -44,10 +55,14 @@ const ProductManagement = () => {
       <main className="main-content">
         {/* Topbar */}
         <header className="header">
-          <h2>Product Management</h2>
+          <h2>{t("ProductManagement")}</h2>
           <div className="header-right">
-            <button className="language-button">Fr/Eng</button>
-            <button className="logout-button">Logout</button>
+            <button onClick={toggleLanguage} className="language-button">
+              {i18n.language === "en" ? "Français" : "English"}
+            </button>
+            <button onClick={handleLogout} className="logout-button">
+              {t("Logout")}
+            </button>
           </div>
         </header>
 
@@ -57,21 +72,21 @@ const ProductManagement = () => {
             <input
               type="text"
               className="search-box"
-              placeholder="Search for a product..."
+              placeholder={t("SearchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="add-btn">+ Add Item</button>
+            {/* <button className="add-btn">+ {t("addItem")}</button> */}
           </div>
 
-          <table className="product-table">
+          <table className="Product-table">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Stock</th>
-                <th>Actions</th>
+                <th>{t("Product")}</th>
+                <th>{t("Category")}</th>
+                <th>{t("Stock")}</th>
+                <th>{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -88,10 +103,10 @@ const ProductManagement = () => {
                     <td>{product.stock}</td>
                     <td className="actions">
                       <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
-                        ✏️ Edit
+                        ✏️ {t("edit")}
                       </button>
                       <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
-                        🗑️ Delete
+                        🗑️ {t("delete")}
                       </button>
                     </td>
                   </tr>

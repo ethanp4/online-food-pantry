@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import "./Dashboard.css";
+import { useTranslation } from "react-i18next";
+import { LoginContext } from "../components/TokenProvider";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { setToken } = useContext(LoginContext);
+
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalItems: 0,
@@ -13,7 +18,6 @@ const Dashboard = () => {
 
   const [disableUntil, setDisableUntil] = useState("2025-02-27");
 
-  // Fetch statistics from backend
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -28,18 +32,20 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  // Handle Logout
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
   const handleLogout = () => {
-    console.log("Logging out...");
+    setToken(""); // Clear login token
     navigate("/login");
   };
 
-  // Handle Order Disable Date Change
   const handleDateChange = (event) => {
     setDisableUntil(event.target.value);
   };
 
-  // Handle Confirm Order Disable
   const confirmOrderDisable = () => {
     console.log("Orders disabled until:", disableUntil);
   };
@@ -48,49 +54,43 @@ const Dashboard = () => {
     <div className="dashboard-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>Admin Panel</h3>
+        <h3>{t("Admin.panel")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><strong>Items</strong></li>
-            <li><Link to="/dashboard/products">Products</Link></li>
-            <li><Link to="/dashboard/orders">Orders</Link></li>
-            {/* <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li> */}
+            <li><Link to="/dashboard">{t("dashboard")}</Link></li>
+            <li><strong>{t("Items")}</strong></li>
+            <li><Link to="/dashboard/products">{t("Products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
           </ul>
         </nav>
       </div>
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Header */}
         <header className="header">
-          <h2>Admin Dashboard</h2>
+          <h2>{t("Admin.dashboard")}</h2>
           <div className="header-right">
-            <button className="language-button">Fr/Eng</button>
-            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <button className="language-button" onClick={toggleLanguage}>
+              {i18n.language === "en" ? "Français" : "English"}
+            </button>
+            <button className="logout-button" onClick={handleLogout}>{t("Logout")}</button>
           </div>
         </header>
         <Outlet />
 
-        {/* Content */}
         <div className="content">
-          {/* This will load the nested components (Products, Orders, Pickup Requests) */}
-          <Outlet />
-
-          {/* Order Disable Section */}
           <div className="order-control">
-            <label>Disable new orders until:</label>
+            <label>{t("Disable orders until")}</label>
             <input type="date" value={disableUntil} onChange={handleDateChange} />
-            <button className="confirm-button" onClick={confirmOrderDisable}>Confirm</button>
+            <button className="Confirm-button" onClick={confirmOrderDisable}>{t("Confirm")}</button>
           </div>
 
-          {/* Statistics Section */}
           <div className="stats">
-            <h3>Statistics Overview</h3>
-            <div className="stats-item"><span>Total Users: </span> <strong>{stats.totalUsers}</strong></div>
-            <div className="stats-item"><span>Total Items: </span> <strong>{stats.totalItems}</strong></div>
-            <div className="stats-item"><span>Total Pending Orders: </span> <strong>{stats.totalPendingOrders}</strong></div>
-            <div className="stats-item"><span>Most Recent Order: </span> <strong>{stats.mostRecentOrder}</strong></div>
+            <h3>{t("Statistics Overview")}</h3>
+            <div className="stats-item"><span>{t("Total Users")}: </span> <strong>{stats.totalUsers}</strong></div>
+            <div className="stats-item"><span>{t("Total Items")}: </span> <strong>{stats.totalItems}</strong></div>
+            <div className="stats-item"><span>{t("Total Pending Orders")}: </span> <strong>{stats.totalPendingOrders}</strong></div>
+            <div className="stats-item"><span>{t("Most Recent Order")}: </span> <strong>{stats.mostRecentOrder}</strong></div>
           </div>
         </div>
       </div>

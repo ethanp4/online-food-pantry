@@ -1,46 +1,64 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
- import "./DeliveryPage.css";  
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginContext } from "../components/TokenProvider";
+import { useTranslation } from "react-i18next";
+import "./DeliveryPage.css";
 
 const DeliveryPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { setToken } = useContext(LoginContext);
+
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
+  const handleLogout = () => {
+    setToken(""); // Clear login token
+    navigate("/login");
+  };
 
   return (
     <div className="admin-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>Admin Panel</h3>
+        <h3>{t("Admin.panel")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard" className="non-active">Dashboard</Link></li>
-            <li className="section-title">Items</li>
-            <li className="section-title">Categories</li>
-            <li><Link to="/dashboard/products" className="non-active">Products</Link></li>
-            <li className="section-title">Requests</li>
-            <li><Link to="/dashboard/orders" className="non-active">Orders</Link></li>
-           
-            <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li>
-            <li><Link to="/dashboard/delivery" className="non-active">Delivery</Link></li>
+            <li><Link to="/dashboard">{t("Dashboard")}</Link></li>
+            <li><strong>{t("Items")}</strong></li>
+            <li><Link to="/dashboard/products">{t("Products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
+            <li><Link to="/dashboard/pickup-requests">{t("Pickup Requests")}</Link></li>
+            <li><Link to="/dashboard/delivery">{t("Delivery")}</Link></li>
           </ul>
         </nav>
       </div>
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Topbar */}
         <header className="header">
-          <h2>Pickup Request Management</h2>
+          <h2>{t("Delivery Management")}</h2>
           <div className="header-right">
-            <button className="language-button">Fr/Eng</button>
-            <button className="logout-button">Logout</button>
+            {/* Language Button */}
+            <button className="language-button" onClick={toggleLanguage}>
+              {i18n.language === "en" ? "Français" : "English"}
+            </button>
+            {/* Logout Button */}
+            <button className="logout-button" onClick={handleLogout}>
+              {t("Logout")}
+            </button>
           </div>
         </header>
 
-        {/* Pickup Requests Table */}
+        {/* Delivery Requests Table */}
         <div className="content">
           <input
             type="text"
-            placeholder="Search"
+            placeholder={t("Search")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -49,18 +67,18 @@ const DeliveryPage = () => {
           <table className="Delivery-table">
             <thead>
               <tr>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
-                <th>No. Of Items</th>
-                <th>Delivery Date & Time</th>
-                <th>Actions</th>
+                <th>{t("Customer ID")}</th>
+                <th>{t("Customer Name")}</th>
+                <th>{t("No. Of Items")}</th>
+                <th>{t("Delivery Date & Time")}</th>
+                <th>{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
               {[...Array(6)].map((_, index) => (
                 <tr key={index}>
                   <td>###</td>
-                  <td>Name</td>
+                  <td>{t("Name")}</td>
                   <td>—</td>
                   <td>yy/mm/dd hh:mm</td>
                   <td>
