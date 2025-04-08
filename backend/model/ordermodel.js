@@ -5,6 +5,7 @@ export async function getAllOrders() {
     const [rows, fields] = await pool.query("SELECT * FROM orders")
     return rows
   } catch (err) {
+    console.log(err)
     return err
   }
 }
@@ -13,7 +14,7 @@ export async function getOrdersByUserId(user_id) {
   try {
     let params = [user_id]
     const [rows, fields] = await pool.query("SELECT * FROM orders WHERE user_id = ?", params)
-    if (rows.length == 0) { return false }
+    if (rows.length == 0) { return [] }
     return rows
   } catch (err) {
     console.log(err)
@@ -36,7 +37,7 @@ export async function getOrderById(id) {
 export async function addOrder(user_id, items, type, delivery_time, address) {
   //delivery time and address are only for delivery orders
   try {
-    let params = [user_id, items, type, delivery_time, address]
+    let params = [user_id, JSON.stringify(items), type, delivery_time, address]
     const res = await pool.execute("INSERT INTO orders (user_id, items, type, delivery_time, address) VALUES(?, ?, ?, ?, ?)", params)
     let rows = res[0].affectedRows
     return await getOrderById(res[0].insertId)
