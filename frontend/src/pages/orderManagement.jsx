@@ -1,39 +1,55 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./orderManagement.css"; 
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { LoginContext } from "../components/TokenProvider";
+import "./orderManagement.css";
 
 const OrderManagement = () => {
+  const { t, i18n } = useTranslation();
+  const { setToken } = useContext(LoginContext);
+  const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("All");
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    navigate("/login");
+  };
 
   return (
     <div className="admin-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>Admin Panel</h3>
+        <h3>{t("Admin.panel")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard" className="non-active">Dashboard</Link></li>
-            <li className="section-title">Items</li>
-            <li className="section-title">Categories</li>
-           
-            <li><Link to="/dashboard/products" className="non-active">Products</Link></li>
-            <li className="section-title">Requests</li>
-            <li><Link to="/dashboard/orders" className="active-text">Orders</Link></li>
-            <li><Link to="/dashboard/pickup-requests">Pickup Requests</Link></li>
-            <li><Link to="/dashboard/delivery" >Delivery</Link></li> {/* Navigates to Delivery Page */}
+            <li><Link to="/dashboard" className="non-active">{t("Dashboard")}</Link></li>
+            <li className="section-title">{t("Items")}</li>
+            <li className="section-title">{t("Categories")}</li>
+            <li><Link to="/dashboard/products" className="non-active">{t("Products")}</Link></li>
+            <li className="section-title">{t("Requests")}</li>
+            <li><Link to="/dashboard/orders" className="active-text">{t("Orders")}</Link></li>
+            <li><Link to="/dashboard/pickup-requests">{t("Pickup Requests")}</Link></li>
+            <li><Link to="/dashboard/delivery">{t("Delivery")}</Link></li>
           </ul>
         </nav>
       </div>
 
       {/* Main Content */}
       <div className="main-content">
-        {/* Topbar */}
         <header className="header">
-          <h2>Admin Dashboard</h2>
+          <h2>{t("Admin.dashboard")}</h2>
           <div className="header-right">
-            <button className="language-button">Fr/Eng</button>
-            <button className="logout-button">Logout</button>
+            <button className="language-button" onClick={toggleLanguage}>
+              {i18n.language === "en" ? "Français" : "English"}
+            </button>
+            <button className="logout-button" onClick={handleLogout}>{t("Logout")}</button>
           </div>
         </header>
 
@@ -42,16 +58,16 @@ const OrderManagement = () => {
           <div className="order-header">
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t("search")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className="filter-dropdown">
-              <label>Filter By:</label>
+            <div className="Filter-dropdown">
+              <label>{t("Filter.by")}:</label>
               <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-                <option value="All">All</option>
-                <option value="Active">Active</option>
-                <option value="Completed">Completed</option>
+                <option value="All">{t("all")}</option>
+                <option value="Active">{t("active")}</option>
+                <option value="Completed">{t("completed")}</option>
               </select>
             </div>
           </div>
@@ -59,18 +75,18 @@ const OrderManagement = () => {
           <table className="order-table">
             <thead>
               <tr>
-                <th>Delivery ID</th>
-                <th>Customer</th>
-                <th>Status</th>
-                <th>Order Date</th>
-                <th>Actions</th>
+                <th>{t("Delivery Id")}</th>
+                <th>{t("Customer")}</th>
+                <th>{t("Status")}</th>
+                <th>{t("Order Date")}</th>
+                <th>{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
               {[...Array(6)].map((_, index) => (
                 <tr key={index}>
                   <td>###</td>
-                  <td>Name</td>
+                  <td>{t("name")}</td>
                   <td>—</td>
                   <td>yy/mm/dd</td>
                   <td className="actions">
