@@ -107,8 +107,9 @@ export const getOrders = async (req, res) => {
     const { type } = verify(accessToken, accessSecret)
     if (type !== "admin") { return res.status(500).json({ message: "Unauthorized" }) }
     const orders = await getAllOrders()
-    res.status(200).json(orders)
+    res.status(200).json( { message: "Successfully retrieved orders", orders })
   } catch (err) {
+    console.log(err)
     res.status(500).json({ message: "Failed to get orders" })
   }
 }

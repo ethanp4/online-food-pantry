@@ -2,7 +2,7 @@ import express from "express"
 import { getItemById, getItems } from "../controllers/foodcontroller.js"
 import { signUp, login, updateProfile, getProfile } from "../controllers/usercontroller.js"
 import { getUsers, getUserById, deleteItemById, editItemById, addItem, getOrders } from "../controllers/admincontroller.js"
-import { createOrder, getOrdersById } from "../controllers/ordercontroller.js"
+import { createOrder, getUserOrders } from "../controllers/ordercontroller.js"
 
 export const router = express.Router()
 
@@ -21,7 +21,7 @@ router.get('/profile', getProfile)
 router.post('/updateProfile', updateProfile) //update one or multiple values related to a users profile
 
 //get orders associated with the token in the authorization header
-router.get('/order', getOrdersById)
+router.get('/order', getUserOrders)
 router.post('/order', createOrder)
 
 //administrator actions, requires admin authorization header
@@ -30,4 +30,4 @@ router.get('/users/:id', getUserById)
 router.delete('/deleteItem/:id', deleteItemById)
 router.post('/editItem/:id', editItemById)
 router.post('/addItem', addItem)
-router.get('/order', getOrders)
+router.get('/orders', getOrders)
