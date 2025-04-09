@@ -58,7 +58,7 @@ export function ProductDetails(){
             <div className="details-panel">
                 <div className="item-image">
                     <button onClick={() => navigate(`../`)} className="backBtn">{t("backBtn")}</button>
-                    <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "400px"}}/> {/* place holder */}
+                    <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "350px"}}/> {/* place holder */}
                 </div>
                 <div className="item-details">
                     <h1>{item.name}</h1>
