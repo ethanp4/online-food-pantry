@@ -37,7 +37,7 @@ function Header() {
 
   return (
     <>
-      { token && (
+      {token && (
         // <header>
         //   <nav className="nav-links">
         //     <Link to="/" className="link">{t("home")}</Link>
@@ -93,7 +93,7 @@ function App() {
             <Route path="/dashboard/products" element={<ProductManagement />} />
             <Route path="/dashboard/orders" element={<OrderManagement />} />
             <Route path="/dashboard/pickup-requests" element={<PickupRequestManagement />} />
-            <Route path="/dashboard/products/edit/:productId" element={<EditDetails />} />
+            <Route path="/dashboard/products/edit/:id" element={<EditDetails />} />
             <Route path="/dashboard/delivery" element={<DeliveryPage />} />
           </Routes>
         </BrowserRouter>
@@ -104,4 +104,3 @@ function App() {
 
 export default App;
 
-  
