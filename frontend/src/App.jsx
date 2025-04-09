@@ -38,18 +38,34 @@ function Header() {
   return (
     <>
       { token && (
+        // <header>
+        //   <nav className="nav-links">
+        //     <Link to="/" className="link">{t("home")}</Link>
+        //     <Link to="/basket" className="link">{t("basket.title")}</Link>
+        //     {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
+        //     <Link to="/dashboard" className="link">Dashboard</Link>
+        //     <Link to="/profile" className="link">My Profile</Link>
+        //     <button onClick={toggleLanguage} className="translate-btn">
+        //       {i18n.language === "en" ? "French" : "English"}
+        //     </button>
+        //     <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
+        //   </nav>
+        // </header>
         <header>
-          <nav className="nav-links">
-            <Link to="/" className="link">{t("home")}</Link>
-            <Link to="/basket" className="link">{t("basket.title")}</Link>
-            {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
-            <Link to="/dashboard" className="link">Dashboard</Link>
-            <Link to="/profile" className="link">My Profile</Link>
-            <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
-            <button onClick={toggleLanguage} className="translate-btn">
-              {i18n.language === "en" ? "French" : "English"}
-            </button>
-          </nav>
+          <div className="nav-container">
+            <nav className="nav-links">
+              <Link to="/" className="link">{t("home")}</Link>
+              <Link to="/basket" className="link">{t("basket.title")}</Link>
+              <Link to="/dashboard" className="link">Dashboard</Link>
+              <Link to="/profile" className="link">My Profile</Link>
+            </nav>
+            <div className="right-actions">
+              <button onClick={toggleLanguage} className="translate-btn">
+                {i18n.language === "en" ? "Français" : "English"}
+              </button>
+              <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
+            </div>
+          </div>
         </header>
       )}
     </>
@@ -77,7 +93,7 @@ function App() {
             <Route path="/dashboard/products" element={<ProductManagement />} />
             <Route path="/dashboard/orders" element={<OrderManagement />} />
             <Route path="/dashboard/pickup-requests" element={<PickupRequestManagement />} />
-            <Route path="/dashboard/products/edit/:id" element={<EditDetails />} />
+            <Route path="/dashboard/products/edit/:productId" element={<EditDetails />} />
             <Route path="/dashboard/delivery" element={<DeliveryPage />} />
           </Routes>
         </BrowserRouter>
