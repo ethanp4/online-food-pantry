@@ -1,21 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider"; 
 const ProductManagement = () => {
   const { t, i18n } = useTranslation();
-  const { setToken } = useContext(LoginContext);
+  const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([
-    { id: 1, name: "Product Name 1", category: "Category 1", stock: 10 },
-    { id: 2, name: "Product Name 2", category: "Category 2", stock: 10 },
-    { id: 3, name: "Product Name 3", category: "Category 3", stock: 10 },
-    { id: 4, name: "Product Name 4", category: "Category 4", stock: 10 },
-    { id: 5, name: "Product Name 5", category: "Category 5", stock: 10 },
-    { id: 6, name: "Product Name 6", category: "Category 6", stock: 10 },
-  ]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchItems() {
+      try {
+        const response = await fetch("http://localhost:5001/item");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    }
+
+    fetchItems();
+  }, []);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "fr" : "en";
@@ -27,12 +34,30 @@ const ProductManagement = () => {
     navigate("/login");
   };
 
+  const handleDelete = async (id) => {
+    const response = await fetch(`http://localhost:5001/item/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": token
+      }
+    })
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      alert("Product deleted successfully");
+    } else {
+      alert("Failed to delete the product");
+      console.error("Error:", data);
+    }
+  }
+
   const handleEditClick = (productId) => {
     navigate(`/dashboard/products/edit/${productId}`);
   };
 
   const handleDeleteClick = (productId) => {
     const updatedProducts = products.filter((product) => product.id !== productId);
+    handleDelete(productId);
     setProducts(updatedProducts);
   };
 

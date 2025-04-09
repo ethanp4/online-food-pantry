@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider";
@@ -6,11 +6,13 @@ import "./orderManagement.css";
 
 const OrderManagement = () => {
   const { t, i18n } = useTranslation();
-  const { setToken } = useContext(LoginContext);
+  const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
+  
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("All");
+  const [orders, setOrders] = useState([]);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "fr" : "en";
@@ -21,6 +23,31 @@ const OrderManagement = () => {
     setToken("");
     navigate("/login");
   };
+
+  const getOrders = async () => {
+    try {
+      const response = await fetch("http://localhost:5001/orders", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        }
+      );
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        setOrders(data["orders"]);
+      }
+    }
+    catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  }
+
+  useEffect(() => {
+    getOrders()
+  }, [])
 
   return (
     <div className="admin-container">
@@ -83,7 +110,7 @@ const OrderManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {[...Array(6)].map((_, index) => (
+              {orders.map((_, index) => (
                 <tr key={index}>
                   <td>###</td>
                   <td>{t("name")}</td>

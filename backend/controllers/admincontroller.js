@@ -69,8 +69,11 @@ export const editItemById = async (req, res) => {
     const name = req.body.name ? req.body.name : item.name
     const qty = req.body.count ? req.body.count : item.count
     const max_per_person = req.body.max_per_person ? req.body.max_per_person : item.max_per_person
-  
-    const result = await editFoodItemById(itemId, name, qty, max_per_person)
+    const cultural_preferences = req.body.cultural_preferences ? req.body.cultural_preferences : item.cultural_preferences
+    const dietary_preferences = req.body.dietary_preferences ? req.body.dietary_preferences : item.dietary_preferences
+    const food_type = req.body.food_type ? req.body.food_type : item.food_type
+
+    const result = await editFoodItemById(itemId, name, qty, max_per_person, dietary_preferences, cultural_preferences, food_type)
     res.status(200).json(result)
   } catch (err) {
     res.status(500).json({ message: "Failed to edit item" })

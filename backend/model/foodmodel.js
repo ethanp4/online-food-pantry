@@ -47,10 +47,10 @@ export async function deleteFoodItemById(id) {
   }
 }
 
-export async function editFoodItemById(id, name, qty, max_per_person) {
+export async function editFoodItemById(id, name, qty, max_per_person, dietary_preferences, cultural_preferences, food_type) {
   try {
-    let params = [name, qty, max_per_person, id]
-    const res = await pool.execute("UPDATE food_items SET name = ?, count = ?, max_per_person = ? WHERE id = ?", params)
+    let params = [name, qty, max_per_person, dietary_preferences, cultural_preferences, food_type, id]
+    const res = await pool.execute("UPDATE food_items SET name = ?, count = ?, max_per_person = ?, dietary_preferences = ?, cultural_preferences = ?, food_type = ? WHERE id = ?", params)
     let rows = res[0].affectedRows
     return await getFoodItemById(id)
   } catch (err) {
