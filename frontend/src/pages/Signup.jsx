@@ -3,7 +3,7 @@ import React, { useContext, useReducer, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider";
 import GenericModal from "../components/GenericModal";
-import "./Signup.css";
+import { useNavigate } from "react-router-dom";
 
 const initialSignupState = {
   username: "",
@@ -36,6 +36,7 @@ function formReducer(state, action) {
 const Signup = () => {
   const { t } = useTranslation();
   const modal = useRef();
+  const navigate = useNavigate(); 
   const { token, setToken } = useContext(LoginContext);
   const [modalState, setModalState] = useState(initialModalState);
   const [formState, setFormState] = useReducer(formReducer, initialSignupState);
@@ -68,6 +69,11 @@ const Signup = () => {
           title: t("signupSuccess"),
           desc: `Welcome: ${data.user.username}`
         });
+
+       
+        setTimeout(() => {
+          navigate("/profile");
+        }, 1500);
       } else {
         setModalState({
           title: t("signupFailed"),
