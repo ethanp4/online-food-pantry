@@ -25,15 +25,15 @@ const DeliveryPage = () => {
     <div className="admin-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>{t("Admin.panel")}</h3>
+        <h3>{t("dashboard.title")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard">{t("Dashboard")}</Link></li>
-            <li><strong>{t("Items")}</strong></li>
-            <li><Link to="/dashboard/products">{t("Products")}</Link></li>
-            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
-            <li><Link to="/dashboard/pickup-requests">{t("Pickup Requests")}</Link></li>
-            <li><Link to="/dashboard/delivery">{t("Delivery")}</Link></li>
+            <li><Link to="/dashboard">{t("dashboard.dashboard")}</Link></li>
+            <li><strong>{t("dashboard.items")}</strong></li>
+            <li><Link to="/dashboard/products">{t("dashboard.products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("dashboard.orders")}</Link></li>
+            <li><Link to="/dashboard/pickup-requests">{t("dashboard.pickup")}</Link></li>
+            <li><Link to="/dashboard/delivery">{t("dashboard.delivery")}</Link></li>
           </ul>
         </nav>
       </div>
@@ -41,7 +41,7 @@ const DeliveryPage = () => {
       {/* Main Content */}
       <div className="main-content">
         <header className="header">
-          <h2>{t("Delivery Management")}</h2>
+          <h2>{t("deliverymgmt.title")}</h2>
           <div className="header-right">
             {/* Language Button */}
             <button className="language-button" onClick={toggleLanguage}>
@@ -58,7 +58,7 @@ const DeliveryPage = () => {
         <div className="content">
           <input
             type="text"
-            placeholder={t("Search")}
+            placeholder={t("search")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -67,18 +67,18 @@ const DeliveryPage = () => {
           <table className="Delivery-table">
             <thead>
               <tr>
-                <th>{t("Customer ID")}</th>
-                <th>{t("Customer Name")}</th>
-                <th>{t("No. Of Items")}</th>
-                <th>{t("Delivery Date & Time")}</th>
-                <th>{t("Actions")}</th>
+                <th>{t("deliverymgmt.customerID")}</th>
+                <th>{t("deliverymgmt.customername")}</th>
+                <th>{t("deliverymgmt.numitems")}</th>
+                <th>{t("deliverymgmt.deliveryDT")}</th>
+                <th>{t("deliverymgmt.actions")}</th>
               </tr>
             </thead>
             <tbody>
               {[...Array(6)].map((_, index) => (
                 <tr key={index}>
                   <td>###</td>
-                  <td>{t("Name")}</td>
+                  <td>{t("deliverymgmt.name")}</td>
                   <td>—</td>
                   <td>yy/mm/dd hh:mm</td>
                   <td>

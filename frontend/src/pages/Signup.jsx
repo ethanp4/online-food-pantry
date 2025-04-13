@@ -34,7 +34,7 @@ function formReducer(state, action) {
 }
 
 const Signup = () => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const modal = useRef();
   const navigate = useNavigate(); 
   const { token, setToken } = useContext(LoginContext);
@@ -90,23 +90,32 @@ const Signup = () => {
     }
   };
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
   return (
     <div className="signup-container">
       <GenericModal ref={modal} {...modalState} />
       <div className="signup-window">
         <div className="signup-header">
+          <p onClick={toggleLanguage} className='translateTxtRegister'>
+            {i18n.language === "en" ? "Français" : "English"}
+          </p>
           <div className="signup-profile">
             <i className="fas fa-user-circle"></i>
           </div>
         </div>
 
         <div className="signup-content">
+          
           <div className="signup-title">
             <i className="fas fa-lock"></i>
-            <span className="signup-text">{t("signup")}</span>
+            <span className="signup-text">{t("signup.title")}</span>
           </div>
 
-          <p className="signup-subtitle">{t("signupSubtitle")}</p>
+          <p className="signup-subtitle">{t("signup.subtitle")}</p>
 
           <form className="signup-form" onSubmit={tryRegister}>
             <div className="signup-input">
@@ -114,7 +123,7 @@ const Signup = () => {
               <input
                 name="username"
                 type="text"
-                placeholder={t("username")}
+                placeholder={t("profiledetails.username")}
                 value={formState.username}
                 onChange={handleFormChange}
               />
@@ -124,7 +133,7 @@ const Signup = () => {
               <input
                 name="email"
                 type="email"
-                placeholder={t("email")}
+                placeholder={t("profiledetails.email")}
                 value={formState.email}
                 onChange={handleFormChange}
               />
@@ -134,7 +143,7 @@ const Signup = () => {
               <input
                 name="password"
                 type="password"
-                placeholder={t("password")}
+                placeholder={t("profiledetails.password")}
                 value={formState.password}
                 onChange={handleFormChange}
               />
@@ -144,21 +153,21 @@ const Signup = () => {
               <input
                 name="confirmPassword"
                 type="password"
-                placeholder={t("confirmPassword")}
+                placeholder={t("profiledetails.confirmpassword")}
                 value={formState.confirmPassword}
                 onChange={handleFormChange}
               />
             </div>
             <button type="submit" className="signup-button">
-              {t("signup")}
+              {t("buttons.signup")}
             </button>
           </form>
 
-          <div className="signup-or">{t("or")}</div>
-          <button className="signup-google">{t("signupWithGoogle")}</button>
+          <div className="signup-or">{t("login.or")}</div>
+          <button className="signup-google">{t("buttons.google")}</button>
 
           <p className="signup-login-link">
-            {t("alreadyHaveAccount")} <a href="/login">{t("login")}</a>
+            {t("signup.haveaccount")} <a href="/login">{t("login.title")}</a>
           </p>
         </div>
       </div>

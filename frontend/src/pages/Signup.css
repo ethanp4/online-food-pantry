@@ -17,6 +17,7 @@
 }
 
 .signup-header {
+    position: relative; 
     display: flex;
     justify-content: center;
 }
@@ -106,4 +107,20 @@ dialog::backdrop {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+
+/*  --------  CLICK TO TRANSLATE  --------  */
+.translateTxtRegister{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.translateTxtRegister:hover{
+    text-decoration: underline;
+    color: #6d1e43;
 }

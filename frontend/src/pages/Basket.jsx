@@ -5,14 +5,9 @@ import { CartContext } from '../components/CartProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Basket = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
-
-  // const handleLanguageToggle = () => {
-  //   const newLang = i18n.language === "en" ? "fr" : "en";
-  //   i18n.changeLanguage(newLang);
-  // };
 
   const handleCheckout = () => {
     navigate('/order-confirmation');

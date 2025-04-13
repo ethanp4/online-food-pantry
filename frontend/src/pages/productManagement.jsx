@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider"; 
 const ProductManagement = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -24,10 +24,10 @@ const ProductManagement = () => {
     fetchItems();
   }, []);
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "fr" : "en";
-    i18n.changeLanguage(newLang);
-  };
+  // const toggleLanguage = () => {
+  //   const newLang = i18n.language === "en" ? "fr" : "en";
+  //   i18n.changeLanguage(newLang);
+  // };
 
   const handleLogout = () => {
     setToken("");
@@ -65,13 +65,13 @@ const ProductManagement = () => {
     <div className="admin-container">
       {/* Sidebar */}
       <aside className="sidebar">
-        <h3>{t("AdminPanel")}</h3>
+        <h3>{t("dashboard.title")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard">{t("Dashboard")}</Link></li>
-            <li className="menu-header">{t("Items")}</li>
-            <li><Link to="/dashboard/products" className="active">{t("Products")}</Link></li>
-            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
+            <li><Link to="/dashboard">{t("dashboard.dashboard")}</Link></li>
+            <li className="menu-header">{t("dashboard.items")}</li>
+            <li><Link to="/dashboard/products" className="active">{t("dashboard.products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("dashboard.orders")}</Link></li>
           </ul>
         </nav>
       </aside>
@@ -80,15 +80,15 @@ const ProductManagement = () => {
       <main className="main-content">
         {/* Topbar */}
         <header className="header">
-          <h2>{t("ProductManagement")}</h2>
-          <div className="header-right">
+          <h2>{t("productmgmt.title")}</h2>
+          {/* <div className="header-right">
             <button onClick={toggleLanguage} className="language-button">
               {i18n.language === "en" ? "Français" : "English"}
             </button>
             <button onClick={handleLogout} className="logout-button">
               {t("Logout")}
             </button>
-          </div>
+          </div> */}
         </header>
 
         {/* Product Management Table */}
@@ -97,7 +97,7 @@ const ProductManagement = () => {
             <input
               type="text"
               className="search-box"
-              placeholder={t("SearchPlaceholder")}
+              placeholder={t("searchBar")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -108,10 +108,10 @@ const ProductManagement = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>{t("Product")}</th>
-                <th>{t("Category")}</th>
-                <th>{t("Stock")}</th>
-                <th>{t("Actions")}</th>
+                <th>{t("productmgmt.product")}</th>
+                <th>{t("productmgmt.category")}</th>
+                <th>{t("productmgmt.stock")}</th>
+                <th>{t("productmgmt.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -128,10 +128,10 @@ const ProductManagement = () => {
                     <td>{product.stock}</td>
                     <td className="actions">
                       <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
-                        ✏️ {t("edit")}
+                        ✏️ {t("buttons.edit")}
                       </button>
                       <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
-                        🗑️ {t("delete")}
+                        🗑️ {t("buttons.delete")}
                       </button>
                     </td>
                   </tr>

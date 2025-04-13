@@ -1,5 +1,6 @@
 import { useContext, useEffect, useReducer, useState } from "react"
 import { LoginContext } from "../components/TokenProvider"
+import { useTranslation } from "react-i18next"
 
 function editProfileReducer(state, action) {
   switch (action.type) {
@@ -28,6 +29,7 @@ const emptyProfileState = {
 }
 
 function EditProfile({profile, setEdit, setProfile}) {
+  const { t } = useTranslation()
   const {token} = useContext(LoginContext)
   const [profileState, setProfileState] = useReducer(editProfileReducer, profile)
   function handleFormChange(e) {
@@ -74,35 +76,37 @@ function EditProfile({profile, setEdit, setProfile}) {
   
   return(
     <div>
-      <label>First name: <input name="first_name" onChange={handleFormChange}  type="text" value={profileState.first_name} /></label><br/>
-      <label>Last name: <input name="last_name" onChange={handleFormChange} type="text"  value={profileState.last_name} /></label><br/>
-      <label>Email: <input name="email" onChange={handleFormChange} type="text" value={profileState.email} /></label><br/>
-      <label>Phone number: <input name="phone_number" onChange={handleFormChange} type="text" value={profileState.phone_number} /></label><br/>
-      <label>Address: <input name="address" onChange={handleFormChange} type="text" value={profileState.address} /><input name="region" onChange={handleFormChange} type="text" value={profileState.region} /></label><br/>
-      <label>Country of origin: <input name="country_of_origin" onChange={handleFormChange} type="text" value={profileState.country_of_origin} /></label><br/>
-      <label>Spoken language: <input name="spoken_language" onChange={handleFormChange} type="text" value={profileState.spoken_language} /></label><br/>
-      <label>Referrer: <input name="referrer" onChange={handleFormChange} type="text" value={profileState.referrer} /></label>
-      <br/><button onClick={(e) => saveProfile(e)}>Save Changes</button>
+      <label>{t("profiledetails.firstname")}: <input name="first_name" onChange={handleFormChange}  type="text" value={profileState.first_name} /></label><br/>
+      <label>{t("profiledetails.lastname")}: <input name="last_name" onChange={handleFormChange} type="text"  value={profileState.last_name} /></label><br/>
+      <label>{t("profiledetails.email")}: <input name="email" onChange={handleFormChange} type="text" value={profileState.email} /></label><br/>
+      <label>{t("profiledetails.phone")}: <input name="phone_number" onChange={handleFormChange} type="text" value={profileState.phone_number} /></label><br/>
+      <label>{t("profiledetails.address")}: <input name="address" onChange={handleFormChange} type="text" value={profileState.address} /><input name="region" onChange={handleFormChange} type="text" value={profileState.region} /></label><br/>
+      <label>{t("profiledetails.country")}: <input name="country_of_origin" onChange={handleFormChange} type="text" value={profileState.country_of_origin} /></label><br/>
+      <label>{t("profiledetails.language")}: <input name="spoken_language" onChange={handleFormChange} type="text" value={profileState.spoken_language} /></label><br/>
+      <label>{t("profiledetails.referrer")}: <input name="referrer" onChange={handleFormChange} type="text" value={profileState.referrer} /></label>
+      <br/><button onClick={(e) => saveProfile(e)}>{t("buttons.save")}</button>
     </div>
   )
 }
 
 function DisplayProfile({profile}) {
+  const { t } = useTranslation()
   return(
     <div>
-      <label>First name: <span>{profile.first_name}</span></label><br/>
-      <label>Last name: <span>{profile.last_name}</span></label><br/>
-      <label>Email: <span>{profile.email}</span></label><br/>
-      <label>Phone number: <span>{profile.phone_number}</span></label><br/>
-      <label>Address: <span>{profile.address}</span><span>{profile.region}</span></label><br/>
-      <label>Country of origin: <span>{profile.country_of_origin}</span></label><br/>
-      <label>Spoken language: <span>{profile.spoken_language}</span></label><br/>
-      <label>Referrer: <span>{profile.referrer}</span></label><br/>
+      <label>{t("profiledetails.firstname")}: <span>{profile.first_name}</span></label><br/>
+      <label>{t("profiledetails.lastname")}: <span>{profile.last_name}</span></label><br/>
+      <label>{t("profiledetails.email")}: <span>{profile.email}</span></label><br/>
+      <label>{t("profiledetails.phone")}: <span>{profile.phone_number}</span></label><br/>
+      <label>{t("profiledetails.address")}: <span>{profile.address}</span><span>{profile.region}</span></label><br/>
+      <label>{t("profiledetails.country")}: <span>{profile.country_of_origin}</span></label><br/>
+      <label>{t("profiledetails.language")}: <span>{profile.spoken_language}</span></label><br/>
+      <label>{t("profiledetails.referrer")}: <span>{profile.referrer}</span></label><br/>
     </div>
   )
 }
 
 export function Profile() {
+  const { t } = useTranslation()
   const {token} = useContext(LoginContext)
   const [edit, setEdit] = useState(false)
   const [profile, setProfile] = useState(null)
@@ -132,14 +136,14 @@ export function Profile() {
     getProfile();
   }, [token]);
 
-  if (!token) return <div>You arent logged in</div>
+  if (!token) return <div>{t("notlogged")}</div>
 
-  if (!profile) return <div>Loading profile..</div>
+  if (!profile) return <div>{t("loadingprofile")}</div>
 
   return(
     <div>
-      <h3>Welcome {profile.username}</h3>
-      <button onClick={ () => setEdit(!edit) }>{!edit ? "Edit profile" : "Cancel"}</button><br/>
+      <h3>{t("welcome")}, {profile.username}</h3>
+      <button onClick={ () => setEdit(!edit) }>{!edit ? t("buttons.editprofile") : t("buttons.cancel")}</button><br/>
       {edit && <EditProfile profile={profile} setEdit={setEdit} setProfile={setProfile} />}
       {!edit && <DisplayProfile profile={profile} />}
     </div>

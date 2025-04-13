@@ -48,7 +48,7 @@ const OrderConfirmation = () => {
       <header className="order-header">
         <div className="header-left">
           <button className="back-button" onClick={() => window.history.back()}>⬅️</button>
-          <h1>{t('orderConfirmation')}</h1>
+          <h1>{t('order.confirmation')}</h1>
         </div>
       </header>
 

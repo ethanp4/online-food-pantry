@@ -1,28 +1,110 @@
 {
   "noItem": "Item not found...",
+  "notlogged": "You aren't logged in",
+  "loadingprofile": "Loading Profile...",
   "home": "Home",
   "about": "About",
+  "profile": "Profile",
   "filter": "Filter by",
   "dietary": "Dietary Preferences",
   "cultural": "Cultural Preferences",
   "foodtype": "Food Type",
-  "details": "Details",
   "search": "Search",
   "searchBar": "Search for a Product",
-  "backBtn": "Back",
   "addToCart": "Add To Cart",
   "inStock": "In stock",
   "outofStock": "is out of stock",
-  "login": "Login",
-  "signup": "Sign Up",
+  "welcome": "Welcome",
   "basket": {
     "title": "Basket",
     "checkout": "Proceed to Checkout"
   },
   "quantity": "Quantity",
   "remove": "Remove",
-  "orderConfirmation": "Order Confirmation",
+  "signupSuccess": "You have successfully signed up!",
+  "signupFailed": "There was an issue with signing up. Please try again.",
+  "OrderConfirmation": "Order Confirmation",
+  "basket.empty": "Your basket is empty",
+  "buttons":{
+    "confirm": "Confirm",
+    "back": "Back",
+    "edit": "Edit",
+    "editprofile": "Edit Profile",
+    "delete": "Delete",
+    "save": "Save Changes",
+    "details": "Details",
+    "undo": "Undo Filters",
+    "login": "Login",
+    "signup": "Sign-up",
+    "google": "Login with Google",
+    "cancel": "Cancel",
+    "logout": "Logout"
+  },
+  "dashboard":{
+    "title": "Admin Dashboard",
+    "dashboard": "Dashboard",
+    "items": "Items",
+    "products": "Products",
+    "orders": "Orders",
+    "disable": "Disable orders until",
+    "pickup": "Pick-up Requests",
+    "delivery": "Delivery",
+    "categories": "Categories",
+    "requests": "Requests"
+  },
+  "stats":{
+    "overview": "Statistics Overview",
+    "totalusers": "Total Users",
+    "totalitems": "Total Items",
+    "pending": "Total Pending Orders",
+    "recent": "Most recent order"
+  },
+  "deliverymgmt":{
+    "title": "Delivery Management",
+    "customerID": "Customer ID",
+    "customername": "Customer Name",
+    "numitems": "Number of Items",
+    "deliveryDT": "Delivery Date and Time",
+    "actions": "Actions",
+    "name": "Name"
+  },
+  "edit":{
+    "title": "Edit Product",
+    "productname": "Product Name",
+    "cultural": "Cultural Preferences",
+    "dietary": "Dietary Preferences",
+    "category": "Category",
+    "stock": "Stock",
+    "maxperprsn": "Max Per Person"
+  },
+  "login":{
+    "error": "There was an error during login. Please check your credentials.",
+    "title": "Login",
+    "subtitle": "Enter your details to log in",
+    "or": "or",
+    "forget": "Forgot Password?",
+    "noAccount": "Don't have an account?"
+  },
+  "signup":{
+    "title": "Sign Up",
+    "subtitle": "Enter your details to log in",
+    "haveaccount": "Already have an account?"
+  },
+  "profiledetails":{
+    "email": "Email",
+    "password": "Password",
+    "confirmpassword": "Confirm Password",
+    "username": "Username",
+    "firstname": "First Name",
+    "lastname": "Last name",
+    "phone": "Phone Number",
+    "address": "Address",
+    "country": "Country of Origin",
+    "language": "Spoken Language",
+    "referrer": "Referrer"
+  },
   "order": {
+    "confirmation": "Order Confirmation",
     "submit": "Submit Order",
     "success": "Your order was placed successfully!",
     "failed": "Order failed",
@@ -31,17 +113,34 @@
     "delivery": "Delivery",
     "selectDate": "Select a date"
   },
-  "signupSuccess": "You have successfully signed up!",
-  "signupFailed": "There was an issue with signing up. Please try again.",
-  "loginError": "There was an error during login. Please check your credentials.",
-  "OrderConfirmation": "Order Confirmation",
-  "loginTitle": "Login",
-  "loginSubtitle": "Enter your details to log in",
-  "email": "Email",
-  "password": "Password",
-  "or": "or",
-  "loginWithGoogle": "Login with Google",
-  "forgotPassword": "Forgot Password?",
-  "noAccount": "Don't have an account?",
-  "basket.empty": "Your basket is empty"
+  "ordermgmt":{
+    "filter": "Filter by",
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "deliveryID": "Delivery ID",
+    "customer": "Customer",
+    "status": "Status",
+    "orderdate": "Order Date",
+    "actions": "Actions",
+    "name": "Name"
+  },
+  "pickupmgmt":{
+    "title": "Pick-up Request",
+    "customerID": "Customer ID",
+    "customername": "Customer Name",
+    "numitems": "Number of Items",
+    "pickupDT": "Pick-up Date and Time",
+    "actions": "Actions",
+    "stats": "Statistics Overview",
+    "totalpickup": "Total Pick-up Requests",
+    "totalcompleted": "Total Completed Requests"
+  },
+  "productmgmt":{
+    "title": "Product Management",
+    "product": "Product",
+    "category": "Category",
+    "stock": "Stock",
+    "actions": "Actions"
+  }
 }

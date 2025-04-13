@@ -117,7 +117,7 @@ export function Home() {
           ))}
         </select>
 
-        <button onClick={resetFilters} className="reset-btn"> {t("Undo Filters")}</button>
+        <button onClick={resetFilters} className="reset-btn"> {t("buttons.undo")}</button>
       </aside>
 
       {/* Main Content */}
@@ -148,7 +148,7 @@ export function Home() {
                 />
                 <h4>{item.name}</h4>
                 <Link to={`/details/${item.id}`}>
-                  <button className="details-btn">{t("details")}</button>
+                  <button className="details-btn">{t("buttons.details")}</button>
                 </Link>
                 <button className="cart-btn" onClick={() => addItemToCart(item)}>🛒</button>
               </div>
