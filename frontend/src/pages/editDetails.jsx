@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import './EditDetails.css'; // Importing CSS for styling
 import { LoginContext } from "../components/TokenProvider";
+import { useTranslation } from "react-i18next";
 
 const EditDetails = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
@@ -66,12 +68,12 @@ const EditDetails = () => {
   return (
     <div className="edit-details-container">
       <header className="header">
-        <button onClick={() => navigate("/dashboard/products")}>← Back</button>
-        <h2>Edit Product</h2>
+        <button onClick={() => navigate("/dashboard/products")}>← {t("buttons.back")}</button>
+        <h2>{t("edit.title")}</h2>
       </header>
 
       <div className="edit-form">
-        <label>Product Name:</label>
+        <label>{t("edit.productname")}:</label>
         <input
           type="text"
           name="name"
@@ -79,7 +81,7 @@ const EditDetails = () => {
           onChange={(e) => handleInputChange(e)}
         />
 
-        <label>Cultural Preference:</label>
+        <label>{t("edit.cultural")}:</label>
         <input
           type="text"
           name="cultural_preferences"
@@ -87,7 +89,7 @@ const EditDetails = () => {
           onChange={(e) => handleInputChange(e)}
         />
 
-        <label>Dietary Preference:</label>
+        <label>{t("edit.dietary")}:</label>
         <input
           type="text"
           name="dietary_preferences"
@@ -95,7 +97,7 @@ const EditDetails = () => {
           onChange={(e) => handleInputChange(e)}
         />
 
-        <label>Category:</label>
+        <label>{t("edit.category")}:</label>
         <input
           type="text"
           name="food_type"
@@ -103,7 +105,7 @@ const EditDetails = () => {
           onChange={(e) => handleInputChange(e)}
         />
 
-        <label>Stock:</label>
+        <label>{t("edit.stock")}:</label>
         <input
           type="number"
           name="count"
@@ -111,7 +113,7 @@ const EditDetails = () => {
           onChange={(e) => handleInputChange(e)}
         />
 
-        <label>Max per person:</label>
+        <label>{t("edit.maxperprsn")}:</label>
         <input
           type="number"
           name="max_per_person"
@@ -121,8 +123,8 @@ const EditDetails = () => {
         />
 
         <div className="edit-buttons">
-          <button className="delete-btn" onClick={handleDelete}>Delete Item</button>
-          <button className="save-btn" onClick={handleSave}>Save Changes</button>
+          <button className="delete-btn" onClick={handleDelete}>{t("buttons.delete")}</button>
+          <button className="save-btn" onClick={handleSave}>{t("buttons.save")}</button>
         </div>
       </div>
     </div>

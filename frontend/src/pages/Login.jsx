@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider";
 
 const Login = () => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
   const { setToken } = useContext(LoginContext);
 
@@ -34,24 +34,32 @@ const Login = () => {
         setToken(data.accessToken);
         navigate("/");
       } else {
-        setError(data.message || t("loginError"));
+        setError(data.message || t("login.error"));
       }
     } catch (err) {
-      setError(err.message || t("loginError"));
+      setError(err.message || t("login.error"));
     }
+  };
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "fr" : "en";
+    i18n.changeLanguage(newLang);
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>{t("loginTitle")}</h2>
-        <p>{t("loginSubtitle")}</p>
+        <p onClick={toggleLanguage} className='translateTxtLogin'>
+          {i18n.language === "en" ? "Français" : "English"}
+        </p>
+        <h2>{t("login.title")}</h2>
+        <p>{t("login.subtitle")}</p>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <span className="icon">👤</span>
             <input
               type="text"
-              placeholder={t("email")}
+              placeholder={t("profiledetails.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -61,23 +69,23 @@ const Login = () => {
             <span className="icon">🔒</span>
             <input
               type="password"
-              placeholder={t("password")}
+              placeholder={t("profiledetails.password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           {error && <p className="error-message">{error}</p>}
-          <button type="submit">{t("login")}</button>
+          <button type="submit">{t("buttons.login")}</button>
         </form>
-        <p>{t("or")}</p>
-        <button className="google-btn">{t("loginWithGoogle")}</button>
+        <p>{t("login.or")}</p>
+        <button className="google-btn">{t("buttons.google")}</button>
         <p>
-          <a href="/forgot-password">{t("forgotPassword")}</a>
+          <a href="/forgot-password">{t("login.forget")}</a>
         </p>
         <p>
           <a href="/signup">
-            {t("noAccount")} {t("signup")}
+            {t("login.noAccount")} {t("login.signup")}
           </a>
         </p>
       </div>

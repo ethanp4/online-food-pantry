@@ -8,6 +8,7 @@
 }
 
 .login-box {
+    position: relative;
     width: 350px;
     padding: 30px;
     background-color: white;
@@ -53,4 +54,19 @@ button:hover {
 .error-message {
     color: red;
     margin-top: 10px;
+}
+
+
+/*  --------  CLICK TO TRANSLATE  --------  */
+.translateTxtLogin{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.translateTxtLogin:hover{
+    text-decoration: underline;
+    color: #6d1e43;
 }
