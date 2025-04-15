@@ -70,9 +70,8 @@ const Signup = () => {
           desc: `Welcome: ${data.user.username}`
         });
 
-       
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/create-profileC");  // ✅ Go to ProfileC.jsx
         }, 1500);
       } else {
         setModalState({
@@ -109,7 +108,6 @@ const Signup = () => {
         </div>
 
         <div className="signup-content">
-          
           <div className="signup-title">
             <i className="fas fa-lock"></i>
             <span className="signup-text">{t("signup.title")}</span>

@@ -1,3 +1,4 @@
+import "./profile.css" 
 import { useContext, useEffect, useReducer, useState } from "react"
 import { LoginContext } from "../components/TokenProvider"
 import { useTranslation } from "react-i18next"
