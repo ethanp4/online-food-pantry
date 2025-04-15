@@ -5,14 +5,9 @@ import { CartContext } from '../components/CartProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Basket = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
-
-  const handleLanguageToggle = () => {
-    const newLang = i18n.language === "en" ? "fr" : "en";
-    i18n.changeLanguage(newLang);
-  };
 
   const handleCheckout = () => {
     navigate('/order-confirmation');
@@ -38,9 +33,9 @@ const Basket = () => {
       <header className="basket-header">
         <div className="basket-title">{t('basket.title')}</div>
         <div className="basket-buttons">
-          <button onClick={handleLanguageToggle} className="lang-btn">
+          {/* <button onClick={handleLanguageToggle} className="lang-btn">
             {i18n.language === 'en' ? 'Français' : 'English'}
-          </button>
+          </button> */}
         </div>
       </header>
 

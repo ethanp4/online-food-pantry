@@ -35,7 +35,7 @@ export function ProductDetails(){
         return (
             <div>
                 <h1 style={errorTextStyling}>{t("noItem")}</h1>
-                <button onClick={() => navigate(`../`)}>{t("backBtn")}</button>
+                <button onClick={() => navigate(`../`)}>{t("buttons.back")}</button>
             </div>
         )
     }
@@ -57,8 +57,8 @@ export function ProductDetails(){
         <div>
             <div className="details-panel">
                 <div className="item-image">
-                    <button onClick={() => navigate(`../`)} className="backBtn">{t("backBtn")}</button>
-                    <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "400px"}}/> {/* place holder */}
+                    <button onClick={() => navigate(`../`)} className="backBtn">{t("buttons.back")}</button>
+                    <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "350px"}}/> {/* place holder */}
                 </div>
                 <div className="item-details">
                     <h1>{item.name}</h1>

@@ -17,6 +17,7 @@
 }
 
 .signup-header {
+    position: relative; 
     display: flex;
     justify-content: center;
 }
@@ -79,4 +80,47 @@
 .signup-login-link {
     text-align: center;
     margin-top: 10px;
+}
+
+/* ---------- MODAL STYLING (for success popup) ---------- */
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+    max-width: 90%;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #6d1e43;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/*  --------  CLICK TO TRANSLATE  --------  */
+.translateTxtRegister{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.translateTxtRegister:hover{
+    text-decoration: underline;
+    color: #6d1e43;
 }

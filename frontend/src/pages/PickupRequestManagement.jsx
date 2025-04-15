@@ -8,7 +8,7 @@ import "./PickupRequestManagment.css";
 
 const PickupRequestManagement = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { setToken } = useContext(LoginContext);
 
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
@@ -31,10 +31,10 @@ const PickupRequestManagement = () => {
     fetchStats();
   }, []);
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "fr" : "en";
-    i18n.changeLanguage(newLang);
-  };
+  // const toggleLanguage = () => {
+  //   const newLang = i18n.language === "en" ? "fr" : "en";
+  //   i18n.changeLanguage(newLang);
+  // };
 
   const handleLogout = () => {
     setToken(""); // Clear login token
@@ -45,15 +45,15 @@ const PickupRequestManagement = () => {
     <div className="admin-container">
       {/* Sidebar */}
       <div className="sidebar">
-        <h3>{t("Admin.panel")}</h3>
+        <h3>{t("dashboard.title")}</h3>
         <nav>
           <ul>
-            <li><Link to="/dashboard">{t("Dashboard")}</Link></li>
-            <li><strong>{t("Items")}</strong></li>
-            <li><Link to="/dashboard/products">{t("Products")}</Link></li>
-            <li><Link to="/dashboard/orders">{t("Orders")}</Link></li>
-            <li><Link to="/dashboard/pickup-requests">{t("PickupRequests")}</Link></li>
-            <li><Link to="/dashboard/delivery">{t("Delivery")}</Link></li>
+            <li><Link to="/dashboard">{t("dashboard.dashboard")}</Link></li>
+            <li><strong>{t("dashboard.items")}</strong></li>
+            <li><Link to="/dashboard/products">{t("dashboard.products")}</Link></li>
+            <li><Link to="/dashboard/orders">{t("dashboard.orders")}</Link></li>
+            <li><Link to="/dashboard/pickup-requests">{t("dashboard.pickup")}</Link></li>
+            <li><Link to="/dashboard/delivery">{t("dashboard.delivery")}</Link></li>
           </ul>
         </nav>
       </div>
@@ -61,24 +61,22 @@ const PickupRequestManagement = () => {
       {/* Main Content */}
       <div className="main-content">
         <header className="header">
-          <h2>{t("Pick-up Request")}</h2>
-          <div className="header-right">
-            {/* Language Button */}
+          <h2>{t("pickupmgmt.title")}</h2>
+          {/* <div className="header-right">
             <button className="language-button" onClick={toggleLanguage}>
               {i18n.language === "en" ? "Français" : "English"}
             </button>
-            {/* Logout Button */}
             <button className="logout-button" onClick={handleLogout}>
               {t("Logout")}
             </button>
-          </div>
+          </div> */}
         </header>
 
         {/* Pickup Requests Table */}
         <div className="content">
           <input
             type="text"
-            placeholder={t("Search")}
+            placeholder={t("search")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -87,11 +85,11 @@ const PickupRequestManagement = () => {
           <table className="pickup-table">
             <thead>
               <tr>
-                <th>{t("Customer Id")}</th>
-                <th>{t("Customer Name")}</th>
-                <th>{t("No. Of Items")}</th>
-                <th>{t("Date &Time")}</th>
-                <th>{t("Actions")}</th>
+                <th>{t("pickupmgmt.customerID")}</th>
+                <th>{t("pickupmgmt.customername")}</th>
+                <th>{t("pickupmgmt.numitems")}</th>
+                <th>{t("pickupmgmt.pickupDT")}</th>
+                <th>{t("pickupmgmt.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -113,12 +111,12 @@ const PickupRequestManagement = () => {
 
         {/* Stats */}
         <div className="stats">
-          <h3>{t("Statistics Overview")}</h3>
+          <h3>{t("pickupmgmt.stats")}</h3>
           <div className="stats-item">
-            <span>{t("Total Pickup Requests")}: </span> <strong>{stats.totalPickupRequests}</strong>
+            <span>{t("pickupmgmt.totalpickup")}: </span> <strong>{stats.totalPickupRequests}</strong>
           </div>
           <div className="stats-item">
-            <span>{t("Total Completed Requests")}: </span> <strong>{stats.totalCompletedRequests}</strong>
+            <span>{t("pickupmgmt.totalcompleted")}: </span> <strong>{stats.totalCompletedRequests}</strong>
           </div>
         </div>
       </div>

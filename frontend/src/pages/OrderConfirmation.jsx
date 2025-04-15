@@ -5,18 +5,13 @@ import { LoginContext } from '../components/TokenProvider';
 import { useNavigate } from 'react-router-dom';
 
 const OrderConfirmation = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { token } = useContext(LoginContext);
   const [showCalendar, setShowCalendar] = useState(false);
   const [option, setOption] = useState('');
   const [date, setDate] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-
-  const handleLanguageToggle = () => {
-    const newLang = i18n.language === "en" ? "fr" : "en";
-    i18n.changeLanguage(newLang);
-  };
 
   const handleOptionClick = (selectedOption) => {
     setOption(selectedOption);
@@ -48,22 +43,12 @@ const OrderConfirmation = () => {
     }
   };
 
-  const handleLogout = () => {
-    navigate('/login');
-  };
-
   return (
     <div className="order-confirmation-container">
       <header className="order-header">
         <div className="header-left">
           <button className="back-button" onClick={() => window.history.back()}>⬅️</button>
-          <h1>{t('orderConfirmation')}</h1>
-        </div>
-        <div className="header-right">
-          <button className="language-button" onClick={handleLanguageToggle}>
-            {i18n.language === 'en' ? 'Français' : 'English'}
-          </button>
-          <button className="logout-button" onClick={handleLogout}>Logout</button>
+          <h1>{t('order.confirmation')}</h1>
         </div>
       </header>
 

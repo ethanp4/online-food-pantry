@@ -37,19 +37,35 @@ function Header() {
 
   return (
     <>
-      { token && (
+      {token && (
+        // <header>
+        //   <nav className="nav-links">
+        //     <Link to="/" className="link">{t("home")}</Link>
+        //     <Link to="/basket" className="link">{t("basket.title")}</Link>
+        //     {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
+        //     <Link to="/dashboard" className="link">Dashboard</Link>
+        //     <Link to="/profile" className="link">My Profile</Link>
+        //     <button onClick={toggleLanguage} className="translate-btn">
+        //       {i18n.language === "en" ? "French" : "English"}
+        //     </button>
+        //     <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
+        //   </nav>
+        // </header>
         <header>
-          <nav className="nav-links">
-            <Link to="/" className="link">{t("home")}</Link>
-            <Link to="/basket" className="link">{t("basket.title")}</Link>
-            {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
-            <Link to="/dashboard" className="link">Dashboard</Link>
-            <Link to="/profile" className="link">My Profile</Link>
-            <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
-            <button onClick={toggleLanguage} className="translate-btn">
-              {i18n.language === "en" ? "French" : "English"}
-            </button>
-          </nav>
+          <div className="nav-container">
+            <nav className="nav-links">
+              <Link to="/" className="link">{t("home")}</Link>
+              <Link to="/basket" className="link">{t("basket.title")}</Link>
+              <Link to="/dashboard" className="link">Dashboard</Link>
+              <Link to="/profile" className="link">{t("profile")}</Link>
+            </nav>
+            <div className="right-actions">
+              <button onClick={toggleLanguage} className="translate-btn">
+                {i18n.language === "en" ? "Français" : "English"}
+              </button>
+              <a onClick={() => { setToken("") }} className="link">{t("buttons.logout")}</a>
+            </div>
+          </div>
         </header>
       )}
     </>
@@ -88,4 +104,3 @@ function App() {
 
 export default App;
 
-  
