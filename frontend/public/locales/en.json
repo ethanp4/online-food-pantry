@@ -66,7 +66,13 @@
     "numitems": "Number of Items",
     "deliveryDT": "Delivery Date and Time",
     "actions": "Actions",
-    "name": "Name"
+    "name": "Name",
+    "filter":"Filter by",
+    "all":"All",
+    "pending":"Pending",
+    "completed":"Completed",
+    "cancelled": "Cancelled",
+    "noOrders":"No Orders"
   },
   "edit":{
     "title": "Edit Product",
@@ -83,7 +89,8 @@
     "subtitle": "Enter your details to log in",
     "or": "or",
     "forget": "Forgot Password?",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "signup": "Sign up"
   },
   "signup":{
     "title": "Sign Up",
@@ -123,7 +130,8 @@
     "status": "Status",
     "orderdate": "Order Date",
     "actions": "Actions",
-    "name": "Name"
+    "name": "Name",
+    "noOrders": "No Orders"
   },
   "pickupmgmt":{
     "title": "Pick-up Request",
@@ -134,7 +142,14 @@
     "actions": "Actions",
     "stats": "Statistics Overview",
     "totalpickup": "Total Pick-up Requests",
-    "totalcompleted": "Total Completed Requests"
+    "totalcompleted": "Total Completed Requests",
+    "status": "Status",
+    "filter":"Filter by",
+    "all":"All",
+    "pending":"Pending",
+    "completed":"Completed",
+    "cancelled": "Cancelled",
+    "noRequests": "No Requests"
   },
   "productmgmt":{
     "title": "Product Management",
