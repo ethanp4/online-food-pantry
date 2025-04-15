@@ -142,7 +142,7 @@ export function Profile() {
   if (!profile) return <div>{t("loadingprofile")}</div>
 
   return(
-    <div>
+    <div className="profile-container">
       <h3>{t("welcome")}, {profile.username}</h3>
       <button onClick={ () => setEdit(!edit) }>{!edit ? t("buttons.editprofile") : t("buttons.cancel")}</button><br/>
       {edit && <EditProfile profile={profile} setEdit={setEdit} setProfile={setProfile} />}

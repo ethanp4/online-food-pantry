@@ -70,7 +70,14 @@
     "numitems": "Nombre de Produits",
     "deliveryDT": "La Date et l'Heure de Livraison",
     "actions": "Actions",
-    "name": "Nom"
+    "name": "Nom",
+    "filter":"Filtrer par",
+    "all":"Tous",
+    "pending":"Pendant",
+    "completed":"Complété",
+    "cancelled": "Annulé",
+    "noOrders":"Pas d'Ordres"
+    
   },
   "edit":{
     "title": "Modifier Produit",
@@ -87,7 +94,8 @@
     "subtitle": "Entrez vos informations pour vous connecter",
     "or": "ou",
     "forget": "Mot de passe oublié?",
-    "noAccount": "Vous n'avez pas de compte?"
+    "noAccount": "Vous n'avez pas de compte?",
+    "signup": "Créer un compte"
   },
   "signup":{
     "title": "Créer un compte",
@@ -127,7 +135,8 @@
     "status": "Statut",
     "orderdate": "Date de la Commande",
     "actions": "Actions",
-    "name": "Nom"
+    "name": "Nom",
+    "noOrders": "Pas d'Ordres"
   },
   "pickupmgmt":{
     "title": "Demande de Ramassage",
@@ -138,7 +147,14 @@
     "actions": "Actions",
     "stats": "Statistique Aperçu",
     "totalpickup": "Total de Demande de Ramassage",
-    "totalcompleted": "Total de Demandes"
+    "totalcompleted": "Total de Demandes",
+    "status": "Statut",
+    "filter":"Filtrer par",
+    "all":"Tous",
+    "pending":"Pendant",
+    "completed":"Complété",
+    "cancelled": "Annulé",
+    "noRequests": "Pas de Demandes"
   },
   "productmgmt":{
     "title": "Gestion de Produit",
