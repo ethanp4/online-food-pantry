@@ -14,7 +14,7 @@ export const createOrder = async (req, res) => {
     }
     if (type == "delivery" && (!delivery_time || !address)) {
       return res.status(500).json({ message: "Missing delivery_time or address" })
-    } else {
+    } else if (type == "pickup"){
       delivery_time = null
       address = null
     }
@@ -42,7 +42,6 @@ export const getUserOrders = async (req, res) => {
   const accessToken = req.headers.authorization
   if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
   try {
-    
     const { id } = verify(accessToken, accessSecret)
     const orders = await getOrdersByUserId(id)
     if (orders) {
@@ -62,4 +61,3 @@ export const getUserOrders = async (req, res) => {
     }
   }
 }
-

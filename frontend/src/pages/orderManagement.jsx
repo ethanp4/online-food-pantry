@@ -13,6 +13,7 @@ const OrderManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("All");
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
 
   // const toggleLanguage = () => {
   //   const newLang = i18n.language === "en" ? "fr" : "en";
@@ -27,27 +28,60 @@ const OrderManagement = () => {
   const getOrders = async () => {
     try {
       const response = await fetch("http://localhost:5001/orders", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": token
-          }
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": token
         }
-      );
+      });
       const data = await response.json();
-      console.log(data)
       if (response.ok) {
-        setOrders(data["orders"]);
+        setOrders(data.orders);
+        setFilteredOrders(data.orders);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching orders:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    getOrders()
-  }, [])
+    getOrders();
+  }, []);
+
+  useEffect(() => {
+    let filtered = orders;
+
+    // Apply status filter
+    if (filter !== "All") {
+      filtered = filtered.filter(order => order.status.toLowerCase() === filter.toLowerCase());
+    }
+
+    // Apply search filter
+    if (searchTerm.trim()) {
+      const searchTermLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(order => 
+        order.id.toString().includes(searchTermLower) ||
+        order.first_name.toLowerCase().includes(searchTermLower) ||
+        order.last_name.toLowerCase().includes(searchTermLower) ||
+        order.type.toLowerCase().includes(searchTermLower) ||
+        order.status.toLowerCase().includes(searchTermLower) ||
+        (order.address && order.address.toLowerCase().includes(searchTermLower))
+      );
+    }
+
+    setFilteredOrders(filtered);
+  }, [searchTerm, filter, orders]);
+
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "N/A";
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
+
+  const handlePrintOrder = (order) => {
+    // TODO: Implement print functionality
+    console.log("Printing order:", order);
+  };
 
   return (
     <div className="admin-container">
@@ -89,12 +123,13 @@ const OrderManagement = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className="Filter-dropdown">
+            <div className="filter-dropdown">
               <label>{t("ordermgmt.filter")}:</label>
               <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                 <option value="All">{t("ordermgmt.all")}</option>
-                <option value="Active">{t("ordermgmt.active")}</option>
+                <option value="Pending">{t("ordermgmt.active")}</option>
                 <option value="Completed">{t("ordermgmt.completed")}</option>
+                <option value="Cancelled">{t("ordermgmt.cancelled")}</option>
               </select>
             </div>
           </div>
@@ -106,21 +141,40 @@ const OrderManagement = () => {
                 <th>{t("ordermgmt.customer")}</th>
                 <th>{t("ordermgmt.status")}</th>
                 <th>{t("ordermgmt.orderdate")}</th>
+                <th>{t("ordermgmt.type")}</th>
                 <th>{t("ordermgmt.actions")}</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((_, index) => (
-                <tr key={index}>
-                  <td>###</td>
-                  <td>{t("ordermgmt.name")}</td>
-                  <td>—</td>
-                  <td>yy/mm/dd</td>
+              {filteredOrders.map((order) => (
+                <tr key={order.id}>
+                  <td>#{order.id}</td>
+                  <td>{order.first_name} {order.last_name}</td>
+                  <td>
+                    <span className={`status-badge ${order.status.toLowerCase()}`}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td>{formatDate(order.time_created)}</td>
+                  <td>{order.type}</td>
                   <td className="actions">
-                    <button className="print-btn">🖨️</button>
+                    <button 
+                      className="print-btn" 
+                      onClick={() => handlePrintOrder(order)}
+                      title={t("ordermgmt.print")}
+                    >
+                      🖨️
+                    </button>
                   </td>
                 </tr>
               ))}
+              {filteredOrders.length === 0 && (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '20px' }}>
+                    {t("ordermgmt.noOrders")}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

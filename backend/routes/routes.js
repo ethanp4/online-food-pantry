@@ -1,7 +1,7 @@
 import express from "express"
 import { getItemById, getItems } from "../controllers/foodcontroller.js"
 import { signUp, login, updateProfile, getProfile } from "../controllers/usercontroller.js"
-import { getUsers, getUserById, deleteItemById, editItemById, addItem, getOrders } from "../controllers/admincontroller.js"
+import { getUsers, getUserById, deleteItemById, editItemById, addItem, getOrders, getStats, updateOrderStatus } from "../controllers/admincontroller.js"
 import { createOrder, getUserOrders } from "../controllers/ordercontroller.js"
 
 export const router = express.Router()
@@ -31,3 +31,6 @@ router.delete('/item/:id', deleteItemById)
 router.put('/item/:id', editItemById)
 router.post('/addItem', addItem)
 router.get('/orders', getOrders)
+// router.put('/orders/:id', editOrder)
+router.put('/orders/:id/status', updateOrderStatus)
+router.get('/stats', getStats)

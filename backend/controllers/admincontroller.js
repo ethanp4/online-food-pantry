@@ -1,5 +1,5 @@
-import { addFoodRow, deleteFoodItemById, editFoodItemById, getFoodItemById } from "../model/foodmodel.js"
-import { getAllOrders } from "../model/ordermodel.js"
+import { addFoodRow, deleteFoodItemById, editFoodItemById, getAllFood, getFoodItemById } from "../model/foodmodel.js"
+import { editOrderById, editOrderStatus, getAllOrders } from "../model/ordermodel.js"
 import { getAllUsers } from "../model/usermodel.js"
 import pkg from 'jsonwebtoken'
 const { verify } = pkg
@@ -114,5 +114,43 @@ export const getOrders = async (req, res) => {
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: "Failed to get orders" })
+  }
+}
+
+export const getStats = async (req, res) => {
+  const accessToken = req.headers.authorization
+  if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
+  try {
+    const { type } = verify(accessToken, accessSecret)
+    if (type !== "admin") { return res.status(500).json({ message: "Unauthorized" }) }
+    const users = await getAllUsers()
+    const orders = await getAllOrders()
+    const items = await getAllFood()
+    let time = new Date(orders[orders.length - 1].time_created)
+    res.status(200).json({ 
+      totalUsers: users.length, 
+      totalItems: items.length, 
+      totalPendingOrders: orders.filter(order => order.status === "pending").length, 
+      mostRecentOrder: time.toLocaleString()
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: "Failed to get stats" })
+  }
+}
+
+export const updateOrderStatus = async (req, res) => {
+  const accessToken = req.headers.authorization
+  if (!accessToken) { return res.status(500).json({ message: "Unauthorized" }) }
+  try {
+    const { type } = verify(accessToken, accessSecret)
+    if (type !== "admin") { return res.status(500).json({ message: "Unauthorized" }) }
+    const orderId = req.params.id
+    const status = req.body.status
+    const updatedOrder = await editOrderStatus(orderId, status)
+    res.status(200).json({ message: "Successfully updated order", order: updatedOrder })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: "Failed to update order status" })
   }
 }

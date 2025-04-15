@@ -7,7 +7,7 @@ import { LoginContext } from "../components/TokenProvider";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { setToken } = useContext(LoginContext);
+  const { token } = useContext(LoginContext);
 
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -21,7 +21,13 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch("http://localhost:5001/stats");
+        const response = await fetch("http://localhost:5001/stats",
+          {
+            headers: {
+              "Authorization": token
+            }
+          }
+        );
         const data = await response.json();
         setStats(data);
       } catch (error) {
@@ -32,15 +38,6 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  // const toggleLanguage = () => {
-  //   const newLang = i18n.language === "en" ? "fr" : "en";
-  //   i18n.changeLanguage(newLang);
-  // };
-
-  // const handleLogout = () => {
-  //   setToken(""); // Clear login token
-  //   navigate("/login");
-  // };
 
   const handleDateChange = (event) => {
     setDisableUntil(event.target.value);

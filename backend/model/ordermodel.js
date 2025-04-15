@@ -2,7 +2,8 @@ import { pool } from "../config/database.js"
 
 export async function getAllOrders() {
   try {
-    const [rows, fields] = await pool.query("SELECT * FROM orders")
+    const [rows, fields] = await pool.query("SELECT o.*, u.first_name, u.last_name FROM orders o JOIN user_profiles u ON o.user_id = u.user_id")
+    console.log(rows)
     return rows
   } catch (err) {
     console.log(err)
@@ -66,6 +67,17 @@ export async function editOrderById(id, user_id, items, type, delivery_time, add
   try {
     let params = [user_id, items, type, delivery_time, address, id]
     const res = await pool.execute("UPDATE orders SET user_id = ?, items = ?, type = ?, delivery_time = ?, address = ? WHERE id = ?", params)
+    let rows = res[0].affectedRows
+    return await getOrderById(id)
+  } catch (err) {
+    return err
+  }
+}
+
+export async function editOrderStatus(id, status) {
+  try {
+    let params = [status, id]
+    const res = await pool.execute("UPDATE orders SET status = ? WHERE id = ?", params)
     let rows = res[0].affectedRows
     return await getOrderById(id)
   } catch (err) {
