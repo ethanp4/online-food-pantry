@@ -9,6 +9,7 @@ const ProductManagement = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     async function fetchItems() {
@@ -16,6 +17,7 @@ const ProductManagement = () => {
         const response = await fetch("http://localhost:5001/item");
         const data = await response.json();
         setProducts(data);
+        setFilteredProducts(data);
       } catch (error) {
         console.error("Error fetching items:", error);
       }
@@ -24,15 +26,35 @@ const ProductManagement = () => {
     fetchItems();
   }, []);
 
+  useEffect(() => {
+    if (!searchTerm.trim()) {
+      setFilteredProducts(products);
+      return;
+    }
+
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtered = products.filter((product) => {
+      return (
+        product.name.toLowerCase().includes(searchTermLower) ||
+        product.category?.toLowerCase().includes(searchTermLower) ||
+        product.dietary_preferences?.toLowerCase().includes(searchTermLower) ||
+        product.cultural_preferences?.toLowerCase().includes(searchTermLower) ||
+        product.food_type?.toLowerCase().includes(searchTermLower) ||
+        product.count?.toString().includes(searchTermLower)
+      );
+    });
+    setFilteredProducts(filtered);
+  }, [searchTerm, products]);
+
   // const toggleLanguage = () => {
   //   const newLang = i18n.language === "en" ? "fr" : "en";
   //   i18n.changeLanguage(newLang);
   // };
 
-  const handleLogout = () => {
-    setToken("");
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   setToken("");
+  //   navigate("/login");
+  // };
 
   const handleDelete = async (id) => {
     const response = await fetch(`http://localhost:5001/item/${id}`, {
@@ -115,27 +137,29 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {products
-                .filter((product) =>
-                  product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  product.category.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .map((product) => (
-                  <tr key={product.id}>
-                    <td>#{product.id}</td>
-                    <td>{product.name}</td>
-                    <td>{product.category}</td>
-                    <td>{product.stock}</td>
-                    <td className="actions">
-                      <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
-                        ✏️ {t("buttons.edit")}
-                      </button>
-                      <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
-                        🗑️ {t("buttons.delete")}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {filteredProducts.map((product) => (
+                <tr key={product.id}>
+                  <td>#{product.id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td>{product.stock}</td>
+                  <td className="actions">
+                    <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
+                      ✏️ {t("buttons.edit")}
+                    </button>
+                    <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
+                      🗑️ {t("buttons.delete")}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {filteredProducts.length === 0 && (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: 'center', padding: '20px' }}>
+                    {t("noItem")}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </section>

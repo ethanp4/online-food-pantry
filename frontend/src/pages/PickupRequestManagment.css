@@ -61,14 +61,41 @@
     padding: 20px;
   }
   
-  .search-input {
-    width: 100%;
+  .pickup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+  
+  .pickup-header input {
+    flex: 1;
     padding: 8px;
-    margin-bottom: 10px;
     border: 1px solid #722549; /* Active Text */
     border-radius: 4px;
     background-color: #f2ecef; /* Main Background */
     color: #404040; /* Non-Active Text */
+  }
+  
+  .filter-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-dropdown label {
+    color: #404040;
+    font-weight: bold;
+  }
+  
+  .filter-dropdown select {
+    padding: 8px;
+    border: 1px solid #722549;
+    border-radius: 4px;
+    background-color: #f2ecef;
+    color: #404040;
+    cursor: pointer;
   }
   
   .pickup-table {
@@ -82,6 +109,58 @@
     text-align: center;
     background-color: #f2ecef; /* Main Background */
     color: #404040; /* Non-Active Text */
+  }
+  
+  .pickup-table th {
+    background-color: #6d1e43;
+    color: #f2ecef;
+  }
+  
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .status-badge.pending {
+    background-color: #ffd700;
+    color: #404040;
+  }
+  
+  .status-badge.completed {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .status-badge.cancelled {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .status-select {
+    padding: 6px;
+    border: 1px solid #722549;
+    border-radius: 4px;
+    background-color: #f2ecef;
+    color: #404040;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .status-select.pending {
+    border-color: #ffd700;
+    color: #404040;
+  }
+  
+  .status-select.completed {
+    border-color: #4caf50;
+    color: #4caf50;
+  }
+  
+  .status-select.cancelled {
+    border-color: #f44336;
+    color: #f44336;
   }
   
   .approve-btn {
