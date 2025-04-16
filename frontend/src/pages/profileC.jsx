@@ -1,10 +1,12 @@
 import './ProfileC.css';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -55,75 +57,80 @@ const ProfileC = () => {
     <div className="profile-form-container">
       {step === 1 && (
         <div className="form-section">
-          <h2>Create your Profile</h2>
-          <input name="firstName" placeholder="First Name" onChange={handleChange} />
-          <input name="lastName" placeholder="Last Name" onChange={handleChange} />
-          <input name="phoneNumber" placeholder="Phone Number" onChange={handleChange} />
-          <input name="homeAddress" placeholder="Current Home Address" onChange={handleChange} />
+          <h2>{t("create.title")}</h2>
+          <input name="firstName" placeholder={t("create.firstname")} onChange={handleChange} />
+          <input name="lastName" placeholder={t("create.lastname")} onChange={handleChange} />
+          <input name="phoneNumber" placeholder={t("create.phone")} onChange={handleChange} />
+          <input name="homeAddress" placeholder={t("create.address")} onChange={handleChange} />
           
           <select name="maritalStatus" onChange={handleChange}>
-            <option value="">Marital Status</option>
-            <option>Single</option>
-            <option>Married</option>
+            <option disabled hidden selected>{t("create.marital")}</option>
+            <option>{t("create.single")}</option>
+            <option>{t("create.married")}</option>
           </select>
 
           <select name="statusInCanada" onChange={handleChange}>
-            <option value="">Your Status in Canada</option>
-            <option>Citizen</option>
-            <option>Permanent Resident</option>
-            <option>Refugee</option>
+            <option disabled hidden selected>{t("create.status")}</option>
+            <option>{t("create.citizen")}</option>
+            <option>{t("create.permanent")}</option>
+            <option>{t("create.refugee")}</option>
           </select>
 
           <select name="ageGroup" onChange={handleChange}>
-            <option value="">Your Age Group</option>
+            <option disabled hidden selected>{t("create.agegroup")}</option>
             <option>18-24</option>
             <option>25-34</option>
             <option>35-44</option>
             <option>45+</option>
           </select>
+          <br />
+          <p>{t("create.uniqueid")}</p>
+          <label><input type="checkbox" name="healthCard" onChange={handleIdChange} /> {t("create.healthcard")}</label>
+          <label><input type="checkbox" name="driversLicense" onChange={handleIdChange} /> {t("create.driverslicense")}</label>
+          <label><input type="checkbox" name="personalId" onChange={handleIdChange} /> {t("create.personalid")}</label>
+          <label><input type="checkbox" name="passport" onChange={handleIdChange} /> {t("create.passport")}</label>
+          <label><input type="text" name="other" placeholder={t("create.other")} onChange={handleIdChange} /></label>
 
-          <label><input type="checkbox" name="healthCard" onChange={handleIdChange} /> Health Card</label>
-          <label><input type="checkbox" name="driversLicense" onChange={handleIdChange} /> Driver's License</label>
-          <label><input type="checkbox" name="personalId" onChange={handleIdChange} /> Personal ID</label>
-          <label><input type="checkbox" name="passport" onChange={handleIdChange} /> Passport</label>
-          <label><input type="text" name="other" placeholder="Other..." onChange={handleIdChange} /></label>
-
-          <button onClick={handleNext}>Next</button>
+          <button onClick={handleNext}>{t("buttons.next")}</button>
         </div>
       )}
 
       {step === 2 && (
         <div className="form-section">
-          <h2>Household Information</h2>
+          <h2>{t("household.title")}</h2>
           <input
             name="householdSize"
             type="number"
-            placeholder="How Many People Live in your Household?"
+            placeholder={t("household.household")}
             onChange={handleChange}
           />
 
           <select name="dietaryRestrictions" onChange={handleChange}>
-            <option value="No">Do you or your household have dietary/cultural preferences? No</option>
-            <option value="Yes">Yes</option>
+            <option disabled hidden selected>{t("household.preferences")}</option>
+            <option value="Yes">{t("household.yes")}</option>
+            <option value="No">{t("household.no")}</option>
           </select>
 
           <select name="receivingAssistance" onChange={handleChange}>
-            <option value="Yes">Receiving food assistance from other organizations? Yes</option>
-            <option value="No">No</option>
+          <option disabled hidden selected>{t("household.assistance")}</option>
+            <option value="Yes">{t("household.yes")}</option>
+            <option value="No">{t("household.no")}</option>
           </select>
 
           <select name="hasInfant" onChange={handleChange}>
-            <option value="Yes">Do you have an infant (0–24 months)? Yes</option>
-            <option value="No">No</option>
+          <option disabled hidden selected>{t("household.infant")}</option>
+            <option value="Yes">{t("household.yes")}</option>
+            <option value="No">{t("household.no")}</option>
           </select>
 
           <select name="foodAssistanceFrequency" onChange={handleChange}>
-            <option value="Monthly">Monthly</option>
-            <option value="Weekly">Weekly</option>
-            <option value="Bi-weekly">Bi-weekly</option>
+            <option disabled hidden selected>{t("household.often")}</option>
+            <option value="Monthly">{t("household.monthly")}</option>
+            <option value="Bi-weekly">{t("household.biweekly")}</option>
+            <option value="Weekly">{t("household.weekly")}</option>
           </select>
 
-          <button onClick={handleSubmit}>Create Profile</button>
+          <button onClick={handleSubmit}>{t("buttons.createprofile")}</button>
         </div>
       )}
     </div>
