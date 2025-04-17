@@ -5,26 +5,40 @@ import { LoginContext } from "../components/TokenProvider";
 import { useTranslation } from "react-i18next";
 
 const EditDetails = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const { token } = useContext(LoginContext)
   
+  const [ metadata, setMetadata ] = useState({
+    foodTypes: [],
+    dietaryPreferences: [],
+    culturalPreferences: []
+  })
+
+  async function fetchMetadata() {
+    const response = await fetch (`http://localhost:5001/metadata`);
+    const data = await response.json();
+    console.log(data);
+    setMetadata(data);
+  }
 
   async function fetchItem() {
     const response = await fetch (`http://localhost:5001/item/${id}`);
     const data = await response.json();
-    console.log(data)
+    console.log(data["item"]);
     setProduct(data["item"]);
-}
+  }
 
   useEffect(() => {
     fetchItem();
+    fetchMetadata();
   }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setProduct({ ...product, [name]: value });
   };
 
@@ -76,39 +90,62 @@ const EditDetails = () => {
         <label>{t("edit.productname")}:</label>
         <input
           type="text"
-          name="name"
-          value={product.name}
+          name="name_en"
+          required
+          value={product.name_en}
+          onChange={(e) => handleInputChange(e)}
+        />
+
+        <label>{t("edit.productnamefr")}:</label>
+        <input
+          type="text"
+          name="name_fr"
+          required
+          value={product.name_fr}
           onChange={(e) => handleInputChange(e)}
         />
 
         <label>{t("edit.cultural")}:</label>
-        <input
-          type="text"
-          name="cultural_preferences"
-          value={product.cultural_preferences}
+        <select
+          name="cultural_preference_id"
+          value={product.cultural_preference_id}
           onChange={(e) => handleInputChange(e)}
-        />
+        >
+          {metadata.culturalPreferences.length != 0 && <option value="">{t("edit.none")}</option>}
+          {metadata.culturalPreferences.length == 0 ? <option value="">{t("edit.loading")}</option> : metadata.culturalPreferences.map((cultural) => (
+            <option key={cultural.id} value={cultural.id}>{cultural[`name_${i18n.language}`]}</option>
+          ))}
+        </select>
 
         <label>{t("edit.dietary")}:</label>
-        <input
-          type="text"
-          name="dietary_preferences"
-          value={product.dietary_preferences}
+        <select
+          name="dietary_preference_id"
+          value={product.dietary_preference_id}
           onChange={(e) => handleInputChange(e)}
-        />
+        >
+          {metadata.dietaryPreferences.length != 0 && <option value="">{t("edit.none")}</option>}
+          {metadata.dietaryPreferences.length == 0 ? <option value="">{t("edit.loading")}</option> : metadata.dietaryPreferences.map((dietary) => (
+            <option key={dietary.id} value={dietary.id}>{dietary[`name_${i18n.language}`]}</option>
+          ))}
+        </select>
 
         <label>{t("edit.category")}:</label>
-        <input
-          type="text"
-          name="food_type"
-          value={product.food_type}
+        <select
+          name="food_type_id"
+          value={product.food_type_id}
           onChange={(e) => handleInputChange(e)}
-        />
+        >
+          {metadata.foodTypes.length != 0 && <option value="">{t("edit.none")}</option>}
+          {metadata.foodTypes.length == 0 ? <option value="">{t("edit.loading")}</option> : metadata.foodTypes.map((foodType) => (
+            <option key={foodType.id} value={foodType.id}>{foodType[`name_${i18n.language}`]}</option>
+          ))}
+        </select>
 
         <label>{t("edit.stock")}:</label>
         <input
           type="number"
           name="count"
+          min="0"
           value={product.count}
           onChange={(e) => handleInputChange(e)}
         />

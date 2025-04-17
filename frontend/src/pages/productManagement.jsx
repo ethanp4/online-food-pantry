@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider"; 
 const ProductManagement = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const ProductManagement = () => {
     const searchTermLower = searchTerm.toLowerCase();
     const filtered = products.filter((product) => {
       return (
-        product.name.toLowerCase().includes(searchTermLower) ||
+        product[`name_${i18n.language}`].toLowerCase().includes(searchTermLower) ||
         product.category?.toLowerCase().includes(searchTermLower) ||
         product.dietary_preferences?.toLowerCase().includes(searchTermLower) ||
         product.cultural_preferences?.toLowerCase().includes(searchTermLower) ||
@@ -140,9 +140,9 @@ const ProductManagement = () => {
               {filteredProducts.map((product) => (
                 <tr key={product.id}>
                   <td>#{product.id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.category}</td>
-                  <td>{product.stock}</td>
+                  <td>{product[`name_${i18n.language}`]}</td>
+                  <td>{product[`food_type_${i18n.language}`]}</td>
+                  <td>{product.count}</td>
                   <td className="actions">
                     <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
                       ✏️ {t("buttons.edit")}

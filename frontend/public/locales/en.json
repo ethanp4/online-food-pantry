@@ -69,23 +69,26 @@
     "deliveryDT": "Delivery Date and Time",
     "actions": "Actions",
     "name": "Name",
-    "filter":"Filter by",
-    "all":"All",
-    "pending":"Pending",
-    "completed":"Completed",
+    "address": "Address",
+    "status": "Status",
+    "filter": "Filter by",
+    "all": "All",
+    "pending": "Pending",
+    "completed": "Completed",
     "cancelled": "Cancelled",
-    "address":"Address",
-    "status":"Status",
-    "noOrders":"No Orders"
+    "noOrders": "No orders found"
   },
   "edit":{
     "title": "Edit Product",
     "productname": "Product Name",
+    "productnamefr": "Product Name (French)",
     "cultural": "Cultural Preferences",
     "dietary": "Dietary Preferences",
     "category": "Category",
     "stock": "Stock",
-    "maxperprsn": "Max Per Person"
+    "maxperprsn": "Max Per Person",
+    "none": "None",
+    "loading": "Loading..."
   },
   "login":{
     "error": "There was an error during login. Please check your credentials.",
@@ -129,14 +132,15 @@
     "all": "All",
     "active": "Active",
     "completed": "Completed",
+    "cancelled": "Cancelled",
     "deliveryID": "Delivery ID",
     "customer": "Customer",
     "status": "Status",
     "orderdate": "Order Date",
     "actions": "Actions",
     "name": "Name",
-    "type": "Type",
-    "noOrders": "No Orders"
+    "noOrders": "No orders found",
+    "type": "Type"
   },
   "pickupmgmt":{
     "title": "Pick-up Request",
@@ -148,13 +152,13 @@
     "stats": "Statistics Overview",
     "totalpickup": "Total Pick-up Requests",
     "totalcompleted": "Total Completed Requests",
+    "noRequests": "No requests found",
     "status": "Status",
-    "filter":"Filter by",
-    "all":"All",
-    "pending":"Pending",
-    "completed":"Completed",
-    "cancelled": "Cancelled",
-    "noRequests": "No Requests"
+    "filter": "Filter by",
+    "all": "All",
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
   },
   "productmgmt":{
     "title": "Product Management",

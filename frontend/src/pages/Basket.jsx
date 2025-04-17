@@ -5,7 +5,7 @@ import { CartContext } from '../components/CartProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Basket = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const Basket = () => {
         ) : (
           cart.map((item, index) => (
             <div className="basket-item" key={index}>
-              <p>{item.name} - {t('quantity')}: <input type="number" min="1" max="10" value={item.quantity} onChange={(e) => handleQuantityChange(item.id, e.target.value)}/></p>
+              <p>{item[`name_${i18n.language}`]} - {t('quantity')}: <input type="number" min="1" max="10" value={item.quantity} onChange={(e) => handleQuantityChange(item.id, e.target.value)}/></p>
               <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
                 {t('remove')}
               </button>
