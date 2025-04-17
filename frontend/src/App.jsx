@@ -20,6 +20,7 @@ import ProductManagement from "./pages/productManagement.jsx";
 import EditDetails from "./pages/editDetails.jsx";
 import DeliveryPage from "./pages/DeliveryPage.jsx";
 import { Profile } from "./pages/Profile.jsx";
+import ProfileC from "./pages/profileC.jsx";
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -87,6 +88,8 @@ function App() {
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="/details/:id" element={<ProductDetails />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/create-profileC" element={<ProfileC />} />
+
 
             {/* Admin */}
             <Route path="/dashboard" element={<Dashboard />} />

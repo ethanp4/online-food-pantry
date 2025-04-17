@@ -42,7 +42,9 @@
     "signup": "Créer un compte",
     "google": "Se connecter avec Google",
     "cancel": "Annuler",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "next": "Suivant",
+    "createprofile": "Créez votre profil"
   },
   "dashboard":{
     "title": "Tableau de Bord",
@@ -70,7 +72,16 @@
     "numitems": "Nombre de Produits",
     "deliveryDT": "La Date et l'Heure de Livraison",
     "actions": "Actions",
-    "name": "Nom"
+    "name": "Nom",
+    "filter":"Filtrer par",
+    "all":"Tous",
+    "pending":"Pendant",
+    "completed":"Complété",
+    "cancelled": "Annulé",
+    "address":"Addresse",
+    "status":"Statut",
+    "noOrders":"Pas d'Ordres"
+    
   },
   "edit":{
     "title": "Modifier Produit",
@@ -90,7 +101,8 @@
     "subtitle": "Entrez vos informations pour vous connecter",
     "or": "ou",
     "forget": "Mot de passe oublié?",
-    "noAccount": "Vous n'avez pas de compte?"
+    "noAccount": "Vous n'avez pas de compte?",
+    "signup": "Créer un compte"
   },
   "signup":{
     "title": "Créer un compte",
@@ -130,7 +142,8 @@
     "status": "Statut",
     "orderdate": "Date de la Commande",
     "actions": "Actions",
-    "name": "Nom"
+    "name": "Nom",
+    "noOrders": "Pas d'Ordres"
   },
   "pickupmgmt":{
     "title": "Demande de Ramassage",
@@ -141,9 +154,14 @@
     "actions": "Actions",
     "stats": "Statistique Aperçu",
     "totalpickup": "Total de Demande de Ramassage",
-    "totalcompleted": "Total de Demandes Complétées",
-    "noRequests": "Aucune demande trouvée",
-    "status": "Statut"
+    "totalcompleted": "Total de Demandes",
+    "status": "Statut",
+    "filter":"Filtrer par",
+    "all":"Tous",
+    "pending":"Pendant",
+    "completed":"Complété",
+    "cancelled": "Annulé",
+    "noRequests": "Pas de Demandes"
   },
   "productmgmt":{
     "title": "Gestion de Produit",
@@ -151,5 +169,39 @@
     "category": "Catégorie",
     "stock": "Stock",
     "actions": "Actions"
+  },
+  "create":{
+    "title": "Créer votre profil",
+    "firstname": "Prénom",
+    "lastname": "Nom de Famille",
+    "phone": "Numéro de Téléphone",
+    "address": "Votre Domicile Actuel",
+    "marital":"Situation Matrimoniale",
+    "single": "Célibataire",
+    "married": "Marié",
+    "status": "Votre Statut en Canada",
+    "citizen": "Citoyen",
+    "permanent": "Résident Permanent",
+    "refugee": "Réfugié",
+    "agegroup": "Votre Group d'âge",
+    "uniqueid":"Possédez-vous l'un des numéros d'identification unique suivants ? (Sélectionnez toutes les réponses qui s'appliquent)",
+    "healthcard": "Carte de Santé",
+    "driverslicense": "Permis de Conduire",
+    "personalid": "Numéros Personnels",
+    "passport": "Passeport",
+    "other": "Autre..."
+  },
+  "household":{
+    "title": "Informations relatives au ménage",
+    "household": "Combien de personnes vivent-elles sous votre toit?",
+    "preferences": "Avez-vous ou votre foyer des préférences alimentaires ou culturelles ?",
+    "assistance": "Recevez-vous une aide alimentaire d’autres organismes ?",
+    "infant": "Avez-vous un nourrisson (0-24 mois) ?",
+    "often": "À quelle fréquence avez-vous besoin d'aide alimentaire ?",
+    "monthly": "Mensuel",
+    "biweekly": "Bihebdomadaire",
+    "weekly": "Hebdomadaire",
+    "yes": "Oui",
+    "no": "Non"
   }
 }

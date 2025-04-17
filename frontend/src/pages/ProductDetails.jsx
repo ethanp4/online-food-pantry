@@ -1,16 +1,18 @@
 //https://www.linguee.com/english-french/
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import "./ProductDetails.css"
 import { useTranslation } from "react-i18next";
+import { CartContext } from "../components/CartProvider";
 
 export function ProductDetails(){
     const {id} = useParams();
     const [item, setItem] = useState(null);
     const navigate = useNavigate();
-    // const { cart, setCart } = useContext(CartContext)
+  
     const { t, i18n } = useTranslation(); //for translations
+    const { cart, setCart } = useContext(CartContext)
 
     const errorTextStyling = {
         textAlign:"center",
@@ -53,6 +55,23 @@ export function ProductDetails(){
         );
     };
 
+    const addItemToCart = (item) => {
+        const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+        if (existingItem) {
+          setCart((prevCart) =>
+            prevCart.map((cartItem) =>
+              cartItem.id === item.id
+                ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                : cartItem
+            )
+          );
+        } else {
+          setCart((prevCart) => [...prevCart, { ...item, quantity: 1 }]);
+        }
+        console.log("Updated cart:", cart);
+        alert(`${item.name} has been added to your cart!`);
+      }
+
     return(
         <div>
             <div className="details-panel">
@@ -66,7 +85,7 @@ export function ProductDetails(){
                     <div className="specifications">
                         {getStockMessage(item)}
                     </div>
-                    <button onClick={null} className="addToCart">{t("addToCart")}</button> {/* no functionality yet */}
+                    <button onClick={() => addItemToCart(item)} className="addToCart">{t("addToCart")}</button>
                 </div>
             </div>
         </div>

@@ -38,7 +38,9 @@
     "signup": "Sign-up",
     "google": "Login with Google",
     "cancel": "Cancel",
-    "logout": "Logout"
+    "logout": "Logout",
+    "next": "Next",
+    "createprofile": "Create your Profile"
   },
   "dashboard":{
     "title": "Admin Dashboard",
@@ -94,7 +96,8 @@
     "subtitle": "Enter your details to log in",
     "or": "or",
     "forget": "Forgot Password?",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "signup": "Sign up"
   },
   "signup":{
     "title": "Sign Up",
@@ -163,5 +166,39 @@
     "category": "Category",
     "stock": "Stock",
     "actions": "Actions"
+  },
+  "create":{
+    "title":"Create Your Profile",
+    "firstname": "First Name",
+    "lastname": "Last name",
+    "phone": "Phone Number",
+    "address": "Current Home Address",
+    "marital":"Marital Status",
+    "single": "Single",
+    "married": "Married",
+    "status": "Your Status in Canada",
+    "citizen": "Citizen",
+    "permanent": "Permanent Resident",
+    "refugee": "Refugee",
+    "agegroup": "Your Age Group",
+    "uniqueid": "Do you have any of the following unique identification numbers? (Choose all that apply)",
+    "healthcard": "Health Card",
+    "driverslicense": "Drivers License",
+    "personalid": "Personal ID",
+    "passport": "Passport",
+    "other": "Other..."
+  },
+  "household":{
+    "title": "Household Information",
+    "household": "How Many People Live in your Household?",
+    "preferences": "Do you or your Household have Dietary/Cultural preferences?",
+    "assistance": "Are you receiving food assistance from other organizations?",
+    "infant": "Do you have an infant (0-24 months)?",
+    "often": "How often do you require food assistance?",
+    "monthly": "Monthly",
+    "biweekly": "Bi-weekly",
+    "weekly": "Weekly",
+    "yes": "Yes",
+    "no": "No"
   }
 }
