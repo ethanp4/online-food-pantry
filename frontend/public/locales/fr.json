@@ -75,11 +75,14 @@
   "edit":{
     "title": "Modifier Produit",
     "productname": "Nom du Produit",
+    "productnamefr": "Nom du Produit (Français)",
     "cultural": "Préférences Culturelles",
     "dietary": "Préférences Alimentaires",
     "category": "Catégorie",
     "stock": "Stock",
-    "maxperprsn": "Max Par Personne"
+    "maxperprsn": "Max Par Personne",
+    "none": "Aucun",
+    "loading": "Chargement..."
   },
   "login":{
     "error": "Une erreur est survenue lors de la connexion. Vérifiez vos identifiants.",
@@ -138,7 +141,9 @@
     "actions": "Actions",
     "stats": "Statistique Aperçu",
     "totalpickup": "Total de Demande de Ramassage",
-    "totalcompleted": "Total de Demandes"
+    "totalcompleted": "Total de Demandes Complétées",
+    "noRequests": "Aucune demande trouvée",
+    "status": "Statut"
   },
   "productmgmt":{
     "title": "Gestion de Produit",

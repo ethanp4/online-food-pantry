@@ -65,15 +65,15 @@ export const editItemById = async (req, res) => {
     const { type } = verify(accessToken, accessSecret)
     if (type !== "admin") { return res.status(500).json({ message: "Unauthorized" }) }
     const itemId = req.params.id
-    const item = await getFoodItemById(itemId)
-    const name = req.body.name ? req.body.name : item.name
-    const qty = req.body.count ? req.body.count : item.count
-    const max_per_person = req.body.max_per_person ? req.body.max_per_person : item.max_per_person
-    const cultural_preferences = req.body.cultural_preferences ? req.body.cultural_preferences : item.cultural_preferences
-    const dietary_preferences = req.body.dietary_preferences ? req.body.dietary_preferences : item.dietary_preferences
-    const food_type = req.body.food_type ? req.body.food_type : item.food_type
-
-    const result = await editFoodItemById(itemId, name, qty, max_per_person, dietary_preferences, cultural_preferences, food_type)
+    const name = req.body.name_en ? req.body.name_en : null
+    const name_fr = req.body.name_fr ? req.body.name_fr : null
+    const qty = req.body.count ? req.body.count : null
+    const max_per_person = req.body.max_per_person ? req.body.max_per_person : null
+    const cultural_preference_id = req.body.cultural_preference_id ? req.body.cultural_preference_id : null
+    const dietary_preference_id = req.body.dietary_preference_id ? req.body.dietary_preference_id : null
+    const food_type_id = req.body.food_type_id ? req.body.food_type_id : null
+    console.log(req.body);
+    const result = await editFoodItemById(itemId, name, name_fr, qty, max_per_person, dietary_preference_id, cultural_preference_id, food_type_id)
     res.status(200).json(result)
   } catch (err) {
     res.status(500).json({ message: "Failed to edit item" })
@@ -126,12 +126,15 @@ export const getStats = async (req, res) => {
     const users = await getAllUsers()
     const orders = await getAllOrders()
     const items = await getAllFood()
-    let time = new Date(orders[orders.length - 1].time_created)
+    let time = null
+    if (orders.length !== 0) {
+      time = new Date(orders[orders.length - 1].time_created)
+    }
     res.status(200).json({ 
       totalUsers: users.length, 
       totalItems: items.length, 
       totalPendingOrders: orders.filter(order => order.status === "pending").length, 
-      mostRecentOrder: time.toLocaleString()
+      mostRecentOrder: time ? time.toLocaleString() : null
     })
   } catch (err) {
     console.log(err)
