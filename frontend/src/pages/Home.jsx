@@ -9,9 +9,9 @@ export function Home() {
   const [filteredItems, setFilteredItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
-    dietary: "",
-    cultural: "",
-    foodType: ""
+    dietary: -1,
+    cultural: -1,
+    foodType: -1
   });
 
   const [dropdownValues, setDropdownValues] = useState({
@@ -20,7 +20,8 @@ export function Home() {
     foodType: []
   });
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   const { cart, setCart } = useContext(CartContext)
 
   useEffect(() => {
@@ -33,9 +34,43 @@ export function Home() {
           setItems(data);
           setFilteredItems(data);
 
-          const dietary = [...new Set(data.map(item => item.dietary_preferences).filter(Boolean))];
-          const cultural = [...new Set(data.map(item => item.cultural_preferences).filter(Boolean))];
-          const foodType = [...new Set(data.map(item => item.food_type).filter(Boolean))];
+          // const dietary = [...new Set(data.map(item => ({ id: item.dietary_preference_id, name_en: item.dietary_preference_en, name_fr: item.dietary_preference_fr })).filter(Boolean))];
+          // const cultural = [...new Set(data.map(item => ({ id: item.cultural_preference_id, name_en: item.cultural_preference_en, name_fr: item.cultural_preference_fr })).filter(Boolean))];
+          // const foodType = [...new Set(data.map(item => ({ id: item.food_type_id, name_en: item.food_type_en, name_fr: item.food_type_fr })).filter(Boolean))];
+
+          const dietaryMap = new Map();
+          data.forEach(item => {
+            if (item.dietary_preference_id) {
+              dietaryMap.set(item.dietary_preference_id, {
+                id: item.dietary_preference_id,
+                name_en: item.dietary_preference_en,
+                name_fr: item.dietary_preference_fr
+              });
+            }
+          });
+          const dietary = Array.from(dietaryMap.values());
+          const culturalMap = new Map();
+          data.forEach(item => {
+            if (item.cultural_preference_id) {
+              culturalMap.set(item.cultural_preference_id, {
+                id: item.cultural_preference_id,
+                name_en: item.cultural_preference_en,
+                name_fr: item.cultural_preference_fr
+              });
+            }
+          });
+          const cultural = Array.from(culturalMap.values());
+          const foodTypeMap = new Map();
+          data.forEach(item => {
+            if (item.food_type_id) {
+              foodTypeMap.set(item.food_type_id, {
+                id: item.food_type_id,
+                name_en: item.food_type_en,
+                name_fr: item.food_type_fr
+              });
+            }
+          });
+          const foodType = Array.from(foodTypeMap.values());
 
           setDropdownValues({ dietary, cultural, foodType });
         } else {
@@ -53,11 +88,11 @@ export function Home() {
     const lowerCaseSearch = searchTerm.toLowerCase();
 
     const result = items.filter(item => {
-      const matchesSearch = item.name.toLowerCase().includes(lowerCaseSearch);
-      const matchesDietary = filters.dietary ? item.dietary_preferences === filters.dietary : true;
-      const matchesCultural = filters.cultural ? item.cultural_preferences === filters.cultural : true;
-      const matchesFoodType = filters.foodType ? item.food_type === filters.foodType : true;
-
+      const matchesSearch = item[`name_${i18n.language}`].toLowerCase().includes(lowerCaseSearch);
+      const matchesDietary = filters.dietary != -1 ? item.dietary_preference_id == filters.dietary : true;
+      const matchesCultural = filters.cultural != -1 ? item.cultural_preference_id == filters.cultural : true;
+      const matchesFoodType = filters.foodType != -1 ? item.food_type_id == filters.foodType : true;
+      // console.log(filters.dietary)
       return matchesSearch && matchesDietary && matchesCultural && matchesFoodType;
     });
 
@@ -70,7 +105,7 @@ export function Home() {
 
   function resetFilters() {
     setSearchTerm("");
-    setFilters({ dietary: "", cultural: "", foodType: "" });
+    setFilters({ dietary: -1, cultural: -1, foodType: -1 });
   }
 
   const addItemToCart = (item) => {
@@ -87,7 +122,7 @@ export function Home() {
       setCart((prevCart) => [...prevCart, { ...item, quantity: 1 }]);
     }
     console.log("Updated cart:", cart);
-    alert(`${item.name} has been added to your cart!`);
+    alert(`${item[`name_${i18n.language}`]} has been added to your cart!`);
   }
 
   return (
@@ -97,23 +132,23 @@ export function Home() {
         <h3>{t("filter")}</h3>
 
         <select onChange={(e) => handleFilterChange("dietary", e.target.value)} value={filters.dietary}>
-          <option value="">{t("dietary")}</option>
+          <option value="-1">{t("dietary")}</option>
           {dropdownValues.dietary.map(option => (
-            <option key={option} value={option}>{option}</option>
+            <option key={option.id} value={option.id}>{option[`name_${i18n.language}`]}</option>
           ))}
         </select>
 
         <select onChange={(e) => handleFilterChange("cultural", e.target.value)} value={filters.cultural}>
-          <option value="">{t("cultural")}</option>
+          <option value="-1">{t("cultural")}</option>
           {dropdownValues.cultural.map(option => (
-            <option key={option} value={option}>{option}</option>
+            <option key={option.id} value={option.id}>{option[`name_${i18n.language}`]}</option>
           ))}
         </select>
 
         <select onChange={(e) => handleFilterChange("foodType", e.target.value)} value={filters.foodType}>
-          <option value="">{t("foodtype")}</option>
+          <option value="-1">{t("foodtype")}</option>
           {dropdownValues.foodType.map(option => (
-            <option key={option} value={option}>{option}</option>
+            <option key={option.id} value={option.id}>{option[`name_${i18n.language}`]}</option>
           ))}
         </select>
 
@@ -146,7 +181,7 @@ export function Home() {
                   alt="Placeholder"
                   className="product-image"
                 />
-                <h4>{item.name}</h4>
+                <h4>{item[`name_${i18n.language}`]}</h4>
                 <Link to={`/details/${item.id}`}>
                   <button className="details-btn">{t("buttons.details")}</button>
                 </Link>

@@ -19,7 +19,7 @@ import PickupRequestManagement from "./pages/PickupRequestManagement.jsx";
 import ProductManagement from "./pages/productManagement.jsx";
 import EditDetails from "./pages/editDetails.jsx";
 import DeliveryPage from "./pages/DeliveryPage.jsx";
-import { Profile } from "./pages/profile.jsx";
+import { Profile } from "./pages/Profile.jsx";
 import ProfileC from "./pages/profileC.jsx";
 
 function Header() {

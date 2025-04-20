@@ -10,8 +10,9 @@ export function ProductDetails(){
     const {id} = useParams();
     const [item, setItem] = useState(null);
     const navigate = useNavigate();
+  
+    const { t, i18n } = useTranslation(); //for translations
     const { cart, setCart } = useContext(CartContext)
-    const { t } = useTranslation(); //for translations
 
     const errorTextStyling = {
         textAlign:"center",
@@ -44,12 +45,12 @@ export function ProductDetails(){
     //hypothetically checks if an item is in stock or not (unsure if it works as we dont have any out of stock dummy data)
     const getStockMessage = (item) => {
         if (item.count === 0) {
-            return <p style={{ color: "red" }}>{item.name} {t("outofStock")}</p>;
+            return <p style={{ color: "red" }}>{item[`name_${i18n.language}`]} {t("outofStock")}</p>;
         }
         return (
             <p>
                 {/* if count=1, name will be singular, if more than 1, name will be plural */}
-                {t("inStock")}: {item.count} {item.count === 1 ? item.name : `${item.name}s`}
+                {t("inStock")}: {item.count} {item.count === 1 ? item[`name_${i18n.language}`] : `${item[`name_${i18n.language}`]}s`}
             </p>
         );
     };
@@ -79,7 +80,7 @@ export function ProductDetails(){
                     <img src="https://blocks.astratic.com/img/general-img-square.png" style={{height: "350px"}}/> {/* place holder */}
                 </div>
                 <div className="item-details">
-                    <h1>{item.name}</h1>
+                    <h1>{item[`name_${i18n.language}`]}</h1>
                     <br />
                     <div className="specifications">
                         {getStockMessage(item)}

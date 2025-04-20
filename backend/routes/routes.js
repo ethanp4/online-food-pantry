@@ -3,7 +3,7 @@ import { getItemById, getItems } from "../controllers/foodcontroller.js"
 import { signUp, login, updateProfile, getProfile } from "../controllers/usercontroller.js"
 import { getUsers, getUserById, deleteItemById, editItemById, addItem, getOrders, getStats, updateOrderStatus } from "../controllers/admincontroller.js"
 import { createOrder, getUserOrders } from "../controllers/ordercontroller.js"
-
+import { getAllMetadata } from "../controllers/metadatacontroller.js"
 export const router = express.Router()
 
 //item related
@@ -34,3 +34,5 @@ router.get('/orders', getOrders)
 // router.put('/orders/:id', editOrder)
 router.put('/orders/:id/status', updateOrderStatus)
 router.get('/stats', getStats)
+
+router.get('/metadata', getAllMetadata)
