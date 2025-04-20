@@ -4,6 +4,9 @@ import { signUp, login, updateProfile, getProfile } from "../controllers/usercon
 import { getUsers, getUserById, deleteItemById, editItemById, addItem, getOrders, getStats, updateOrderStatus } from "../controllers/admincontroller.js"
 import { createOrder, getUserOrders } from "../controllers/ordercontroller.js"
 import { getAllMetadata } from "../controllers/metadatacontroller.js"
+import { pool } from "../config/database.js";
+import bcrypt from "bcrypt";
+
 export const router = express.Router()
 
 //item related
@@ -36,3 +39,57 @@ router.put('/orders/:id/status', updateOrderStatus)
 router.get('/stats', getStats)
 
 router.get('/metadata', getAllMetadata)
+
+router.post("/password-reset-request", async (req, res) => {
+    const { username } = req.body;
+  
+    if (!username) {
+      return res.status(400).json({ message: "Username is required." });
+    }
+  
+    try {
+        const [users] = await pool.query("SELECT * FROM users WHERE username = ?", [username]);
+
+  
+      if (users.length === 0) {
+        return res.status(404).json({ message: "User not found." });
+      }
+  
+      res.status(200).json({ message: "User verified. Proceed to change password." });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error." });
+    }
+  });
+
+  router.post("/reset-password", async (req, res) => {
+    const { username, newPassword } = req.body;
+  
+    if (!username || !newPassword) {
+      return res.status(400).json({ message: "Username and new password are required." });
+    }
+  
+    try {
+      const [users] = await pool.query("SELECT * FROM users WHERE username = ?", [username]);
+  
+      if (users.length === 0) {
+        return res.status(404).json({ message: "User not found." });
+      }
+  
+      const hashed = await bcrypt.hash(newPassword, 10); // 🔐 securely hash password
+  
+      await pool.query(
+        "UPDATE users SET hashedPassword = ? WHERE username = ?",
+        [hashed, username]
+      );
+  
+      res.status(200).json({ message: "Password updated successfully." });
+    } catch (err) {
+      console.error("Reset error:", err);
+      res.status(500).json({ message: "Server error." });
+    }
+  });
+  
+  
+  
+  

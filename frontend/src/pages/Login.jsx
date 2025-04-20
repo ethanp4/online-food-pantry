@@ -83,11 +83,10 @@ const Login = () => {
           <button type="submit">{t("buttons.login")}</button>
         </form>
         <p>{t("login.or")}</p>
-        <button className="google-btn">{t("buttons.google")}</button>
         <p>
-          <span className="link" onClick={goToResetPassword}>
+          <a className="link" onClick={goToResetPassword}>
             {t("login.forget")}
-          </span>
+          </a>
         </p>
         <p>
           <a href="/signup">
