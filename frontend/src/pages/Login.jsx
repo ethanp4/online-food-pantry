@@ -46,10 +46,14 @@ const Login = () => {
     i18n.changeLanguage(newLang);
   };
 
+  const goToResetPassword = () => {
+    navigate("/reset-password");
+  };
+
   return (
     <div className="login-container">
       <div className="login-box">
-        <p onClick={toggleLanguage} className='translateTxtLogin'>
+        <p onClick={toggleLanguage} className="translateTxtLogin">
           {i18n.language === "en" ? "Français" : "English"}
         </p>
         <h2>{t("login.title")}</h2>
@@ -81,7 +85,9 @@ const Login = () => {
         <p>{t("login.or")}</p>
         <button className="google-btn">{t("buttons.google")}</button>
         <p>
-          <a href="/forgot-password">{t("login.forget")}</a>
+          <span className="link" onClick={goToResetPassword}>
+            {t("login.forget")}
+          </span>
         </p>
         <p>
           <a href="/signup">

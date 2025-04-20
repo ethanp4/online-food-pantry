@@ -21,6 +21,7 @@ import EditDetails from "./pages/editDetails.jsx";
 import DeliveryPage from "./pages/DeliveryPage.jsx";
 import { Profile } from "./pages/Profile.jsx";
 import ProfileC from "./pages/profileC.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 function Header() {
   const { t, i18n } = useTranslation();
@@ -32,7 +33,7 @@ function Header() {
     i18n.changeLanguage(newLang);
   };
 
-  if (!token && location.pathname !== "/login" && location.pathname !== "/signup") {
+  if (!token && location.pathname !== "/login" && location.pathname !== "/signup" && location.pathname !== "/reset-password") {
     return <Navigate to="/login" replace />;
   }
 
@@ -89,7 +90,7 @@ function App() {
             <Route path="/details/:id" element={<ProductDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-profileC" element={<ProfileC />} />
-
+            <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Admin */}
             <Route path="/dashboard" element={<Dashboard />} />
@@ -98,6 +99,7 @@ function App() {
             <Route path="/dashboard/pickup-requests" element={<PickupRequestManagement />} />
             <Route path="/dashboard/products/edit/:id" element={<EditDetails />} />
             <Route path="/dashboard/delivery" element={<DeliveryPage />} />
+            <Route path="/reset-password" element={<ResetPassword />} />           
           </Routes>
         </BrowserRouter>
       </CartProvider>
