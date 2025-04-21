@@ -17,7 +17,8 @@
   "welcome": "Bienvenue",
   "basket": {
     "title": "Panier",
-    "checkout": "Procéder au paiement"
+    "checkout": "Procéder au paiement",
+    "empty": "Votre panier est vide!"
   },
   "quantity": "Quantité",
   "remove": "Supprimer",
@@ -28,7 +29,6 @@
   "signupSuccess": "Vous vous êtes inscrit avec succès !",
   "signupFailed": "Un problème est survenu lors de l'inscription. Veuillez réessayer.",
   "OrderConfirmation": "Confirmation de commande",
-  "basket.empty": "Votre panier est vide",
   "buttons":{
     "confirm": "Confirmer",
     "back": "Retour",

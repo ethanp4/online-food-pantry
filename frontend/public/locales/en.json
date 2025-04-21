@@ -17,14 +17,14 @@
   "welcome": "Welcome",
   "basket": {
     "title": "Basket",
-    "checkout": "Proceed to Checkout"
+    "checkout": "Proceed to Checkout",
+    "empty": "Your basket is empty!"
   },
   "quantity": "Quantity",
   "remove": "Remove",
   "signupSuccess": "You have successfully signed up!",
   "signupFailed": "There was an issue with signing up. Please try again.",
   "OrderConfirmation": "Order Confirmation",
-  "basket.empty": "Your basket is empty",
   "buttons":{
     "confirm": "Confirm",
     "back": "Back",

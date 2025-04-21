@@ -10,7 +10,12 @@ const Basket = () => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    navigate('/order-confirmation');
+    if(cart.length === 0){
+      alert(t('basket.empty'));
+    }
+    else{
+      navigate('/order-confirmation');
+    }
   };
 
   const removeFromCart = (itemId) => {
