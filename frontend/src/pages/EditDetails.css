@@ -1,7 +1,7 @@
 /* EditDetails Container */
 .edit-details-container {
     padding: 20px;
-    background-color: #f4f4f4; /* Light background for contrast */
+    background-color: #f4f4f4;
     min-height: 100vh;
 }
 
@@ -87,11 +87,14 @@
 }
 
 .delete-btn {
-    background-color: #c0392b; /* Red for Delete Item */
-    color: white;
+    background-color: none;
+    color: black;
+    border: 1px solid #6d1e43;
     transition: background-color 0.3s;
 }
 
 .delete-btn:hover {
     background-color: #a93226; /* Darker red on hover */
+    color: white;
+    border: 1px solid #a93226
 }

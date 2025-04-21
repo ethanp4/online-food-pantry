@@ -12,8 +12,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px dashed #ccc;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.order-header input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #722549; /* Active Text */
+    border-radius: 4px;
+    background-color:white;
+    color: #404040; /* Non-Active Text */
 }
 
 .header-left h1 {

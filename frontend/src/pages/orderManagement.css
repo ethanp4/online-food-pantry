@@ -10,42 +10,6 @@ body {
     height: 100vh;
   }
   
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background-color: #dcb6dc;
-    padding: 20px;
-    color: #6d1e43;
-  }
-  
-  .sidebar h3 {
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    padding: 10px;
-    margin-bottom: 5px;
-  }
-  
-  .sidebar .section-title {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .sidebar .active-text {
-    font-weight: bold;
-    color: #722549;
-  }
-  
-  .sidebar .non-active {
-    color: #404040;
-  }
-  
   /* Main Content */
   .main-content {
     flex-grow: 1;
@@ -91,6 +55,7 @@ body {
     padding: 8px;
     width: 50%;
     border: 1px solid #6d1e43;
+    background-color: white;
     border-radius: 4px;
   }
   

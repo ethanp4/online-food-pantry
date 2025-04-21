@@ -62,10 +62,13 @@ function Header() {
               <Link to="/profile" className="link">{t("profile")}</Link>
             </nav>
             <div className="right-actions">
-              <button onClick={toggleLanguage} className="translate-btn">
+              {/* <button onClick={toggleLanguage} className="translate-btn">
                 {i18n.language === "en" ? "Français" : "English"}
-              </button>
-              <a onClick={() => { setToken("") }} className="link">{t("buttons.logout")}</a>
+              </button> */}
+              <a onClick={toggleLanguage}>
+                {i18n.language === "en" ? "Français" : "English"}
+              </a>
+              <a onClick={() => { setToken("") }}>{t("buttons.logout")}</a>
             </div>
           </div>
         </header>

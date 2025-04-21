@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LoginContext } from "../components/TokenProvider"; 
+import "./productManagement.css"
+
 const ProductManagement = () => {
   const { t, i18n } = useTranslation();
   const { token, setToken } = useContext(LoginContext);
@@ -126,42 +128,45 @@ const ProductManagement = () => {
             {/* <button className="add-btn">+ {t("addItem")}</button> */}
           </div>
 
-          <table className="Product-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>{t("productmgmt.product")}</th>
-                <th>{t("productmgmt.category")}</th>
-                <th>{t("productmgmt.stock")}</th>
-                <th>{t("productmgmt.actions")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProducts.map((product) => (
-                <tr key={product.id}>
-                  <td>#{product.id}</td>
-                  <td>{product[`name_${i18n.language}`]}</td>
-                  <td>{product[`food_type_${i18n.language}`]}</td>
-                  <td>{product.count}</td>
-                  <td className="actions">
-                    <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
-                      ✏️ {t("buttons.edit")}
-                    </button>
-                    <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
-                      🗑️ {t("buttons.delete")}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {filteredProducts.length === 0 && (
+          <div className="table-wrapper">
+            <table className="product-table">
+              <thead>
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', padding: '20px' }}>
-                    {t("noItem")}
-                  </td>
+                  <th>#</th>
+                  <th>{t("productmgmt.product")}</th>
+                  <th>{t("productmgmt.category")}</th>
+                  <th>{t("productmgmt.stock")}</th>
+                  <th>{t("productmgmt.actions")}</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredProducts.map((product) => (
+                  <tr key={product.id}>
+                    <td>#{product.id}</td>
+                    <td>{product[`name_${i18n.language}`]}</td>
+                    <td>{product[`food_type_${i18n.language}`]}</td>
+                    <td>{product.count}</td>
+                    <td className="actions">
+                      <button className="edit-btn" onClick={() => handleEditClick(product.id)}>
+                        ✏️ {t("buttons.edit")}
+                      </button>
+                      <button className="delete-btn" onClick={() => handleDeleteClick(product.id)}>
+                        🗑️ {t("buttons.delete")}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {filteredProducts.length === 0 && (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', padding: '20px' }}>
+                      {t("noItem")}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>  
+          
         </section>
       </main>
     </div>

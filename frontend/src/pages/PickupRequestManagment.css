@@ -3,36 +3,6 @@
     height: 100vh;
   }
   
-  .sidebar {
-    width: 250px;
-    background-color: #e49439; /* Orange */
-    padding: 20px;
-  }
-  
-  .sidebar h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #f2ecef; /* Main Text */
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 8px 0;
-  }
-  
-  .sidebar ul li .active-text {
-    font-weight: bold;
-    color: #722549; /* Active Text */
-  }
-  
-  .sidebar ul li .non-active {
-    color: #404040; /* Non-Active Text */
-  }
-  
   .main-content {
     flex: 1;
     padding: 20px;
@@ -74,7 +44,7 @@
     padding: 8px;
     border: 1px solid #722549; /* Active Text */
     border-radius: 4px;
-    background-color: #f2ecef; /* Main Background */
+    background-color:white;
     color: #404040; /* Non-Active Text */
   }
   
