@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import './App.css';
 import { useTranslation } from 'react-i18next';
@@ -33,32 +33,47 @@ function Header() {
     i18n.changeLanguage(newLang);
   };
 
+  const [ accountType, setAccountType ] = useState("")
+
+  useEffect(() => {
+    const fetchAccountType = async () => {
+      try {
+        const response = await fetch("http://localhost:5001/profile", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setAccountType(data.type);
+          console.log("Account type:", data.type);
+        }
+      } catch (error) {
+        console.error("Error fetching account type:", error);
+      }
+    };
+
+    fetchAccountType();
+  }, [token])
+  
+
   if (!token && location.pathname !== "/login" && location.pathname !== "/signup" && location.pathname !== "/reset-password") {
     return <Navigate to="/login" replace />;
   }
-
+  
   return (
     <>
       {token && (
-        // <header>
-        //   <nav className="nav-links">
-        //     <Link to="/" className="link">{t("home")}</Link>
-        //     <Link to="/basket" className="link">{t("basket.title")}</Link>
-        //     {/* <Link to="/order-confirmation" className="link">{t("OrderConfirmation")}</Link> */}
-        //     <Link to="/dashboard" className="link">Dashboard</Link>
-        //     <Link to="/profile" className="link">My Profile</Link>
-        //     <button onClick={toggleLanguage} className="translate-btn">
-        //       {i18n.language === "en" ? "French" : "English"}
-        //     </button>
-        //     <a onClick={() => { setToken("") }} className="link">{t("logout")}</a>
-        //   </nav>
-        // </header>
         <header>
           <div className="nav-container">
             <nav className="nav-links">
               <Link to="/" className="link">{t("home")}</Link>
               <Link to="/basket" className="link">{t("basket.title")}</Link>
-              <Link to="/dashboard" className="link">Dashboard</Link>
+              { accountType === "admin" && (
+                <Link to="/dashboard" className="link">Dashboard</Link>
+              )}
               <Link to="/profile" className="link">{t("profile")}</Link>
             </nav>
             <div className="right-actions">
@@ -111,4 +126,3 @@ function App() {
 }
 
 export default App;
-
