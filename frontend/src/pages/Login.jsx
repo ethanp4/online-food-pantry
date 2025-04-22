@@ -88,6 +88,7 @@ const Login = () => {
             {t("login.forget")}
           </a>
         </p>
+        <br />
         <p>
           <a href="/signup">
             {t("login.noAccount")} {t("login.signup")}

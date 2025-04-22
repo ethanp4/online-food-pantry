@@ -116,7 +116,7 @@ const ProductManagement = () => {
         </header>
 
         {/* Product Management Table */}
-        <section className="content">
+        <section className="admincontent">
           <div className="product-header">
             <input
               type="text"
