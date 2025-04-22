@@ -42,10 +42,11 @@ body {
   }
   
   /* Content */
-  .content {
+  .admincontent {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    height: calc(100vh - 80px); /* Adjust for header height */
+    height: calc(100vh - 150px);
     overflow: hidden;
   }
   
