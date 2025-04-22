@@ -50,10 +50,10 @@ const OrderConfirmation = () => {
   return (
     <div className="order-confirmation-container">
       <header className="order-header">
-        <div className="header-left">
+        <span className="header-left">
           <button className="back-button" onClick={() => window.history.back()}>⬅️</button>
-          <h1>{t('order.confirmation')}</h1>
-        </div>
+          <h1 style={{display: 'inline-block', paddingLeft: '10px'}}>{t('order.confirmation')}</h1>
+        </span>
       </header>
 
       <div className="options">
