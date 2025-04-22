@@ -3,6 +3,12 @@
 2. Ensure you have ran `npm i` in both frontend and backend
 3. Launch both with `npm run dev`
 
+### Dockerfile
+A Dockerfile is provided for easy deployment. It will install all dependecies, build the project, then host it using `launch.sh`. `launch.sh` will also initialize the mysql database using the provided statements in `create_sample_database.sql` if necessary.
+
+### Postman requests
+Postman requests for testing are provided in `Postman requests.json`
+
 ## Routes
 
 #### `/item` - GET
