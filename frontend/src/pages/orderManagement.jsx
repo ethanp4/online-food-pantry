@@ -127,9 +127,9 @@ const OrderManagement = () => {
               <label>{t("ordermgmt.filter")}:</label>
               <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                 <option value="All">{t("ordermgmt.all")}</option>
-                <option value="Pending">{t("ordermgmt.active")}</option>
-                <option value="Completed">{t("ordermgmt.completed")}</option>
-                <option value="Cancelled">{t("ordermgmt.cancelled")}</option>
+                <option value="pending">{t("ordermgmt.active")}</option>
+                <option value="completed">{t("ordermgmt.completed")}</option>
+                <option value="cancelled">{t("ordermgmt.cancelled")}</option>
               </select>
             </div>
           </div>

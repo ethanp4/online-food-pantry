@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginContext } from '../components/TokenProvider';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../components/CartProvider';
 
 const OrderConfirmation = () => {
   const { t } = useTranslation();
@@ -11,6 +12,8 @@ const OrderConfirmation = () => {
   const [option, setOption] = useState('');
   const [date, setDate] = useState('');
   const [message, setMessage] = useState('');
+  const { cart } = useContext(CartContext);
+  
   const navigate = useNavigate();
 
   const handleOptionClick = (selectedOption) => {
@@ -28,6 +31,7 @@ const OrderConfirmation = () => {
         },
         body: JSON.stringify({
           type: option,
+          items: cart,
           date: date,
         }),
       });

@@ -169,9 +169,9 @@ const PickupRequestManagement = () => {
                       onChange={(e) => handleStatusChange(request.id, e.target.value)}
                       className={`status-select ${request.status.toLowerCase()}`}
                     >
-                      <option value="Pending">{t("pickupmgmt.pending")}</option>
-                      <option value="Completed">{t("pickupmgmt.completed")}</option>
-                      <option value="Cancelled">{t("pickupmgmt.cancelled")}</option>
+                      <option value="pending">{t("pickupmgmt.pending")}</option>
+                      <option value="completed">{t("pickupmgmt.completed")}</option>
+                      <option value="cancelled">{t("pickupmgmt.cancelled")}</option>
                     </select>
                   </td>
                 </tr>
